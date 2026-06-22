@@ -171,7 +171,7 @@ function AccessGate({ onUnlock, t }) {
   return (
     <div style={{ minHeight:"100vh", background:C.green, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:24 }}>
       <div style={{ background:C.white, borderRadius:16, padding:32, maxWidth:360, width:"100%", textAlign:"center", boxShadow:"0 8px 32px rgba(0,0,0,0.18)" }}>
-        <div <img src="/logo.png" alt="Corte Pro" style={{ width:120, marginBottom:8 }} />
+        <img src="/logo.png" alt="Corte Pro" style={{ width:120, marginBottom:8 }} />
         <div style={{ fontSize:28, fontWeight:800, color:C.green, marginBottom:4 }}>{t.appName}</div>
         <div style={{ fontSize:13, color:C.grayDark, marginBottom:28 }}>{t.tagline}</div>
         <div style={{ fontSize:15, fontWeight:600, color:C.text, marginBottom:8 }}>{t.access.title}</div>
