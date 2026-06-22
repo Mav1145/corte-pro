@@ -171,7 +171,7 @@ function AccessGate({ onUnlock, t }) {
   return (
     <div style={{ minHeight:"100vh", background:C.green, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:24 }}>
       <div style={{ background:C.white, borderRadius:16, padding:32, maxWidth:360, width:"100%", textAlign:"center", boxShadow:"0 8px 32px rgba(0,0,0,0.18)" }}>
-        <div style={{ fontSize:48, marginBottom:8 }}>🌿</div>
+        <div <img src="/logo.png" alt="Corte Pro" style={{ width:120, marginBottom:8 }} />
         <div style={{ fontSize:28, fontWeight:800, color:C.green, marginBottom:4 }}>{t.appName}</div>
         <div style={{ fontSize:13, color:C.grayDark, marginBottom:28 }}>{t.tagline}</div>
         <div style={{ fontSize:15, fontWeight:600, color:C.text, marginBottom:8 }}>{t.access.title}</div>
@@ -408,7 +408,7 @@ export default function App() {
     <div style={{ maxWidth:480, margin:"0 auto", minHeight:"100vh", background:C.gray, fontFamily:"-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", paddingBottom:80 }}>
       <div style={{ background:C.green, padding:"14px 16px", display:"flex", justifyContent:"space-between", alignItems:"center", position:"sticky", top:0, zIndex:10 }}>
         <div>
-          <div style={{ color:C.white, fontWeight:800, fontSize:18 }}>🌿 {t.appName}</div>
+          <div style={{ color:C.white, fontWeight:800, fontSize:18, display:"flex", alignItems:"center", gap:8 }}><img src="/logo.png" alt="" style={{ height:24 }} /> {t.appName}</div>
           <div style={{ color:"rgba(255,255,255,0.75)", fontSize:11 }}>{t.tagline}</div>
         </div>
         <button onClick={() => setLang(lang==="en"?"es":"en")} style={{ background:"rgba(255,255,255,0.15)", color:C.white, border:"1px solid rgba(255,255,255,0.3)", borderRadius:20, padding:"6px 14px", fontWeight:700, cursor:"pointer", fontSize:12 }}>{t.lang}</button>
