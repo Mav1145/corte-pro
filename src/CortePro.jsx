@@ -25,25 +25,25 @@ const SERVICES_EN = [
 ];
 
 const SERVICES_ES = [
-  "Corte de Césped Semanal",
-  "Corte de Césped Quincenal",
-  "Bordeado de Césped",
+  "Corte de Pasto Semanal",
+  "Corte de Pasto Quincenal",
+  "Orillado del Pasto",
   "Aireación",
-  "Descopete",
-  "Instalación de Césped",
-  "Instalación de Mantillo",
-  "Poda de Arbustos",
-  "Poda de Setos",
-  "Plantación de Árboles",
-  "Plantación de Arbustos",
+  "Limpieza del Pasto",
+  "Instalación de Pasto en Rollo",
+  "Instalación de Mulch",
+  "Podar Arbustos",
+  "Podar Setos",
+  "Plantar Árboles",
+  "Plantar Arbustos",
   "Entrega de Materiales",
   "Instalación de Muro de Contención",
-  "Proyecto de Paisajismo",
+  "Proyecto de Jardinería",
   "Limpieza de Primavera",
   "Limpieza de Otoño",
-  "Limpieza de Nieve (Plow)",
-  "Sal para Nieve",
-  "Palada de Banqueta",
+  "Quitar Nieve",
+  "Echar Sal",
+  "Limpiar Banquetas",
   "Servicio Completo de Nieve",
   "Otro Servicio",
 ];
@@ -53,24 +53,26 @@ const TRANSLATIONS = {
     appName: "Corte Pro",
     tagline: "Manage Your Crew. Grow Your Business.",
     tabs: ["Route", "Clients", "Invoices", "Estimates", "Billing"],
-    route: { title: "Today's Route", addStop: "Add Stop", address: "Address", client: "Client Name", addBtn: "Add", noStops: "No stops added yet. Add a client stop to begin.", navigate: "Start GPS", remove: "Remove", stop: "Stop" },
-    clients: { title: "Clients", addClient: "Add Client", name: "Full Name", phone: "Phone Number", address: "Address", email: "Email (optional)", save: "Save Client", update: "Update Client", noClients: "No clients yet. Add your first client.", call: "Call", directions: "Directions", edit: "Edit", delete: "Delete", confirmDelete: "Delete this client?" },
-    invoices: { title: "Invoices", create: "Create Invoice", client: "Select Client", service: "Service", amount: "Amount ($)", date: "Date", send: "Save Invoice", paid: "Paid", pending: "Pending", noInvoices: "No invoices yet. Create your first invoice.", total: "Total", services: SERVICES_EN, markPaid: "Mark Paid", review: "Request Google Review", addLine: "+ Add Service Line", removeLine: "Remove", lineItems: "Service Lines" },
-    estimates: { title: "Estimates", create: "Create Estimate", client: "Select Client", service: "Service Description", amount: "Estimated Amount ($)", notes: "Notes", save: "Save Estimate", convert: "Convert to Invoice", noEstimates: "No estimates yet.", approved: "Approved", pending: "Pending" },
-    billing: { title: "Billing & Reports", totalEarned: "Total Earned", totalPending: "Pending", thisMonth: "This Month", lastMonth: "Last Month", export: "Export Report", plan: "Current Plan", monthly: "$24.99/month", annual: "$199/year" },
+    route: { title: "Today's Route", addStop: "Add Stop", address: "Address", client: "Client Name", addBtn: "Add", noStops: "No stops added yet. Add a client stop to begin.", navigate: "Start GPS", remove: "Remove", stop: "Stop", loadToday: "Load Today's Route", noScheduled: "No clients scheduled for today.", clearRoute: "Clear Route", optimize: "⚡ Optimize Order", optimized: "✓ Route optimized!" },
+    clients: { title: "Clients", addClient: "Add Client", name: "Full Name", phone: "Phone Number", address: "Address", email: "Email (optional)", save: "Save Client", update: "Update Client", noClients: "No clients yet. Add your first client.", call: "Call", directions: "Directions", edit: "Edit", delete: "Delete", confirmDelete: "Delete this client?", schedule: "Service Schedule", weekly: "Weekly", biweeklyA: "Bi-Weekly (Week A)", biweeklyB: "Bi-Weekly (Week B)", oneTime: "One-Time / No Schedule", days: ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"], daysFull: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"] },
+    invoices: { title: "Invoices", create: "Create Invoice", client: "Select Client", service: "Service", amount: "Amount ($)", date: "Date", send: "Save Invoice", paid: "Paid", pending: "Pending", noInvoices: "No invoices yet. Create your first invoice.", total: "Total", services: SERVICES_EN, markPaid: "Mark Paid", review: "Request Review", addLine: "+ Add Service Line", removeLine: "Remove", lineItems: "Service Lines", from: "From", to: "Bill To", setup: "Set up your company info in Settings to show your business name on invoices.", invoiceNum: "Invoice #", textInv: "📱 Text", emailInv: "✉️ Email", deleteInv: "Delete", confirmDelInv: "Delete this invoice?" },
+    estimates: { title: "Estimates", create: "Create Estimate", client: "Select Client", service: "Service Description", amount: "Estimated Amount ($)", notes: "Notes", save: "Save Estimate", convert: "Convert to Invoice", noEstimates: "No estimates yet.", approved: "Approved", pending: "Pending", convertConfirm: "Convert this estimate to an invoice?", converted: "✓ Estimate converted to invoice!", textEst: "📱 Text", emailEst: "✉️ Email", deleteEst: "Delete", confirmDelEst: "Delete this estimate?" },
+    billing: { title: "Billing & Reports", totalEarned: "Total Earned", totalPending: "Pending", thisMonth: "This Month", lastMonth: "Last Month", export: "📊 Export Invoices to CSV", exportEstimates: "📋 Export Estimates to CSV", plan: "Current Plan", monthly: "$24.99/month", annual: "$199/year", settings: "Company Settings", companyName: "Company Name", ownerName: "Owner Name", phone: "Phone Number", email: "Email", address: "Business Address", license: "License # (optional)", saveSettings: "Save Settings", saved: "Settings saved!", exportTitle: "Accounting Export", exportBlurb: "Download your invoices as a CSV file. You can then upload this file directly into QuickBooks, Wave, FreshBooks, Xero, or your accountant's software. Most accounting platforms have a 'Import from CSV' option in their invoices section.", noData: "No data to export yet." },
     access: { title: "Enter Access Code", subtitle: "Enter your Corte Pro access code to get started.", placeholder: "", btn: "Unlock App", error: "Invalid access code. Please try again.", codes: ["CP-2025-LAUNCH","CP-2025-BETA1","CP-2025-BETA2"] },
+    setup: { title: "Welcome to Corte Pro!", subtitle: "Let's set up your business. This info will appear on your invoices and estimates.", companyName: "Company Name", ownerName: "Your Name", phone: "Business Phone", email: "Business Email", address: "Business Address", continue: "Continue to App", skip: "Skip for now" },
     lang: "Español",
   },
   es: {
     appName: "Corte Pro",
     tagline: "Maneja Tu Equipo. Haz Crecer Tu Negocio.",
     tabs: ["Ruta","Clientes","Facturas","Estimados","Facturación"],
-    route: { title: "Ruta de Hoy", addStop: "Agregar Parada", address: "Dirección", client: "Nombre del Cliente", addBtn: "Agregar", noStops: "No hay paradas. Agrega una parada para comenzar.", navigate: "Iniciar GPS", remove: "Eliminar", stop: "Parada" },
-    clients: { title: "Clientes", addClient: "Agregar Cliente", name: "Nombre Completo", phone: "Teléfono", address: "Dirección", email: "Correo (opcional)", save: "Guardar Cliente", update: "Actualizar Cliente", noClients: "No hay clientes. Agrega tu primer cliente.", call: "Llamar", directions: "Direcciones", edit: "Editar", delete: "Eliminar", confirmDelete: "¿Eliminar este cliente?" },
-    invoices: { title: "Facturas", create: "Crear Factura", client: "Seleccionar Cliente", service: "Servicio", amount: "Monto ($)", date: "Fecha", send: "Guardar Factura", paid: "Pagado", pending: "Pendiente", noInvoices: "No hay facturas. Crea tu primera factura.", total: "Total", services: SERVICES_ES, markPaid: "Marcar como Pagado", review: "Pedir Reseña en Google", addLine: "+ Agregar Servicio", removeLine: "Quitar", lineItems: "Servicios" },
-    estimates: { title: "Estimados", create: "Crear Estimado", client: "Seleccionar Cliente", service: "Descripción del Servicio", amount: "Monto Estimado ($)", notes: "Notas", save: "Guardar Estimado", convert: "Convertir a Factura", noEstimates: "No hay estimados.", approved: "Aprobado", pending: "Pendiente" },
-    billing: { title: "Facturación y Reportes", totalEarned: "Total Ganado", totalPending: "Pendiente", thisMonth: "Este Mes", lastMonth: "Mes Pasado", export: "Exportar Reporte", plan: "Plan Actual", monthly: "$24.99/mes", annual: "$199/año" },
+    route: { title: "Ruta de Hoy", addStop: "Agregar Parada", address: "Dirección", client: "Nombre del Cliente", addBtn: "Agregar", noStops: "No hay paradas. Agrega una parada para comenzar.", navigate: "Iniciar GPS", remove: "Eliminar", stop: "Parada", loadToday: "Cargar Ruta de Hoy", noScheduled: "No hay clientes programados para hoy.", clearRoute: "Borrar Ruta", optimize: "⚡ Optimizar Orden", optimized: "✓ ¡Ruta optimizada!" },
+    clients: { title: "Clientes", addClient: "Agregar Cliente", name: "Nombre Completo", phone: "Teléfono", address: "Dirección", email: "Correo (opcional)", save: "Guardar Cliente", update: "Actualizar Cliente", noClients: "No hay clientes. Agrega tu primer cliente.", call: "Llamar", directions: "Direcciones", edit: "Corregir", delete: "Eliminar", confirmDelete: "¿Eliminar este cliente?", schedule: "Horario de Servicio", weekly: "Semanal", biweeklyA: "Quincenal (Semana A)", biweeklyB: "Quincenal (Semana B)", oneTime: "Una Vez / Sin Horario", days: ["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"], daysFull: ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"] },
+    invoices: { title: "Facturas", create: "Crear Factura", client: "Seleccionar Cliente", service: "Servicio", amount: "Monto ($)", date: "Fecha", send: "Guardar Factura", paid: "Pagado", pending: "Pendiente", noInvoices: "No hay facturas. Crea tu primera factura.", total: "Total", services: SERVICES_ES, markPaid: "Marcar Pagado", review: "Pedir Reseña", addLine: "+ Agregar Servicio", removeLine: "Quitar", lineItems: "Servicios", from: "De", to: "Para", setup: "Configura los datos de tu negocio en Ajustes para que aparezcan en tus facturas.", invoiceNum: "Factura #", textInv: "📱 Mensaje", emailInv: "✉️ Correo", deleteInv: "Eliminar", confirmDelInv: "¿Eliminar esta factura?" },
+    estimates: { title: "Estimados", create: "Crear Estimado", client: "Seleccionar Cliente", service: "Descripción del Servicio", amount: "Monto Estimado ($)", notes: "Notas", save: "Guardar Estimado", convert: "Convertir a Factura", noEstimates: "No hay estimados.", approved: "Aprobado", pending: "Pendiente", convertConfirm: "¿Convertir este estimado a factura?", converted: "✓ ¡Estimado convertido a factura!", textEst: "📱 Mensaje", emailEst: "✉️ Correo", deleteEst: "Eliminar", confirmDelEst: "¿Eliminar este estimado?" },
+    billing: { title: "Facturación y Reportes", totalEarned: "Total Ganado", totalPending: "Pendiente", thisMonth: "Este Mes", lastMonth: "Mes Pasado", export: "📊 Exportar Facturas a CSV", exportEstimates: "📋 Exportar Estimados a CSV", plan: "Plan Actual", monthly: "$24.99/mes", annual: "$199/año", settings: "Información del Negocio", companyName: "Nombre del Negocio", ownerName: "Nombre del Dueño", phone: "Teléfono", email: "Correo", address: "Dirección del Negocio", license: "Licencia # (opcional)", saveSettings: "Guardar Información", saved: "¡Información guardada!", exportTitle: "Exportar para Contabilidad", exportBlurb: "Descarga tus facturas en un archivo CSV. Después puedes subir este archivo directamente a QuickBooks, Wave, FreshBooks, Xero, o el programa de tu contador. La mayoría de los programas de contabilidad tienen una opción de 'Importar desde CSV' en su sección de facturas.", noData: "No hay datos para exportar todavía." },
     access: { title: "Ingresa tu Código", subtitle: "Ingresa tu código de acceso de Corte Pro para comenzar.", placeholder: "", btn: "Desbloquear App", error: "Código inválido. Intenta de nuevo.", codes: ["CP-2025-LAUNCH","CP-2025-BETA1","CP-2025-BETA2"] },
+    setup: { title: "¡Bienvenido a Corte Pro!", subtitle: "Configura tu negocio. Estos datos van a salir en tus facturas y estimados.", companyName: "Nombre del Negocio", ownerName: "Tu Nombre", phone: "Teléfono del Negocio", email: "Correo del Negocio", address: "Dirección del Negocio", continue: "Continuar a la App", skip: "Saltar por ahora" },
     lang: "English",
   },
 };
@@ -80,6 +82,79 @@ const C = { green: "#2D6A1F", greenDark: "#1a4011", greenPale: "#f0ebd8", tan: "
 // Storage helpers — saves data so it doesn't disappear when switching tabs
 const save = (key, val) => { try { localStorage.setItem(key, JSON.stringify(val)); } catch(e){} };
 const load = (key, fallback) => { try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; } catch(e){ return fallback; } };
+
+// Helper: Format invoice as plain text for SMS/Email
+const formatInvoiceText = (inv, company, t) => {
+  let text = "";
+  if (company.companyName) text += `${company.companyName}\n`;
+  if (company.ownerName) text += `${company.ownerName}\n`;
+  if (company.phone) text += `${company.phone}\n`;
+  text += `\n${t.invoices.invoiceNum}: ${inv.id}\n${t.invoices.date}: ${inv.date}\n\n`;
+  text += `${t.invoices.to}: ${inv.client}\n\n`;
+  if (inv.lines) {
+    inv.lines.forEach(l => { text += `• ${l.service} (${l.date}) — $${parseFloat(l.amount).toFixed(2)}\n`; });
+  }
+  text += `\n${t.invoices.total}: $${parseFloat(inv.total).toFixed(2)}\n`;
+  text += `${t.invoices.paid}/${t.invoices.pending}: ${inv.status}\n`;
+  return text;
+};
+
+// Helper: Send via SMS (opens phone's texting app)
+const sendSMS = (phone, body) => {
+  const cleanPhone = (phone || "").replace(/[^\d+]/g, "");
+  window.location.href = `sms:${cleanPhone}?body=${encodeURIComponent(body)}`;
+};
+
+// Helper: Send via Email (opens phone's email app)
+const sendEmail = (email, subject, body) => {
+  window.location.href = `mailto:${email||""}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+};
+
+// Helper: Simple route optimization using nearest-neighbor based on text-similarity of addresses
+// Since we don't have GPS coords, we group by ZIP code or city name when possible
+const optimizeRoute = (stops) => {
+  if (stops.length < 2) return stops;
+  // Extract ZIP codes if present, else use full address as grouping key
+  const getKey = (s) => {
+    const zipMatch = (s.address||"").match(/\b\d{5}\b/);
+    if (zipMatch) return zipMatch[0];
+    // Fall back to extracting city name (text after second comma)
+    const parts = (s.address||"").split(",");
+    return parts.length > 1 ? parts[1].trim().toLowerCase() : (s.address||"").toLowerCase();
+  };
+  // Group stops by key, then return groups in order
+  const grouped = {};
+  stops.forEach(s => { const k = getKey(s); if (!grouped[k]) grouped[k] = []; grouped[k].push(s); });
+  const sortedKeys = Object.keys(grouped).sort();
+  const result = [];
+  sortedKeys.forEach(k => grouped[k].forEach(s => result.push(s)));
+  return result;
+};
+
+function SetupScreen({ onComplete, t, lang, setLang }) {
+  const [form, setForm] = useState({ companyName:"", ownerName:"", phone:"", email:"", address:"" });
+  const save = () => { onComplete(form); };
+  const skip = () => { onComplete(form); };
+  return (
+    <div style={{ minHeight:"100vh", background:C.black, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:24 }}>
+      <div style={{ position:"fixed", top:12, right:16, zIndex:99 }}>
+        <button onClick={() => setLang(lang==="en"?"es":"en")} style={{ background:"rgba(255,255,255,0.15)", color:C.white, border:"1px solid rgba(255,255,255,0.3)", borderRadius:20, padding:"6px 14px", fontWeight:700, cursor:"pointer", fontSize:13 }}>{t.lang}</button>
+      </div>
+      <div style={{ background:C.white, borderRadius:16, padding:28, maxWidth:400, width:"100%", boxShadow:"0 8px 32px rgba(0,0,0,0.4)", borderTop:`4px solid ${C.green}` }}>
+        <div style={{ textAlign:"center", marginBottom:20 }}>
+          <img src="/logo.png" alt="Corte Pro" style={{ width:90, marginBottom:12 }} />
+          <div style={{ fontSize:18, fontWeight:800, color:C.black, marginBottom:6 }}>{t.setup.title}</div>
+          <div style={{ fontSize:13, color:C.grayDark }}>{t.setup.subtitle}</div>
+        </div>
+        {[["companyName",t.setup.companyName],["ownerName",t.setup.ownerName],["phone",t.setup.phone],["email",t.setup.email],["address",t.setup.address]].map(([key,label]) => (
+          <input key={key} value={form[key]} onChange={e => setForm({ ...form, [key]:e.target.value })} placeholder={label} style={{ width:"100%", padding:"11px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:14, marginBottom:10, boxSizing:"border-box" }} />
+        ))}
+        <button onClick={save} style={{ width:"100%", background:C.green, color:C.white, border:"none", borderRadius:8, padding:"13px 0", fontSize:15, fontWeight:800, cursor:"pointer", marginTop:8, marginBottom:8 }}>{t.setup.continue}</button>
+        <button onClick={skip} style={{ width:"100%", background:"none", color:C.grayDark, border:"none", padding:"8px 0", fontSize:13, cursor:"pointer", textDecoration:"underline" }}>{t.setup.skip}</button>
+      </div>
+    </div>
+  );
+}
 
 function AccessGate({ onUnlock, t }) {
   const [code, setCode] = useState("");
@@ -108,13 +183,39 @@ function RouteTab({ t, clients }) {
   const [showForm, setShowForm] = useState(false);
   useEffect(() => { save("cp_stops", stops); }, [stops]);
   const addStop = () => { if (!form.address) return; setStops([...stops, { ...form, id:Date.now(), done:false }]); setForm({ client:"", address:"" }); setShowForm(false); };
-  // GPS auto-start: dir/ format opens Google Maps directly in navigation mode
   const startGPS = (address) => { window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}&travelmode=driving&dir_action=navigate`, "_blank"); };
+
+  // Calculate today's day of week (0=Mon, 6=Sun) and which bi-weekly week it is
+  const todayDayIdx = ((new Date().getDay() + 6) % 7);  // Convert Sun=0 to Mon=0
+  // Week A vs B: based on week number of year (odd vs even)
+  const weekNum = (() => { const d = new Date(); const start = new Date(d.getFullYear(),0,1); return Math.ceil(((d - start) / 86400000 + start.getDay() + 1) / 7); })();
+  const isWeekA = weekNum % 2 === 1;
+
+  const loadTodaysRoute = () => {
+    const scheduled = clients.filter(c => {
+      if (!c.scheduleType || c.scheduleType === "oneTime") return false;
+      if (!c.days || !c.days.includes(todayDayIdx)) return false;
+      if (c.scheduleType === "weekly") return true;
+      if (c.scheduleType === "biweeklyA" && isWeekA) return true;
+      if (c.scheduleType === "biweeklyB" && !isWeekA) return true;
+      return false;
+    });
+    if (scheduled.length === 0) { alert(t.route.noScheduled); return; }
+    const newStops = scheduled.map(c => ({ id:Date.now()+Math.random(), client:c.name, address:c.address, done:false }));
+    setStops(newStops);
+  };
+  const clearRoute = () => setStops([]);
+
   return (
     <div style={{ padding:16 }}>
-      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:16 }}>
+      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:12 }}>
         <h2 style={{ margin:0, color:C.green, fontSize:20, fontWeight:800 }}>{t.route.title}</h2>
         <button onClick={() => setShowForm(!showForm)} style={{ background:C.green, color:C.white, border:"none", borderRadius:8, padding:"8px 14px", fontWeight:700, cursor:"pointer", fontSize:13 }}>+ {t.route.addStop}</button>
+      </div>
+      <div style={{ display:"flex", gap:8, marginBottom:14, flexWrap:"wrap" }}>
+        <button onClick={loadTodaysRoute} style={{ flex:"1 1 auto", minWidth:140, background:C.black, color:C.white, border:`2px solid ${C.green}`, borderRadius:8, padding:"10px 12px", fontWeight:700, cursor:"pointer", fontSize:13 }}>📅 {t.route.loadToday}</button>
+        {stops.length > 1 && <button onClick={() => { setStops(optimizeRoute(stops)); }} style={{ background:C.green, color:C.white, border:"none", borderRadius:8, padding:"10px 14px", fontWeight:700, cursor:"pointer", fontSize:13 }}>{t.route.optimize}</button>}
+        {stops.length > 0 && <button onClick={clearRoute} style={{ background:C.white, color:C.red, border:`2px solid ${C.red}`, borderRadius:8, padding:"10px 14px", fontWeight:700, cursor:"pointer", fontSize:13 }}>{t.route.clearRoute}</button>}
       </div>
       {showForm && (
         <div style={{ background:C.greenPale, borderRadius:12, padding:16, marginBottom:16 }}>
@@ -144,16 +245,30 @@ function RouteTab({ t, clients }) {
 function ClientsTab({ t, clients, setClients }) {
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState(null);
-  const [form, setForm] = useState({ name:"", phone:"", address:"", email:"" });
-  const openAdd = () => { setEditingId(null); setForm({ name:"", phone:"", address:"", email:"" }); setShowForm(true); };
-  const openEdit = (c) => { setEditingId(c.id); setForm({ name:c.name, phone:c.phone, address:c.address, email:c.email }); setShowForm(true); };
+  const [form, setForm] = useState({ name:"", phone:"", address:"", email:"", scheduleType:"oneTime", days:[] });
+  const openAdd = () => { setEditingId(null); setForm({ name:"", phone:"", address:"", email:"", scheduleType:"oneTime", days:[] }); setShowForm(true); };
+  const openEdit = (c) => { setEditingId(c.id); setForm({ name:c.name, phone:c.phone, address:c.address, email:c.email, scheduleType:c.scheduleType||"oneTime", days:c.days||[] }); setShowForm(true); };
+  const toggleDay = (dayIdx) => {
+    const newDays = form.days.includes(dayIdx) ? form.days.filter(d => d !== dayIdx) : [...form.days, dayIdx].sort();
+    setForm({ ...form, days:newDays });
+  };
   const saveClient = () => {
     if (!form.name) return;
     if (editingId) { setClients(clients.map(c => c.id === editingId ? { ...form, id:editingId } : c)); }
     else { setClients([...clients, { ...form, id:Date.now() }]); }
-    setForm({ name:"", phone:"", address:"", email:"" }); setEditingId(null); setShowForm(false);
+    setForm({ name:"", phone:"", address:"", email:"", scheduleType:"oneTime", days:[] }); setEditingId(null); setShowForm(false);
   };
   const deleteClient = (id) => { if (window.confirm(t.clients.confirmDelete)) setClients(clients.filter(c => c.id !== id)); };
+  const scheduleLabel = (c) => {
+    if (!c.scheduleType || c.scheduleType === "oneTime") return null;
+    const dayNames = (c.days||[]).map(d => t.clients.days[d]).join(", ");
+    if (!dayNames) return null;
+    let prefix = "";
+    if (c.scheduleType === "weekly") prefix = t.clients.weekly;
+    if (c.scheduleType === "biweeklyA") prefix = t.clients.biweeklyA;
+    if (c.scheduleType === "biweeklyB") prefix = t.clients.biweeklyB;
+    return `${prefix}: ${dayNames}`;
+  };
   return (
     <div style={{ padding:16 }}>
       <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:16 }}>
@@ -165,6 +280,20 @@ function ClientsTab({ t, clients, setClients }) {
           {[["name",t.clients.name],["phone",t.clients.phone],["address",t.clients.address],["email",t.clients.email]].map(([key,label]) => (
             <input key={key} value={form[key]} onChange={e => setForm({ ...form, [key]:e.target.value })} placeholder={label} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:14, marginBottom:10, boxSizing:"border-box" }} />
           ))}
+          <div style={{ fontSize:13, fontWeight:700, color:C.black, marginBottom:8, marginTop:6 }}>📅 {t.clients.schedule}</div>
+          <select value={form.scheduleType} onChange={e => setForm({ ...form, scheduleType:e.target.value })} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:14, marginBottom:10, boxSizing:"border-box" }}>
+            <option value="oneTime">{t.clients.oneTime}</option>
+            <option value="weekly">{t.clients.weekly}</option>
+            <option value="biweeklyA">{t.clients.biweeklyA}</option>
+            <option value="biweeklyB">{t.clients.biweeklyB}</option>
+          </select>
+          {form.scheduleType !== "oneTime" && (
+            <div style={{ display:"flex", gap:4, marginBottom:10, flexWrap:"wrap" }}>
+              {t.clients.days.map((day, idx) => (
+                <button key={day} onClick={() => toggleDay(idx)} style={{ flex:"1 1 auto", minWidth:42, padding:"8px 4px", borderRadius:6, border:`2px solid ${form.days.includes(idx) ? C.green : C.grayMid}`, background:form.days.includes(idx) ? C.green : C.white, color:form.days.includes(idx) ? C.white : C.grayDark, fontWeight:700, fontSize:12, cursor:"pointer" }}>{day}</button>
+              ))}
+            </div>
+          )}
           <button onClick={saveClient} style={{ width:"100%", background:C.green, color:C.white, border:"none", borderRadius:8, padding:"11px 0", fontWeight:700, cursor:"pointer" }}>{editingId ? t.clients.update : t.clients.save}</button>
         </div>
       )}
@@ -172,7 +301,8 @@ function ClientsTab({ t, clients, setClients }) {
         <div key={c.id} style={{ background:C.white, borderRadius:12, padding:14, marginBottom:10, border:`1px solid ${C.grayMid}` }}>
           <div style={{ fontWeight:700, fontSize:15, color:C.text, marginBottom:2 }}>{c.name}</div>
           <div style={{ color:C.grayDark, fontSize:13, marginBottom:2 }}>{c.phone}</div>
-          <div style={{ color:C.grayDark, fontSize:13, marginBottom:8 }}>{c.address}</div>
+          <div style={{ color:C.grayDark, fontSize:13, marginBottom:scheduleLabel(c)?4:8 }}>{c.address}</div>
+          {scheduleLabel(c) && <div style={{ display:"inline-block", background:C.greenPale, color:C.green, padding:"3px 8px", borderRadius:6, fontSize:11, fontWeight:700, marginBottom:8 }}>📅 {scheduleLabel(c)}</div>}
           <div style={{ display:"flex", gap:8, flexWrap:"wrap" }}>
             {c.phone && <a href={`tel:${c.phone}`} style={{ background:C.green, color:C.white, borderRadius:6, padding:"6px 12px", fontSize:12, fontWeight:600, textDecoration:"none" }}>{t.clients.call}</a>}
             {c.address && <a href={`https://maps.google.com/?q=${encodeURIComponent(c.address)}`} target="_blank" rel="noreferrer" style={{ background:C.blue, color:C.white, borderRadius:6, padding:"6px 12px", fontSize:12, fontWeight:600, textDecoration:"none" }}>{t.clients.directions}</a>}
@@ -185,7 +315,7 @@ function ClientsTab({ t, clients, setClients }) {
   );
 }
 
-function InvoicesTab({ t, clients, invoices, setInvoices }) {
+function InvoicesTab({ t, clients, invoices, setInvoices, company }) {
   const [showForm, setShowForm] = useState(false);
   const emptyLine = () => ({ service:"", amount:"", date:new Date().toISOString().split("T")[0], id:Date.now()+Math.random() });
   const [form, setForm] = useState({ client:"", lines:[emptyLine()] });
@@ -244,6 +374,20 @@ function InvoicesTab({ t, clients, invoices, setInvoices }) {
       )}
       {invoices.length === 0 ? <div style={{ textAlign:"center", color:C.grayDark, padding:"40px 16px", fontSize:14 }}>{t.invoices.noInvoices}</div> : invoices.map(inv => (
         <div key={inv.id} style={{ background:C.white, borderRadius:12, padding:14, marginBottom:10, border:`1px solid ${C.grayMid}` }}>
+          {company.companyName ? (
+            <div style={{ borderBottom:`2px solid ${C.green}`, paddingBottom:10, marginBottom:10 }}>
+              <div style={{ fontSize:11, color:C.grayDark, fontWeight:600, marginBottom:2 }}>{t.invoices.from}:</div>
+              <div style={{ fontWeight:800, fontSize:14, color:C.black }}>{company.companyName}</div>
+              {company.ownerName && <div style={{ fontSize:11, color:C.grayDark }}>{company.ownerName}</div>}
+              {company.phone && <div style={{ fontSize:11, color:C.grayDark }}>📞 {company.phone}</div>}
+              {company.email && <div style={{ fontSize:11, color:C.grayDark }}>✉️ {company.email}</div>}
+              {company.address && <div style={{ fontSize:11, color:C.grayDark }}>{company.address}</div>}
+              {company.license && <div style={{ fontSize:10, color:C.grayDark, marginTop:2 }}>License: {company.license}</div>}
+            </div>
+          ) : (
+            <div style={{ background:"#fff8e1", padding:"8px 10px", borderRadius:6, marginBottom:10, fontSize:11, color:C.orange }}>⚠️ {t.invoices.setup}</div>
+          )}
+          <div style={{ fontSize:11, color:C.grayDark, fontWeight:600, marginBottom:2 }}>{t.invoices.to}:</div>
           <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:8 }}>
             <div style={{ fontWeight:700, fontSize:15, color:C.text }}>{inv.client}</div>
             <div style={{ fontSize:17, fontWeight:800, color:C.green }}>${parseFloat(inv.total).toFixed(2)}</div>
@@ -254,12 +398,15 @@ function InvoicesTab({ t, clients, invoices, setInvoices }) {
               <div>${parseFloat(l.amount).toFixed(2)}</div>
             </div>
           ))}
-          <div style={{ display:"flex", gap:8, flexWrap:"wrap", marginTop:10 }}>
+          <div style={{ display:"flex", gap:6, flexWrap:"wrap", marginTop:10 }}>
             <span style={{ background:inv.status==="paid"?"#e8f5e3":"#fff3cd", color:inv.status==="paid"?C.green:C.orange, borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600 }}>
               {inv.status==="paid"?t.invoices.paid:t.invoices.pending}
             </span>
             {inv.status!=="paid" && <button onClick={() => setInvoices(invoices.map(x=>x.id===inv.id?{...x,status:"paid"}:x))} style={{ background:C.green, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.markPaid}</button>}
-            <a href="https://g.page/r/review" target="_blank" rel="noreferrer" style={{ background:C.blue, color:C.white, borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, textDecoration:"none" }}>⭐ {t.invoices.review}</a>
+            <button onClick={() => { const client = clients.find(c => c.name === inv.client); const text = formatInvoiceText(inv, company, t); sendSMS(client ? client.phone : "", text); }} style={{ background:C.blue, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.textInv}</button>
+            <button onClick={() => { const client = clients.find(c => c.name === inv.client); const text = formatInvoiceText(inv, company, t); sendEmail(client ? client.email : "", `${t.invoices.invoiceNum} ${inv.id} — ${company.companyName||""}`, text); }} style={{ background:C.orange, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.emailInv}</button>
+            <a href="https://g.page/r/review" target="_blank" rel="noreferrer" style={{ background:C.black, color:C.white, borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, textDecoration:"none" }}>⭐ {t.invoices.review}</a>
+            <button onClick={() => { if (window.confirm(t.invoices.confirmDelInv)) setInvoices(invoices.filter(x => x.id !== inv.id)); }} style={{ background:C.red, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.deleteInv}</button>
           </div>
         </div>
       ))}
@@ -267,7 +414,7 @@ function InvoicesTab({ t, clients, invoices, setInvoices }) {
   );
 }
 
-function EstimatesTab({ t, clients, estimates, setEstimates }) {
+function EstimatesTab({ t, clients, estimates, setEstimates, invoices, setInvoices, company }) {
   const [showForm, setShowForm] = useState(false);
   const emptyLine = () => ({ service:"", amount:"", id:Date.now()+Math.random() });
   const [form, setForm] = useState({ client:"", lines:[emptyLine()], notes:"" });
@@ -282,6 +429,24 @@ function EstimatesTab({ t, clients, estimates, setEstimates }) {
     const total = lineTotal(validLines);
     setEstimates([...estimates, { id:Date.now(), client:form.client, lines:validLines, notes:form.notes, total, status:"pending", date:new Date().toISOString().split("T")[0] }]);
     setForm({ client:"", lines:[emptyLine()], notes:"" }); setShowForm(false);
+  };
+  const convertToInvoice = (est) => {
+    if (!window.confirm(t.estimates.convertConfirm)) return;
+    const newInvoice = { id:Date.now(), client:est.client, lines:est.lines || [], total:est.total||est.amount||0, status:"pending", date:new Date().toISOString().split("T")[0] };
+    setInvoices([...invoices, newInvoice]);
+    setEstimates(estimates.map(e => e.id === est.id ? { ...e, status:"approved" } : e));
+    alert(t.estimates.converted);
+  };
+  const formatEstText = (est) => {
+    let text = "";
+    if (company.companyName) text += `${company.companyName}\n`;
+    if (company.ownerName) text += `${company.ownerName}\n`;
+    if (company.phone) text += `${company.phone}\n\n`;
+    text += `${t.estimates.title}\n${t.invoices.date}: ${est.date||""}\n\n${t.invoices.to}: ${est.client}\n\n`;
+    if (est.lines) est.lines.forEach(l => { text += `• ${l.service} — $${parseFloat(l.amount).toFixed(2)}\n`; });
+    text += `\n${t.invoices.total}: $${parseFloat(est.total||est.amount||0).toFixed(2)}\n`;
+    if (est.notes) text += `\n${t.estimates.notes}: ${est.notes}\n`;
+    return text;
   };
   return (
     <div style={{ padding:16 }}>
@@ -325,11 +490,14 @@ function EstimatesTab({ t, clients, estimates, setEstimates }) {
             </div>
           ))}
           {est.notes && <div style={{ color:C.grayDark, fontSize:12, marginTop:6, fontStyle:"italic" }}>{est.notes}</div>}
-          <div style={{ display:"flex", gap:8, marginTop:10 }}>
+          <div style={{ display:"flex", gap:6, flexWrap:"wrap", marginTop:10 }}>
             <span style={{ background:est.status==="approved"?"#e8f5e3":"#fff3cd", color:est.status==="approved"?C.green:C.orange, borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600 }}>
               {est.status==="approved"?t.estimates.approved:t.estimates.pending}
             </span>
-            {est.status!=="approved" && <button onClick={() => setEstimates(estimates.map(x=>x.id===est.id?{...x,status:"approved"}:x))} style={{ background:C.green, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.convert}</button>}
+            {est.status!=="approved" && <button onClick={() => convertToInvoice(est)} style={{ background:C.green, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.convert}</button>}
+            <button onClick={() => { const client = clients.find(c => c.name === est.client); sendSMS(client ? client.phone : "", formatEstText(est)); }} style={{ background:C.blue, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.textEst}</button>
+            <button onClick={() => { const client = clients.find(c => c.name === est.client); sendEmail(client ? client.email : "", `${t.estimates.title} — ${company.companyName||""}`, formatEstText(est)); }} style={{ background:C.orange, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.emailEst}</button>
+            <button onClick={() => { if (window.confirm(t.estimates.confirmDelEst)) setEstimates(estimates.filter(x => x.id !== est.id)); }} style={{ background:C.red, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.deleteEst}</button>
           </div>
         </div>
       ))}
@@ -337,11 +505,63 @@ function EstimatesTab({ t, clients, estimates, setEstimates }) {
   );
 }
 
-function BillingTab({ t, invoices }) {
+function BillingTab({ t, invoices, estimates, company, setCompany }) {
+  const [form, setForm] = useState(company);
+  const [showSaved, setShowSaved] = useState(false);
+  useEffect(() => { setForm(company); }, [company]);
   const total = invoices.reduce((s,i) => s+parseFloat(i.total||0), 0);
   const paid = invoices.filter(i=>i.status==="paid").reduce((s,i) => s+parseFloat(i.total||0), 0);
   const pending = total - paid;
   const thisMonth = invoices.filter(i => { const d = new Date(i.date); const n = new Date(); return d.getMonth() === n.getMonth() && d.getFullYear() === n.getFullYear(); }).reduce((s,i) => s+parseFloat(i.total||0), 0);
+  const saveSettings = () => { setCompany(form); setShowSaved(true); setTimeout(() => setShowSaved(false), 2000); };
+
+  // CSV export function — formats data for QuickBooks/Wave/etc import
+  const downloadCSV = (data, filename) => {
+    const blob = new Blob([data], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", filename);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+  const escapeCsv = (val) => { if (val === null || val === undefined) return ""; const s = String(val); if (s.includes(",") || s.includes("\"") || s.includes("\n")) return `"${s.replace(/"/g, '""')}"`; return s; };
+  const exportInvoices = () => {
+    if (!invoices || invoices.length === 0) { alert(t.billing.noData); return; }
+    const headers = ["Invoice Date","Client","Service","Amount","Status","Company"];
+    const rows = [];
+    invoices.forEach(inv => {
+      if (inv.lines && inv.lines.length > 0) {
+        inv.lines.forEach(l => {
+          rows.push([l.date || inv.date, inv.client, l.service, parseFloat(l.amount||0).toFixed(2), inv.status, company.companyName || ""].map(escapeCsv).join(","));
+        });
+      } else {
+        rows.push([inv.date, inv.client, "", parseFloat(inv.total||inv.amount||0).toFixed(2), inv.status, company.companyName || ""].map(escapeCsv).join(","));
+      }
+    });
+    const csv = [headers.join(","), ...rows].join("\n");
+    const today = new Date().toISOString().split("T")[0];
+    downloadCSV(csv, `corte-pro-invoices-${today}.csv`);
+  };
+  const exportEstimates = () => {
+    if (!estimates || estimates.length === 0) { alert(t.billing.noData); return; }
+    const headers = ["Estimate Date","Client","Service","Amount","Status","Notes","Company"];
+    const rows = [];
+    estimates.forEach(est => {
+      if (est.lines && est.lines.length > 0) {
+        est.lines.forEach(l => {
+          rows.push([est.date || "", est.client, l.service, parseFloat(l.amount||0).toFixed(2), est.status, est.notes || "", company.companyName || ""].map(escapeCsv).join(","));
+        });
+      } else {
+        rows.push([est.date || "", est.client, est.service || "", parseFloat(est.total||est.amount||0).toFixed(2), est.status, est.notes || "", company.companyName || ""].map(escapeCsv).join(","));
+      }
+    });
+    const csv = [headers.join(","), ...rows].join("\n");
+    const today = new Date().toISOString().split("T")[0];
+    downloadCSV(csv, `corte-pro-estimates-${today}.csv`);
+  };
+
   return (
     <div style={{ padding:16 }}>
       <h2 style={{ margin:"0 0 16px", color:C.green, fontSize:20, fontWeight:800 }}>{t.billing.title}</h2>
@@ -353,7 +573,25 @@ function BillingTab({ t, invoices }) {
           </div>
         ))}
       </div>
-      <div style={{ background:C.greenPale, borderRadius:12, padding:16, marginBottom:12 }}>
+
+      <div style={{ background:C.black, color:C.white, borderRadius:12, padding:16, marginBottom:16, borderLeft:`5px solid ${C.green}` }}>
+        <div style={{ fontSize:15, fontWeight:800, marginBottom:6, color:C.white }}>📊 {t.billing.exportTitle}</div>
+        <div style={{ fontSize:12, color:"rgba(255,255,255,0.85)", marginBottom:14, lineHeight:1.5 }}>{t.billing.exportBlurb}</div>
+        <button onClick={exportInvoices} style={{ width:"100%", background:C.green, color:C.white, border:"none", borderRadius:8, padding:"11px 0", fontWeight:700, cursor:"pointer", marginBottom:8, fontSize:14 }}>{t.billing.export}</button>
+        <button onClick={exportEstimates} style={{ width:"100%", background:"transparent", color:C.white, border:`2px solid ${C.green}`, borderRadius:8, padding:"10px 0", fontWeight:700, cursor:"pointer", fontSize:14 }}>{t.billing.exportEstimates}</button>
+      </div>
+
+      <div style={{ background:C.white, borderRadius:12, padding:16, marginBottom:16, border:`2px solid ${C.green}` }}>
+        <div style={{ fontSize:15, fontWeight:800, color:C.black, marginBottom:4 }}>🏢 {t.billing.settings}</div>
+        <div style={{ fontSize:12, color:C.grayDark, marginBottom:14 }}>This info appears on your invoices and estimates.</div>
+        {[["companyName",t.billing.companyName],["ownerName",t.billing.ownerName],["phone",t.billing.phone],["email",t.billing.email],["address",t.billing.address],["license",t.billing.license]].map(([key,label]) => (
+          <input key={key} value={form[key]||""} onChange={e => setForm({ ...form, [key]:e.target.value })} placeholder={label} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:14, marginBottom:8, boxSizing:"border-box" }} />
+        ))}
+        <button onClick={saveSettings} style={{ width:"100%", background:C.green, color:C.white, border:"none", borderRadius:8, padding:"11px 0", fontWeight:700, cursor:"pointer", marginTop:6 }}>{t.billing.saveSettings}</button>
+        {showSaved && <div style={{ textAlign:"center", color:C.green, fontWeight:700, marginTop:8, fontSize:13 }}>✓ {t.billing.saved}</div>}
+      </div>
+
+      <div style={{ background:C.greenPale, borderRadius:12, padding:16 }}>
         <div style={{ fontSize:13, color:C.grayDark, marginBottom:4 }}>{t.billing.plan}</div>
         <div style={{ fontWeight:800, fontSize:16, color:C.green, marginBottom:2 }}>{t.billing.monthly}</div>
         <div style={{ fontSize:12, color:C.grayDark }}>{t.billing.annual} — save $100/year</div>
@@ -365,19 +603,23 @@ function BillingTab({ t, invoices }) {
 export default function App() {
   const [lang, setLang] = useState(() => load("cp_lang", "en"));
   const [unlocked, setUnlocked] = useState(false);
+  const [setupDone, setSetupDone] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
   const [clients, setClients] = useState(() => load("cp_clients", []));
   const [invoices, setInvoices] = useState(() => load("cp_invoices", []));
   const [estimates, setEstimates] = useState(() => load("cp_estimates", []));
+  const [company, setCompany] = useState(() => load("cp_company", { companyName:"", ownerName:"", phone:"", email:"", address:"", license:"" }));
   const t = TRANSLATIONS[lang];
 
-  useEffect(() => { if (load("cp_unlocked", false)) setUnlocked(true); }, []);
+  useEffect(() => { if (load("cp_unlocked", false)) setUnlocked(true); if (load("cp_setup_done", false)) setSetupDone(true); }, []);
   useEffect(() => { save("cp_lang", lang); }, [lang]);
   useEffect(() => { save("cp_clients", clients); }, [clients]);
   useEffect(() => { save("cp_invoices", invoices); }, [invoices]);
   useEffect(() => { save("cp_estimates", estimates); }, [estimates]);
+  useEffect(() => { save("cp_company", company); }, [company]);
 
   const handleUnlock = () => { setUnlocked(true); save("cp_unlocked", true); };
+  const handleSetupComplete = (info) => { setCompany(info); setSetupDone(true); save("cp_setup_done", true); };
 
   if (!unlocked) return (
     <div>
@@ -388,16 +630,18 @@ export default function App() {
     </div>
   );
 
+  if (!setupDone) return <SetupScreen onComplete={handleSetupComplete} t={t} lang={lang} setLang={setLang} />;
+
   const tabs = [
     <RouteTab t={t} clients={clients} key="route" />,
     <ClientsTab t={t} clients={clients} setClients={setClients} key="clients" />,
-    <InvoicesTab t={t} clients={clients} invoices={invoices} setInvoices={setInvoices} key="invoices" />,
-    <EstimatesTab t={t} clients={clients} estimates={estimates} setEstimates={setEstimates} key="estimates" />,
-    <BillingTab t={t} invoices={invoices} key="billing" />,
+    <InvoicesTab t={t} clients={clients} invoices={invoices} setInvoices={setInvoices} company={company} key="invoices" />,
+    <EstimatesTab t={t} clients={clients} estimates={estimates} setEstimates={setEstimates} invoices={invoices} setInvoices={setInvoices} company={company} key="estimates" />,
+    <BillingTab t={t} invoices={invoices} estimates={estimates} company={company} setCompany={setCompany} key="billing" />,
   ];
 
   return (
-    <div style={{ maxWidth:480, margin:"0 auto", minHeight:"100vh", background:C.gray, fontFamily:"-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", paddingBottom:80 }}>
+    <div style={{ maxWidth:1100, margin:"0 auto", minHeight:"100vh", background:C.gray, fontFamily:"-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", paddingBottom:80 }}>
       <div style={{ background:C.white, padding:0, position:"sticky", top:0, zIndex:10, borderBottom:`3px solid ${C.green}` }}>
         <img src="/header.png" alt="Corte Pro" style={{ width:"100%", height:"auto", display:"block" }} />
         <div style={{ background:C.black, padding:"6px 12px", display:"flex", justifyContent:"flex-end", alignItems:"center" }}>
@@ -405,7 +649,7 @@ export default function App() {
         </div>
       </div>
       <div>{tabs[activeTab]}</div>
-      <div style={{ position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)", width:"100%", maxWidth:480, background:C.black, borderTop:`3px solid ${C.green}`, display:"flex", zIndex:10 }}>
+      <div style={{ position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)", width:"100%", maxWidth:1100, background:C.black, borderTop:`3px solid ${C.green}`, display:"flex", zIndex:10 }}>
         {t.tabs.map((tab,i) => (
           <button key={tab} onClick={() => setActiveTab(i)} style={{ flex:1, padding:"10px 0", background:"none", border:"none", color:activeTab===i?C.green:"rgba(255,255,255,0.6)", fontWeight:activeTab===i?800:500, fontSize:11, cursor:"pointer", borderTop:activeTab===i?`2px solid ${C.green}`:"2px solid transparent" }}>
             {["🗺️","👥","📄","📋","💰"][i]}<br />{tab}
