@@ -269,8 +269,20 @@ function InvoicesTab({ t, clients, invoices, setInvoices }) {
 
 function EstimatesTab({ t, clients, estimates, setEstimates }) {
   const [showForm, setShowForm] = useState(false);
-  const [form, setForm] = useState({ client:"", service:"", amount:"", notes:"" });
-  const saveEst = () => { if (!form.client || !form.amount) return; setEstimates([...estimates, { ...form, id:Date.now(), status:"pending" }]); setForm({ client:"", service:"", amount:"", notes:"" }); setShowForm(false); };
+  const emptyLine = () => ({ service:"", amount:"", id:Date.now()+Math.random() });
+  const [form, setForm] = useState({ client:"", lines:[emptyLine()], notes:"" });
+  const addLine = () => setForm({ ...form, lines:[...form.lines, emptyLine()] });
+  const removeLine = (id) => setForm({ ...form, lines:form.lines.filter(l => l.id !== id) });
+  const updateLine = (id, field, val) => setForm({ ...form, lines:form.lines.map(l => l.id === id ? { ...l, [field]:val } : l) });
+  const lineTotal = (lines) => lines.reduce((s,l) => s+parseFloat(l.amount||0), 0);
+  const saveEst = () => {
+    if (!form.client) return;
+    const validLines = form.lines.filter(l => l.amount && parseFloat(l.amount) > 0);
+    if (validLines.length === 0) return;
+    const total = lineTotal(validLines);
+    setEstimates([...estimates, { id:Date.now(), client:form.client, lines:validLines, notes:form.notes, total, status:"pending", date:new Date().toISOString().split("T")[0] }]);
+    setForm({ client:"", lines:[emptyLine()], notes:"" }); setShowForm(false);
+  };
   return (
     <div style={{ padding:16 }}>
       <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:16 }}>
@@ -279,24 +291,41 @@ function EstimatesTab({ t, clients, estimates, setEstimates }) {
       </div>
       {showForm && (
         <div style={{ background:C.greenPale, borderRadius:12, padding:16, marginBottom:16 }}>
-          <select value={form.client} onChange={e => setForm({ ...form, client:e.target.value })} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:14, marginBottom:10, boxSizing:"border-box" }}>
+          <select value={form.client} onChange={e => setForm({ ...form, client:e.target.value })} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:14, marginBottom:12, boxSizing:"border-box" }}>
             <option value="">-- {t.estimates.client} --</option>
             {clients.map(c => <option key={c.id} value={c.name}>{c.name}</option>)}
           </select>
-          <input value={form.service} onChange={e => setForm({ ...form, service:e.target.value })} placeholder={t.estimates.service} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:14, marginBottom:10, boxSizing:"border-box" }} />
-          <input value={form.amount} onChange={e => setForm({ ...form, amount:e.target.value })} placeholder={t.estimates.amount} type="number" style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:14, marginBottom:10, boxSizing:"border-box" }} />
+          <div style={{ fontSize:12, fontWeight:700, color:C.grayDark, marginBottom:8 }}>{t.invoices.lineItems}</div>
+          {form.lines.map((line) => (
+            <div key={line.id} style={{ background:C.white, borderRadius:8, padding:10, marginBottom:8, border:`1px solid ${C.grayMid}` }}>
+              <select value={line.service} onChange={e => updateLine(line.id, "service", e.target.value)} style={{ width:"100%", padding:"8px 10px", borderRadius:6, border:`1px solid ${C.grayMid}`, fontSize:13, marginBottom:6, boxSizing:"border-box" }}>
+                <option value="">-- {t.invoices.service} --</option>
+                {t.invoices.services.map(s => <option key={s} value={s}>{s}</option>)}
+              </select>
+              <input value={line.amount} onChange={e => updateLine(line.id, "amount", e.target.value)} placeholder={t.estimates.amount} type="number" style={{ width:"100%", padding:"8px 10px", borderRadius:6, border:`1px solid ${C.grayMid}`, fontSize:13, marginBottom:6, boxSizing:"border-box" }} />
+              {form.lines.length > 1 && <button onClick={() => removeLine(line.id)} style={{ background:C.red, color:C.white, border:"none", borderRadius:6, padding:"6px 10px", fontSize:11, fontWeight:600, cursor:"pointer" }}>{t.invoices.removeLine}</button>}
+            </div>
+          ))}
+          <button onClick={addLine} style={{ width:"100%", background:C.white, color:C.green, border:`2px dashed ${C.green}`, borderRadius:8, padding:"10px 0", fontWeight:700, cursor:"pointer", marginBottom:10, fontSize:13 }}>{t.invoices.addLine}</button>
           <input value={form.notes} onChange={e => setForm({ ...form, notes:e.target.value })} placeholder={t.estimates.notes} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:14, marginBottom:10, boxSizing:"border-box" }} />
+          <div style={{ background:C.white, padding:"10px 12px", borderRadius:8, marginBottom:10, textAlign:"right", fontWeight:700, color:C.green, fontSize:15 }}>{t.invoices.total}: ${lineTotal(form.lines).toFixed(2)}</div>
           <button onClick={saveEst} style={{ width:"100%", background:C.green, color:C.white, border:"none", borderRadius:8, padding:"11px 0", fontWeight:700, cursor:"pointer" }}>{t.estimates.save}</button>
         </div>
       )}
       {estimates.length === 0 ? <div style={{ textAlign:"center", color:C.grayDark, padding:"40px 16px", fontSize:14 }}>{t.estimates.noEstimates}</div> : estimates.map(est => (
         <div key={est.id} style={{ background:C.white, borderRadius:12, padding:14, marginBottom:10, border:`1px solid ${C.grayMid}` }}>
-          <div style={{ display:"flex", justifyContent:"space-between", marginBottom:4 }}>
+          <div style={{ display:"flex", justifyContent:"space-between", marginBottom:8 }}>
             <div style={{ fontWeight:700, fontSize:15, color:C.text }}>{est.client}</div>
-            <div style={{ fontSize:16, fontWeight:800, color:C.green }}>${parseFloat(est.amount).toFixed(2)}</div>
+            <div style={{ fontSize:17, fontWeight:800, color:C.green }}>${parseFloat(est.total||est.amount||0).toFixed(2)}</div>
           </div>
-          <div style={{ color:C.grayDark, fontSize:13, marginBottom:8 }}>{est.service}</div>
-          <div style={{ display:"flex", gap:8 }}>
+          {est.lines && est.lines.map(l => (
+            <div key={l.id} style={{ display:"flex", justifyContent:"space-between", color:C.grayDark, fontSize:13, marginBottom:3, paddingLeft:8, borderLeft:`2px solid ${C.greenPale}` }}>
+              <div>{l.service}</div>
+              <div>${parseFloat(l.amount).toFixed(2)}</div>
+            </div>
+          ))}
+          {est.notes && <div style={{ color:C.grayDark, fontSize:12, marginTop:6, fontStyle:"italic" }}>{est.notes}</div>}
+          <div style={{ display:"flex", gap:8, marginTop:10 }}>
             <span style={{ background:est.status==="approved"?"#e8f5e3":"#fff3cd", color:est.status==="approved"?C.green:C.orange, borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600 }}>
               {est.status==="approved"?t.estimates.approved:t.estimates.pending}
             </span>
