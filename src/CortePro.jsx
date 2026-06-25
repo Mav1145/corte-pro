@@ -75,7 +75,7 @@ const TRANSLATIONS = {
   },
 };
 
-const C = { green: "#2D6A1F", greenPale: "#e8f5e3", white: "#ffffff", gray: "#f5f5f5", grayMid: "#e0e0e0", grayDark: "#666", text: "#1a1a1a", red: "#c0392b", orange: "#e67e22", blue: "#2980b9" };
+const C = { green: "#2D6A1F", greenDark: "#1a4011", greenPale: "#f0ebd8", tan: "#d4c5a0", tanLight: "#f0ebd8", tanDark: "#a8946b", white: "#ffffff", gray: "#f5f0e6", grayMid: "#d4c5a0", grayDark: "#666", text: "#1a1a1a", black: "#0d0d0d", red: "#c0392b", orange: "#e67e22", blue: "#2980b9" };
 
 // Storage helpers — saves data so it doesn't disappear when switching tabs
 const save = (key, val) => { try { localStorage.setItem(key, JSON.stringify(val)); } catch(e){} };
@@ -89,15 +89,14 @@ function AccessGate({ onUnlock, t }) {
     else { setError(true); setTimeout(() => setError(false), 2000); }
   };
   return (
-    <div style={{ minHeight:"100vh", background:C.green, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:24 }}>
-      <div style={{ background:C.white, borderRadius:16, padding:32, maxWidth:360, width:"100%", textAlign:"center", boxShadow:"0 8px 32px rgba(0,0,0,0.18)" }}>
-        <img src="/logo.png" alt="Corte Pro" style={{ width:140, marginBottom:16 }} />
-        <div style={{ fontSize:13, color:C.grayDark, marginBottom:24 }}>{t.tagline}</div>
-        <div style={{ fontSize:15, fontWeight:600, color:C.text, marginBottom:8 }}>{t.access.title}</div>
+    <div style={{ minHeight:"100vh", background:C.black, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:24 }}>
+      <div style={{ background:C.white, borderRadius:16, padding:36, maxWidth:380, width:"100%", textAlign:"center", boxShadow:"0 8px 32px rgba(0,0,0,0.4)", borderTop:`4px solid ${C.green}` }}>
+        <img src="/logo.png" alt="Corte Pro" style={{ width:220, marginBottom:20 }} />
+        <div style={{ fontSize:15, fontWeight:700, color:C.black, marginBottom:8, letterSpacing:0.5 }}>{t.access.title}</div>
         <div style={{ fontSize:13, color:C.grayDark, marginBottom:16 }}>{t.access.subtitle}</div>
         <input value={code} onChange={e => setCode(e.target.value)} onKeyDown={e => e.key==="Enter" && handleUnlock()} placeholder={t.access.placeholder} style={{ width:"100%", padding:"12px 14px", borderRadius:8, border:`2px solid ${error ? C.red : C.grayMid}`, fontSize:15, marginBottom:12, boxSizing:"border-box", outline:"none", textAlign:"center", letterSpacing:1 }} />
         {error && <div style={{ color:C.red, fontSize:13, marginBottom:8 }}>{t.access.error}</div>}
-        <button onClick={handleUnlock} style={{ width:"100%", background:C.green, color:C.white, border:"none", borderRadius:8, padding:"13px 0", fontSize:15, fontWeight:700, cursor:"pointer" }}>{t.access.btn}</button>
+        <button onClick={handleUnlock} style={{ width:"100%", background:C.black, color:C.white, border:`2px solid ${C.green}`, borderRadius:8, padding:"14px 0", fontSize:16, fontWeight:800, cursor:"pointer", letterSpacing:0.5 }}>{t.access.btn}</button>
       </div>
     </div>
   );
@@ -370,20 +369,14 @@ export default function App() {
 
   return (
     <div style={{ maxWidth:480, margin:"0 auto", minHeight:"100vh", background:C.gray, fontFamily:"-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", paddingBottom:80 }}>
-      <div style={{ background:C.green, padding:"14px 16px", display:"flex", justifyContent:"space-between", alignItems:"center", position:"sticky", top:0, zIndex:10 }}>
-        <div style={{ display:"flex", alignItems:"center", gap:8 }}>
-          <img src="/logo.png" alt="" style={{ height:36 }} />
-          <div>
-            <div style={{ color:C.white, fontWeight:800, fontSize:16 }}>{t.appName}</div>
-            <div style={{ color:"rgba(255,255,255,0.75)", fontSize:10 }}>{t.tagline}</div>
-          </div>
-        </div>
-        <button onClick={() => setLang(lang==="en"?"es":"en")} style={{ background:"rgba(255,255,255,0.15)", color:C.white, border:"1px solid rgba(255,255,255,0.3)", borderRadius:20, padding:"6px 14px", fontWeight:700, cursor:"pointer", fontSize:12 }}>{t.lang}</button>
+      <div style={{ background:C.black, padding:"16px 16px", display:"flex", justifyContent:"space-between", alignItems:"center", position:"sticky", top:0, zIndex:10, borderBottom:`3px solid ${C.green}` }}>
+        <img src="/logo.png" alt="Corte Pro" style={{ height:50 }} />
+        <button onClick={() => setLang(lang==="en"?"es":"en")} style={{ background:C.green, color:C.white, border:`1px solid ${C.greenDark}`, borderRadius:20, padding:"6px 14px", fontWeight:700, cursor:"pointer", fontSize:12 }}>{t.lang}</button>
       </div>
       <div>{tabs[activeTab]}</div>
-      <div style={{ position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)", width:"100%", maxWidth:480, background:C.white, borderTop:`1px solid ${C.grayMid}`, display:"flex", zIndex:10 }}>
+      <div style={{ position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)", width:"100%", maxWidth:480, background:C.black, borderTop:`3px solid ${C.green}`, display:"flex", zIndex:10 }}>
         {t.tabs.map((tab,i) => (
-          <button key={tab} onClick={() => setActiveTab(i)} style={{ flex:1, padding:"10px 0", background:"none", border:"none", color:activeTab===i?C.green:C.grayDark, fontWeight:activeTab===i?700:400, fontSize:11, cursor:"pointer", borderTop:activeTab===i?`2px solid ${C.green}`:"2px solid transparent" }}>
+          <button key={tab} onClick={() => setActiveTab(i)} style={{ flex:1, padding:"10px 0", background:"none", border:"none", color:activeTab===i?C.green:"rgba(255,255,255,0.6)", fontWeight:activeTab===i?800:500, fontSize:11, cursor:"pointer", borderTop:activeTab===i?`2px solid ${C.green}`:"2px solid transparent" }}>
             {["🗺️","👥","📄","📋","💰"][i]}<br />{tab}
           </button>
         ))}
