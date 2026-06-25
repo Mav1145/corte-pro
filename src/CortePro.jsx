@@ -369,9 +369,11 @@ export default function App() {
 
   return (
     <div style={{ maxWidth:480, margin:"0 auto", minHeight:"100vh", background:C.gray, fontFamily:"-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", paddingBottom:80 }}>
-      <div style={{ background:C.white, padding:0, display:"flex", justifyContent:"space-between", alignItems:"center", position:"sticky", top:0, zIndex:10, borderBottom:`3px solid ${C.green}` }}>
-        <img src="/header.png" alt="Corte Pro" style={{ height:70, width:"auto", maxWidth:"calc(100% - 80px)", objectFit:"contain" }} />
-        <button onClick={() => setLang(lang==="en"?"es":"en")} style={{ background:C.green, color:C.white, border:`1px solid ${C.greenDark}`, borderRadius:20, padding:"6px 14px", fontWeight:700, cursor:"pointer", fontSize:12, marginRight:12 }}>{t.lang}</button>
+      <div style={{ background:C.white, padding:0, position:"sticky", top:0, zIndex:10, borderBottom:`3px solid ${C.green}`, overflow:"hidden" }}>
+        <div style={{ position:"relative", width:"100%", height:80 }}>
+          <img src="/header.png" alt="Corte Pro" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center", display:"block" }} />
+          <button onClick={() => setLang(lang==="en"?"es":"en")} style={{ position:"absolute", top:8, right:8, background:C.green, color:C.white, border:`1px solid ${C.greenDark}`, borderRadius:20, padding:"5px 12px", fontWeight:700, cursor:"pointer", fontSize:11, boxShadow:"0 2px 4px rgba(0,0,0,0.3)" }}>{t.lang}</button>
+        </div>
       </div>
       <div>{tabs[activeTab]}</div>
       <div style={{ position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)", width:"100%", maxWidth:480, background:C.black, borderTop:`3px solid ${C.green}`, display:"flex", zIndex:10 }}>
