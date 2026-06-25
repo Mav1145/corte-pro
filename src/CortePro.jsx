@@ -369,9 +369,9 @@ export default function App() {
 
   return (
     <div style={{ maxWidth:480, margin:"0 auto", minHeight:"100vh", background:C.gray, fontFamily:"-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", paddingBottom:80 }}>
-      <div style={{ background:C.black, padding:"16px 16px", display:"flex", justifyContent:"space-between", alignItems:"center", position:"sticky", top:0, zIndex:10, borderBottom:`3px solid ${C.green}` }}>
-        <img src="/logo.png" alt="Corte Pro" style={{ height:50 }} />
-        <button onClick={() => setLang(lang==="en"?"es":"en")} style={{ background:C.green, color:C.white, border:`1px solid ${C.greenDark}`, borderRadius:20, padding:"6px 14px", fontWeight:700, cursor:"pointer", fontSize:12 }}>{t.lang}</button>
+      <div style={{ background:C.white, padding:0, display:"flex", justifyContent:"space-between", alignItems:"center", position:"sticky", top:0, zIndex:10, borderBottom:`3px solid ${C.green}` }}>
+        <img src="/header.png" alt="Corte Pro" style={{ height:70, width:"auto", maxWidth:"calc(100% - 80px)", objectFit:"contain" }} />
+        <button onClick={() => setLang(lang==="en"?"es":"en")} style={{ background:C.green, color:C.white, border:`1px solid ${C.greenDark}`, borderRadius:20, padding:"6px 14px", fontWeight:700, cursor:"pointer", fontSize:12, marginRight:12 }}>{t.lang}</button>
       </div>
       <div>{tabs[activeTab]}</div>
       <div style={{ position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)", width:"100%", maxWidth:480, background:C.black, borderTop:`3px solid ${C.green}`, display:"flex", zIndex:10 }}>
