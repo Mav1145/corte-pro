@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const SERVICES_EN = [
   "Weekly Lawn Mowing",
@@ -54,7 +54,7 @@ const TRANSLATIONS = {
     tagline: "Manage Your Crew. Grow Your Business.",
     tabs: ["Route", "Clients", "Invoices", "Estimates", "Billing"],
     route: { title: "Today's Route", addStop: "Add Stop", address: "Address", client: "Client Name", addBtn: "Add", noStops: "No stops added yet. Add a client stop to begin.", navigate: "Start GPS", remove: "Remove", stop: "Stop", loadToday: "Load Today's Route", noScheduled: "No clients scheduled for today.", clearRoute: "Clear Route", optimize: "⚡ Optimize Order", optimized: "✓ Route optimized!" },
-    clients: { title: "Clients", addClient: "Add Client", name: "Full Name", phone: "Phone Number", address: "Address", email: "Email (optional)", save: "Save Client", update: "Update Client", noClients: "No clients yet. Add your first client.", call: "Call", directions: "Directions", edit: "Edit", delete: "Delete", confirmDelete: "Delete this client?", schedule: "Service Schedule", weekly: "Weekly", biweeklyA: "Bi-Weekly (Week A)", biweeklyB: "Bi-Weekly (Week B)", oneTime: "One-Time / No Schedule", days: ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"], daysFull: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"] },
+    clients: { title: "Clients", addClient: "Add Client", name: "Full Name", phone: "Phone Number", address: "Address", email: "Email (optional)", save: "Save Client", update: "Update Client", noClients: "No clients yet. Add your first client.", call: "Call", directions: "Directions", edit: "Edit", delete: "Delete", confirmDelete: "Delete this client?", schedule: "Service Schedule", weekly: "Weekly", biweeklyA: "Bi-Weekly (Week A)", biweeklyB: "Bi-Weekly (Week B)", oneTime: "One-Time / No Schedule", days: ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"], daysFull: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], import: "📥 Import CSV", downloadTemplate: "📄 Download Template", importTitle: "Import Clients from CSV", importBlurb: "Upload a CSV file to add many clients at once. Download the template below, fill in your clients in Excel or Google Sheets, save as CSV, then upload it here.", importSuccess: "clients imported!", importError: "Could not read this file. Make sure it's a CSV file.", schedHelp: "Schedule: weekly, biweeklyA, biweeklyB, or oneTime. Days: comma-separated like Mon,Wed,Fri" },
     invoices: { title: "Invoices", create: "Create Invoice", client: "Select Client", service: "Service", amount: "Amount ($)", date: "Date", send: "Save Invoice", paid: "Paid", pending: "Pending", noInvoices: "No invoices yet. Create your first invoice.", total: "Total", services: SERVICES_EN, markPaid: "Mark Paid", review: "Request Review", addLine: "+ Add Service Line", removeLine: "Remove", lineItems: "Service Lines", from: "From", to: "Bill To", setup: "Set up your company info in Settings to show your business name on invoices.", invoiceNum: "Invoice #", textInv: "📱 Text", emailInv: "✉️ Email", deleteInv: "Delete", confirmDelInv: "Delete this invoice?" },
     estimates: { title: "Estimates", create: "Create Estimate", client: "Select Client", service: "Service Description", amount: "Estimated Amount ($)", notes: "Notes", save: "Save Estimate", convert: "Convert to Invoice", noEstimates: "No estimates yet.", approved: "Approved", pending: "Pending", convertConfirm: "Convert this estimate to an invoice?", converted: "✓ Estimate converted to invoice!", textEst: "📱 Text", emailEst: "✉️ Email", deleteEst: "Delete", confirmDelEst: "Delete this estimate?" },
     billing: { title: "Billing & Reports", totalEarned: "Total Earned", totalPending: "Pending", thisMonth: "This Month", lastMonth: "Last Month", export: "📊 Export Invoices to CSV", exportEstimates: "📋 Export Estimates to CSV", plan: "Current Plan", monthly: "$24.99/month", annual: "$199/year", settings: "Company Settings", companyName: "Company Name", ownerName: "Owner Name", phone: "Phone Number", email: "Email", address: "Business Address", license: "License # (optional)", saveSettings: "Save Settings", saved: "Settings saved!", exportTitle: "Accounting Export", exportBlurb: "Download your invoices as a CSV file. You can then upload this file directly into QuickBooks, Wave, FreshBooks, Xero, or your accountant's software. Most accounting platforms have a 'Import from CSV' option in their invoices section.", noData: "No data to export yet.", paymentsTitle: "Payment Methods Accepted", paymentsBlurb: "Select which payment methods you accept. These will be shown on every invoice so clients know how to pay you.", check: "Check", cash: "Cash", zelle: "Zelle", venmo: "Venmo", cashapp: "Cash App", creditCard: "Credit Card", paymentHandle: "Handle/Number (e.g. @Yourname or phone)", reviewTitle: "Google Review Link", reviewBlurb: "Paste your Google Business review link here. Get it free at business.google.com → Get more reviews → Share review form. Without this, the 'Request Review' button on invoices won't work.", reviewPlaceholder: "https://g.page/r/YOUR-CODE/review" },
@@ -68,9 +68,9 @@ const TRANSLATIONS = {
     tagline: "Maneja Tu Equipo. Haz Crecer Tu Negocio.",
     tabs: ["Ruta","Clientes","Facturas","Estimados","Facturación"],
     route: { title: "Ruta de Hoy", addStop: "Agregar Parada", address: "Dirección", client: "Nombre del Cliente", addBtn: "Agregar", noStops: "No hay paradas. Agrega una parada para comenzar.", navigate: "Iniciar GPS", remove: "Eliminar", stop: "Parada", loadToday: "Cargar Ruta de Hoy", noScheduled: "No hay clientes programados para hoy.", clearRoute: "Borrar Ruta", optimize: "⚡ Optimizar Orden", optimized: "✓ ¡Ruta optimizada!" },
-    clients: { title: "Clientes", addClient: "Agregar Cliente", name: "Nombre Completo", phone: "Teléfono", address: "Dirección", email: "Correo (opcional)", save: "Guardar Cliente", update: "Actualizar Cliente", noClients: "No hay clientes. Agrega tu primer cliente.", call: "Llamar", directions: "Direcciones", edit: "Corregir", delete: "Eliminar", confirmDelete: "¿Eliminar este cliente?", schedule: "Horario de Servicio", weekly: "Semanal", biweeklyA: "Quincenal (Semana A)", biweeklyB: "Quincenal (Semana B)", oneTime: "Una Vez / Sin Horario", days: ["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"], daysFull: ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"] },
-    invoices: { title: "Facturas", create: "Crear Factura", client: "Seleccionar Cliente", service: "Servicio", amount: "Monto ($)", date: "Fecha", send: "Guardar Factura", paid: "Pagado", pending: "Pendiente", noInvoices: "No hay facturas. Crea tu primera factura.", total: "Total", services: SERVICES_ES, markPaid: "Marcar Pagado", review: "Pedir Reseña", addLine: "+ Agregar Servicio", removeLine: "Quitar", lineItems: "Servicios", from: "De", to: "Para", setup: "Configura los datos de tu negocio en Ajustes para que aparezcan en tus facturas.", invoiceNum: "Factura #", textInv: "📱 Mensaje", emailInv: "✉️ Correo", deleteInv: "Eliminar", confirmDelInv: "¿Eliminar esta factura?" },
-    estimates: { title: "Estimados", create: "Crear Estimado", client: "Seleccionar Cliente", service: "Descripción del Servicio", amount: "Monto Estimado ($)", notes: "Notas", save: "Guardar Estimado", convert: "Convertir a Factura", noEstimates: "No hay estimados.", approved: "Aprobado", pending: "Pendiente", convertConfirm: "¿Convertir este estimado a factura?", converted: "✓ ¡Estimado convertido a factura!", textEst: "📱 Mensaje", emailEst: "✉️ Correo", deleteEst: "Eliminar", confirmDelEst: "¿Eliminar este estimado?" },
+    clients: { title: "Clientes", addClient: "Agregar Cliente", name: "Nombre Completo", phone: "Teléfono", address: "Dirección", email: "Correo (opcional)", save: "Guardar Cliente", update: "Actualizar Cliente", noClients: "No hay clientes. Agrega tu primer cliente.", call: "Llamar", directions: "Direcciones", edit: "Corregir", delete: "Eliminar", confirmDelete: "¿Eliminar este cliente?", schedule: "Horario de Servicio", weekly: "Semanal", biweeklyA: "Quincenal (Semana A)", biweeklyB: "Quincenal (Semana B)", oneTime: "Una Vez / Sin Horario", days: ["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"], daysFull: ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"], import: "📥 Importar CSV", downloadTemplate: "📄 Descargar Plantilla", importTitle: "Importar Clientes desde CSV", importBlurb: "Sube un archivo CSV para agregar muchos clientes a la vez. Descarga la plantilla, llena tus clientes en Excel o Google Sheets, guarda como CSV, y súbelo aquí.", importSuccess: "¡clientes importados!", importError: "No se pudo leer este archivo. Asegúrate que sea un archivo CSV.", schedHelp: "Horario: weekly, biweeklyA, biweeklyB, o oneTime. Días: separados por comas como Lun,Mié,Vie" },
+    invoices: { title: "Facturas", create: "Crear Factura", client: "Seleccionar Cliente", service: "Servicio", amount: "Cantidad ($)", date: "Fecha", send: "Guardar Factura", paid: "Pagado", pending: "Pendiente", noInvoices: "No hay facturas. Crea tu primera factura.", total: "Total", services: SERVICES_ES, markPaid: "Marcar Pagado", review: "Pedir Reseña", addLine: "+ Agregar Servicio", removeLine: "Quitar", lineItems: "Servicios", from: "De", to: "Para", setup: "Configura los datos de tu negocio en Ajustes para que aparezcan en tus facturas.", invoiceNum: "Factura #", textInv: "📱 Mensaje", emailInv: "✉️ Correo", deleteInv: "Eliminar", confirmDelInv: "¿Eliminar esta factura?" },
+    estimates: { title: "Estimados", create: "Crear Estimado", client: "Seleccionar Cliente", service: "Descripción del Servicio", amount: "Cantidad Estimada ($)", notes: "Notas", save: "Guardar Estimado", convert: "Convertir a Factura", noEstimates: "No hay estimados.", approved: "Aprobado", pending: "Pendiente", convertConfirm: "¿Convertir este estimado a factura?", converted: "✓ ¡Estimado convertido a factura!", textEst: "📱 Mensaje", emailEst: "✉️ Correo", deleteEst: "Eliminar", confirmDelEst: "¿Eliminar este estimado?" },
     billing: { title: "Facturación y Reportes", totalEarned: "Total Ganado", totalPending: "Pendiente", thisMonth: "Este Mes", lastMonth: "Mes Pasado", export: "📊 Exportar Facturas a CSV", exportEstimates: "📋 Exportar Estimados a CSV", plan: "Plan Actual", monthly: "$24.99/mes", annual: "$199/año", settings: "Información del Negocio", companyName: "Nombre del Negocio", ownerName: "Nombre del Dueño", phone: "Teléfono", email: "Correo", address: "Dirección del Negocio", license: "Licencia # (opcional)", saveSettings: "Guardar Información", saved: "¡Información guardada!", exportTitle: "Exportar para Contabilidad", exportBlurb: "Descarga tus facturas en un archivo CSV. Después puedes subir este archivo directamente a QuickBooks, Wave, FreshBooks, Xero, o el programa de tu contador. La mayoría de los programas de contabilidad tienen una opción de 'Importar desde CSV' en su sección de facturas.", noData: "No hay datos para exportar todavía.", paymentsTitle: "Métodos de Pago Aceptados", paymentsBlurb: "Selecciona qué métodos de pago aceptas. Estos van a salir en cada factura para que los clientes sepan cómo pagarte.", check: "Cheque", cash: "Efectivo", zelle: "Zelle", venmo: "Venmo", cashapp: "Cash App", creditCard: "Tarjeta de Crédito", paymentHandle: "Usuario/Número (ej. @TuNombre o teléfono)", reviewTitle: "Link de Reseñas de Google", reviewBlurb: "Pega aquí el link de reseñas de tu Negocio en Google. Consíguelo gratis en business.google.com → Conseguir más reseñas → Compartir formulario. Sin este link, el botón 'Pedir Reseña' en las facturas no va a funcionar.", reviewPlaceholder: "https://g.page/r/TU-CODIGO/review" },
     access: { title: "Ingresa tu Código", subtitle: "Ingresa tu código de acceso de Corte Pro para comenzar.", placeholder: "", btn: "Desbloquear App", error: "Código inválido. Intenta de nuevo.", codes: ["CP-2025-LAUNCH","CP-2025-BETA1","CP-2025-BETA2"] },
     setup: { title: "¡Bienvenido a Corte Pro!", subtitle: "Configura tu negocio. Estos datos van a salir en tus facturas y estimados.", companyName: "Nombre del Negocio", ownerName: "Tu Nombre", phone: "Teléfono del Negocio", email: "Correo del Negocio", address: "Dirección del Negocio", continue: "Continuar a la App", skip: "Saltar por ahora", payments: "Métodos de Pago que Aceptas" },
@@ -311,6 +311,7 @@ function ClientsTab({ t, clients, setClients }) {
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [form, setForm] = useState({ name:"", phone:"", address:"", email:"", scheduleType:"oneTime", days:[] });
+  const fileInputRef = useRef(null);
   const openAdd = () => { setEditingId(null); setForm({ name:"", phone:"", address:"", email:"", scheduleType:"oneTime", days:[] }); setShowForm(true); };
   const openEdit = (c) => { setEditingId(c.id); setForm({ name:c.name, phone:c.phone, address:c.address, email:c.email, scheduleType:c.scheduleType||"oneTime", days:c.days||[] }); setShowForm(true); };
   const toggleDay = (dayIdx) => {
@@ -334,12 +335,94 @@ function ClientsTab({ t, clients, setClients }) {
     if (c.scheduleType === "biweeklyB") prefix = t.clients.biweeklyB;
     return `${prefix}: ${dayNames}`;
   };
+  // CSV template download
+  const downloadTemplate = () => {
+    const csv = "Name,Phone,Address,Email,Schedule,Days\nJohn Smith,555-1234,\"123 Main St, Anytown CA\",john@email.com,weekly,\"Mon,Wed,Fri\"\nMaria Garcia,555-5678,\"456 Oak Ave, Anytown CA\",maria@email.com,biweeklyA,Tue\nBob Jones,555-9999,\"789 Pine Rd, Anytown CA\",,oneTime,";
+    const blob = new Blob([csv], { type:"text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "corte-pro-client-template.csv");
+    document.body.appendChild(link); link.click(); document.body.removeChild(link);
+  };
+  // CSV import handler
+  const handleImport = (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      try {
+        const text = evt.target.result;
+        const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
+        if (lines.length < 2) { alert(t.clients.importError); return; }
+        // Parse CSV — handles quoted fields with commas
+        const parseLine = (line) => {
+          const result = []; let cur = ""; let inQuotes = false;
+          for (let i = 0; i < line.length; i++) {
+            const ch = line[i];
+            if (ch === '"') { if (inQuotes && line[i+1] === '"') { cur += '"'; i++; } else { inQuotes = !inQuotes; } }
+            else if (ch === "," && !inQuotes) { result.push(cur.trim()); cur = ""; }
+            else { cur += ch; }
+          }
+          result.push(cur.trim()); return result;
+        };
+        const headers = parseLine(lines[0]).map(h => h.toLowerCase());
+        const idxName = headers.findIndex(h => h.includes("name"));
+        const idxPhone = headers.findIndex(h => h.includes("phone"));
+        const idxAddr = headers.findIndex(h => h.includes("address"));
+        const idxEmail = headers.findIndex(h => h.includes("email"));
+        const idxSched = headers.findIndex(h => h.includes("schedule"));
+        const idxDays = headers.findIndex(h => h.includes("day"));
+        const dayMap = { "mon":0,"tue":1,"wed":2,"thu":3,"fri":4,"sat":5,"sun":6,"lun":0,"mar":1,"mié":2,"mie":2,"jue":3,"vie":4,"sáb":5,"sab":5,"dom":6 };
+        const imported = [];
+        for (let i = 1; i < lines.length; i++) {
+          const fields = parseLine(lines[i]);
+          const name = idxName >= 0 ? fields[idxName] : "";
+          if (!name) continue;
+          const schedRaw = idxSched >= 0 ? (fields[idxSched]||"").toLowerCase() : "onetime";
+          let scheduleType = "oneTime";
+          if (schedRaw.includes("weekly") && !schedRaw.includes("biweekly")) scheduleType = "weekly";
+          else if (schedRaw.includes("biweeklya") || schedRaw === "a") scheduleType = "biweeklyA";
+          else if (schedRaw.includes("biweeklyb") || schedRaw === "b") scheduleType = "biweeklyB";
+          const daysRaw = idxDays >= 0 ? (fields[idxDays]||"") : "";
+          const days = daysRaw.split(",").map(d => dayMap[d.trim().toLowerCase().substring(0,3)]).filter(d => d !== undefined);
+          imported.push({
+            id: Date.now() + Math.random(),
+            name,
+            phone: idxPhone >= 0 ? fields[idxPhone] : "",
+            address: idxAddr >= 0 ? fields[idxAddr] : "",
+            email: idxEmail >= 0 ? fields[idxEmail] : "",
+            scheduleType, days,
+          });
+        }
+        if (imported.length === 0) { alert(t.clients.importError); return; }
+        setClients([...clients, ...imported]);
+        alert(`${imported.length} ${t.clients.importSuccess}`);
+      } catch (err) {
+        alert(t.clients.importError);
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = "";  // reset so same file can be re-uploaded
+  };
   return (
     <div style={{ padding:16 }}>
-      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:16 }}>
+      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:14 }}>
         <h2 style={{ margin:0, color:C.green, fontSize:20, fontWeight:800 }}>{t.clients.title}</h2>
         <button onClick={openAdd} style={{ background:C.green, color:C.white, border:"none", borderRadius:8, padding:"8px 14px", fontWeight:700, cursor:"pointer", fontSize:13 }}>+ {t.clients.addClient}</button>
       </div>
+
+      <div style={{ background:C.black, color:C.white, borderRadius:12, padding:14, marginBottom:14, borderLeft:`5px solid ${C.green}` }}>
+        <div style={{ fontSize:14, fontWeight:800, marginBottom:4 }}>📥 {t.clients.importTitle}</div>
+        <div style={{ fontSize:12, color:"rgba(255,255,255,0.85)", marginBottom:10, lineHeight:1.5 }}>{t.clients.importBlurb}</div>
+        <div style={{ fontSize:11, color:"rgba(255,255,255,0.7)", marginBottom:10, fontStyle:"italic" }}>{t.clients.schedHelp}</div>
+        <div style={{ display:"flex", gap:8, flexWrap:"wrap" }}>
+          <button onClick={downloadTemplate} style={{ flex:"1 1 auto", background:"transparent", color:C.white, border:`2px solid ${C.green}`, borderRadius:8, padding:"9px 12px", fontWeight:700, cursor:"pointer", fontSize:13 }}>{t.clients.downloadTemplate}</button>
+          <button onClick={() => fileInputRef.current && fileInputRef.current.click()} style={{ flex:"1 1 auto", background:C.green, color:C.white, border:"none", borderRadius:8, padding:"10px 12px", fontWeight:700, cursor:"pointer", fontSize:13 }}>{t.clients.import}</button>
+          <input ref={fileInputRef} type="file" accept=".csv,text/csv" onChange={handleImport} style={{ display:"none" }} />
+        </div>
+      </div>
+
       {showForm && (
         <div style={{ background:C.greenPale, borderRadius:12, padding:16, marginBottom:16 }}>
           {[["name",t.clients.name],["phone",t.clients.phone],["address",t.clients.address],["email",t.clients.email]].map(([key,label]) => (
