@@ -57,9 +57,10 @@ const TRANSLATIONS = {
     clients: { title: "Clients", addClient: "Add Client", name: "Full Name", phone: "Phone Number", address: "Address", email: "Email (optional)", save: "Save Client", update: "Update Client", noClients: "No clients yet. Add your first client.", call: "Call", directions: "Directions", edit: "Edit", delete: "Delete", confirmDelete: "Delete this client?", schedule: "Service Schedule", weekly: "Weekly", biweeklyA: "Bi-Weekly (Week A)", biweeklyB: "Bi-Weekly (Week B)", oneTime: "One-Time / No Schedule", days: ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"], daysFull: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"] },
     invoices: { title: "Invoices", create: "Create Invoice", client: "Select Client", service: "Service", amount: "Amount ($)", date: "Date", send: "Save Invoice", paid: "Paid", pending: "Pending", noInvoices: "No invoices yet. Create your first invoice.", total: "Total", services: SERVICES_EN, markPaid: "Mark Paid", review: "Request Review", addLine: "+ Add Service Line", removeLine: "Remove", lineItems: "Service Lines", from: "From", to: "Bill To", setup: "Set up your company info in Settings to show your business name on invoices.", invoiceNum: "Invoice #", textInv: "📱 Text", emailInv: "✉️ Email", deleteInv: "Delete", confirmDelInv: "Delete this invoice?" },
     estimates: { title: "Estimates", create: "Create Estimate", client: "Select Client", service: "Service Description", amount: "Estimated Amount ($)", notes: "Notes", save: "Save Estimate", convert: "Convert to Invoice", noEstimates: "No estimates yet.", approved: "Approved", pending: "Pending", convertConfirm: "Convert this estimate to an invoice?", converted: "✓ Estimate converted to invoice!", textEst: "📱 Text", emailEst: "✉️ Email", deleteEst: "Delete", confirmDelEst: "Delete this estimate?" },
-    billing: { title: "Billing & Reports", totalEarned: "Total Earned", totalPending: "Pending", thisMonth: "This Month", lastMonth: "Last Month", export: "📊 Export Invoices to CSV", exportEstimates: "📋 Export Estimates to CSV", plan: "Current Plan", monthly: "$24.99/month", annual: "$199/year", settings: "Company Settings", companyName: "Company Name", ownerName: "Owner Name", phone: "Phone Number", email: "Email", address: "Business Address", license: "License # (optional)", saveSettings: "Save Settings", saved: "Settings saved!", exportTitle: "Accounting Export", exportBlurb: "Download your invoices as a CSV file. You can then upload this file directly into QuickBooks, Wave, FreshBooks, Xero, or your accountant's software. Most accounting platforms have a 'Import from CSV' option in their invoices section.", noData: "No data to export yet." },
+    billing: { title: "Billing & Reports", totalEarned: "Total Earned", totalPending: "Pending", thisMonth: "This Month", lastMonth: "Last Month", export: "📊 Export Invoices to CSV", exportEstimates: "📋 Export Estimates to CSV", plan: "Current Plan", monthly: "$24.99/month", annual: "$199/year", settings: "Company Settings", companyName: "Company Name", ownerName: "Owner Name", phone: "Phone Number", email: "Email", address: "Business Address", license: "License # (optional)", saveSettings: "Save Settings", saved: "Settings saved!", exportTitle: "Accounting Export", exportBlurb: "Download your invoices as a CSV file. You can then upload this file directly into QuickBooks, Wave, FreshBooks, Xero, or your accountant's software. Most accounting platforms have a 'Import from CSV' option in their invoices section.", noData: "No data to export yet.", paymentsTitle: "Payment Methods Accepted", paymentsBlurb: "Select which payment methods you accept. These will be shown on every invoice so clients know how to pay you.", check: "Check", cash: "Cash", zelle: "Zelle", venmo: "Venmo", cashapp: "Cash App", creditCard: "Credit Card", paymentHandle: "Handle/Number (e.g. @Yourname or phone)", reviewTitle: "Google Review Link", reviewBlurb: "Paste your Google Business review link here. Get it free at business.google.com → Get more reviews → Share review form. Without this, the 'Request Review' button on invoices won't work.", reviewPlaceholder: "https://g.page/r/YOUR-CODE/review" },
     access: { title: "Enter Access Code", subtitle: "Enter your Corte Pro access code to get started.", placeholder: "", btn: "Unlock App", error: "Invalid access code. Please try again.", codes: ["CP-2025-LAUNCH","CP-2025-BETA1","CP-2025-BETA2"] },
-    setup: { title: "Welcome to Corte Pro!", subtitle: "Let's set up your business. This info will appear on your invoices and estimates.", companyName: "Company Name", ownerName: "Your Name", phone: "Business Phone", email: "Business Email", address: "Business Address", continue: "Continue to App", skip: "Skip for now" },
+    setup: { title: "Welcome to Corte Pro!", subtitle: "Let's set up your business. This info will appear on your invoices and estimates.", companyName: "Company Name", ownerName: "Your Name", phone: "Business Phone", email: "Business Email", address: "Business Address", continue: "Continue to App", skip: "Skip for now", payments: "Payment Methods You Accept" },
+    pdf: "🖨️ Print/PDF",
     lang: "Español",
   },
   es: {
@@ -70,9 +71,10 @@ const TRANSLATIONS = {
     clients: { title: "Clientes", addClient: "Agregar Cliente", name: "Nombre Completo", phone: "Teléfono", address: "Dirección", email: "Correo (opcional)", save: "Guardar Cliente", update: "Actualizar Cliente", noClients: "No hay clientes. Agrega tu primer cliente.", call: "Llamar", directions: "Direcciones", edit: "Corregir", delete: "Eliminar", confirmDelete: "¿Eliminar este cliente?", schedule: "Horario de Servicio", weekly: "Semanal", biweeklyA: "Quincenal (Semana A)", biweeklyB: "Quincenal (Semana B)", oneTime: "Una Vez / Sin Horario", days: ["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"], daysFull: ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"] },
     invoices: { title: "Facturas", create: "Crear Factura", client: "Seleccionar Cliente", service: "Servicio", amount: "Monto ($)", date: "Fecha", send: "Guardar Factura", paid: "Pagado", pending: "Pendiente", noInvoices: "No hay facturas. Crea tu primera factura.", total: "Total", services: SERVICES_ES, markPaid: "Marcar Pagado", review: "Pedir Reseña", addLine: "+ Agregar Servicio", removeLine: "Quitar", lineItems: "Servicios", from: "De", to: "Para", setup: "Configura los datos de tu negocio en Ajustes para que aparezcan en tus facturas.", invoiceNum: "Factura #", textInv: "📱 Mensaje", emailInv: "✉️ Correo", deleteInv: "Eliminar", confirmDelInv: "¿Eliminar esta factura?" },
     estimates: { title: "Estimados", create: "Crear Estimado", client: "Seleccionar Cliente", service: "Descripción del Servicio", amount: "Monto Estimado ($)", notes: "Notas", save: "Guardar Estimado", convert: "Convertir a Factura", noEstimates: "No hay estimados.", approved: "Aprobado", pending: "Pendiente", convertConfirm: "¿Convertir este estimado a factura?", converted: "✓ ¡Estimado convertido a factura!", textEst: "📱 Mensaje", emailEst: "✉️ Correo", deleteEst: "Eliminar", confirmDelEst: "¿Eliminar este estimado?" },
-    billing: { title: "Facturación y Reportes", totalEarned: "Total Ganado", totalPending: "Pendiente", thisMonth: "Este Mes", lastMonth: "Mes Pasado", export: "📊 Exportar Facturas a CSV", exportEstimates: "📋 Exportar Estimados a CSV", plan: "Plan Actual", monthly: "$24.99/mes", annual: "$199/año", settings: "Información del Negocio", companyName: "Nombre del Negocio", ownerName: "Nombre del Dueño", phone: "Teléfono", email: "Correo", address: "Dirección del Negocio", license: "Licencia # (opcional)", saveSettings: "Guardar Información", saved: "¡Información guardada!", exportTitle: "Exportar para Contabilidad", exportBlurb: "Descarga tus facturas en un archivo CSV. Después puedes subir este archivo directamente a QuickBooks, Wave, FreshBooks, Xero, o el programa de tu contador. La mayoría de los programas de contabilidad tienen una opción de 'Importar desde CSV' en su sección de facturas.", noData: "No hay datos para exportar todavía." },
+    billing: { title: "Facturación y Reportes", totalEarned: "Total Ganado", totalPending: "Pendiente", thisMonth: "Este Mes", lastMonth: "Mes Pasado", export: "📊 Exportar Facturas a CSV", exportEstimates: "📋 Exportar Estimados a CSV", plan: "Plan Actual", monthly: "$24.99/mes", annual: "$199/año", settings: "Información del Negocio", companyName: "Nombre del Negocio", ownerName: "Nombre del Dueño", phone: "Teléfono", email: "Correo", address: "Dirección del Negocio", license: "Licencia # (opcional)", saveSettings: "Guardar Información", saved: "¡Información guardada!", exportTitle: "Exportar para Contabilidad", exportBlurb: "Descarga tus facturas en un archivo CSV. Después puedes subir este archivo directamente a QuickBooks, Wave, FreshBooks, Xero, o el programa de tu contador. La mayoría de los programas de contabilidad tienen una opción de 'Importar desde CSV' en su sección de facturas.", noData: "No hay datos para exportar todavía.", paymentsTitle: "Métodos de Pago Aceptados", paymentsBlurb: "Selecciona qué métodos de pago aceptas. Estos van a salir en cada factura para que los clientes sepan cómo pagarte.", check: "Cheque", cash: "Efectivo", zelle: "Zelle", venmo: "Venmo", cashapp: "Cash App", creditCard: "Tarjeta de Crédito", paymentHandle: "Usuario/Número (ej. @TuNombre o teléfono)", reviewTitle: "Link de Reseñas de Google", reviewBlurb: "Pega aquí el link de reseñas de tu Negocio en Google. Consíguelo gratis en business.google.com → Conseguir más reseñas → Compartir formulario. Sin este link, el botón 'Pedir Reseña' en las facturas no va a funcionar.", reviewPlaceholder: "https://g.page/r/TU-CODIGO/review" },
     access: { title: "Ingresa tu Código", subtitle: "Ingresa tu código de acceso de Corte Pro para comenzar.", placeholder: "", btn: "Desbloquear App", error: "Código inválido. Intenta de nuevo.", codes: ["CP-2025-LAUNCH","CP-2025-BETA1","CP-2025-BETA2"] },
-    setup: { title: "¡Bienvenido a Corte Pro!", subtitle: "Configura tu negocio. Estos datos van a salir en tus facturas y estimados.", companyName: "Nombre del Negocio", ownerName: "Tu Nombre", phone: "Teléfono del Negocio", email: "Correo del Negocio", address: "Dirección del Negocio", continue: "Continuar a la App", skip: "Saltar por ahora" },
+    setup: { title: "¡Bienvenido a Corte Pro!", subtitle: "Configura tu negocio. Estos datos van a salir en tus facturas y estimados.", companyName: "Nombre del Negocio", ownerName: "Tu Nombre", phone: "Teléfono del Negocio", email: "Correo del Negocio", address: "Dirección del Negocio", continue: "Continuar a la App", skip: "Saltar por ahora", payments: "Métodos de Pago que Aceptas" },
+    pdf: "🖨️ Imprimir/PDF",
     lang: "English",
   },
 };
@@ -131,16 +133,67 @@ const optimizeRoute = (stops) => {
   return result;
 };
 
+// Helper: Print invoice as PDF (uses browser's built-in print-to-PDF)
+const printInvoice = (inv, company, t) => {
+  const win = window.open("", "_blank");
+  if (!win) return;
+  const payments = company.payments || {};
+  const enabledPayments = Object.entries(payments).filter(([k,v]) => v && v.enabled);
+  const paymentsHtml = enabledPayments.length > 0 ? `
+    <div style="margin-top:30px;padding:16px;background:#f0ebd8;border-radius:8px;border-left:4px solid #2D6A1F;">
+      <div style="font-weight:bold;color:#2D6A1F;margin-bottom:8px;">${t.billing.paymentsTitle}:</div>
+      ${enabledPayments.map(([k,v]) => `<div style="margin:4px 0;font-size:14px;">✓ <strong>${t.billing[k]||k}</strong>${v.handle ? ` — ${v.handle}` : ''}</div>`).join("")}
+    </div>` : "";
+  const linesHtml = (inv.lines||[]).map(l => `<tr><td style="padding:8px;border-bottom:1px solid #eee;">${l.service||""}</td><td style="padding:8px;border-bottom:1px solid #eee;">${l.date||""}</td><td style="padding:8px;border-bottom:1px solid #eee;text-align:right;">$${parseFloat(l.amount||0).toFixed(2)}</td></tr>`).join("");
+  const html = `<!DOCTYPE html><html><head><title>${t.invoices.invoiceNum} ${inv.id}</title><meta charset="UTF-8"></head>
+    <body style="font-family:Arial,sans-serif;max-width:800px;margin:30px auto;padding:30px;color:#1a1a1a;">
+      <div style="border-bottom:3px solid #2D6A1F;padding-bottom:20px;margin-bottom:30px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <div style="font-size:28px;font-weight:800;color:#2D6A1F;">${company.companyName||"Your Company"}</div>
+            ${company.ownerName?`<div style="color:#666;">${company.ownerName}</div>`:""}
+            ${company.phone?`<div style="color:#666;">📞 ${company.phone}</div>`:""}
+            ${company.email?`<div style="color:#666;">✉️ ${company.email}</div>`:""}
+            ${company.address?`<div style="color:#666;">${company.address}</div>`:""}
+            ${company.license?`<div style="color:#666;font-size:11px;">License: ${company.license}</div>`:""}
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:24px;font-weight:800;color:#1a1a1a;">INVOICE</div>
+            <div style="color:#666;">#${inv.id}</div>
+            <div style="color:#666;">${inv.date}</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-bottom:24px;">
+        <div style="font-size:12px;color:#666;font-weight:bold;">${t.invoices.to}:</div>
+        <div style="font-size:18px;font-weight:bold;">${inv.client}</div>
+      </div>
+      <table style="width:100%;border-collapse:collapse;margin-bottom:20px;">
+        <thead><tr style="background:#2D6A1F;color:white;"><th style="padding:10px;text-align:left;">${t.invoices.service}</th><th style="padding:10px;text-align:left;">${t.invoices.date}</th><th style="padding:10px;text-align:right;">${t.invoices.amount}</th></tr></thead>
+        <tbody>${linesHtml}</tbody>
+      </table>
+      <div style="text-align:right;font-size:22px;font-weight:800;color:#2D6A1F;padding:14px;background:#e8f5e3;border-radius:8px;">${t.invoices.total}: $${parseFloat(inv.total||0).toFixed(2)}</div>
+      <div style="margin-top:14px;text-align:right;font-size:14px;font-weight:600;color:${inv.status==='paid'?'#2D6A1F':'#e67e22'};">${inv.status==='paid'?t.invoices.paid.toUpperCase():t.invoices.pending.toUpperCase()}</div>
+      ${paymentsHtml}
+      <div style="margin-top:40px;padding-top:20px;border-top:1px solid #eee;text-align:center;color:#999;font-size:11px;">Generated by Corte Pro · cortepro.app</div>
+    </body></html>`;
+  win.document.write(html);
+  win.document.close();
+  setTimeout(() => { win.print(); }, 500);
+};
+
 function SetupScreen({ onComplete, t, lang, setLang }) {
-  const [form, setForm] = useState({ companyName:"", ownerName:"", phone:"", email:"", address:"" });
+  const [form, setForm] = useState({ companyName:"", ownerName:"", phone:"", email:"", address:"", payments:{ check:{enabled:false,handle:""}, cash:{enabled:false,handle:""}, zelle:{enabled:false,handle:""}, venmo:{enabled:false,handle:""}, cashapp:{enabled:false,handle:""}, creditCard:{enabled:false,handle:""} } });
+  const togglePayment = (key) => setForm({ ...form, payments:{ ...form.payments, [key]:{ ...form.payments[key], enabled:!form.payments[key].enabled } } });
+  const updatePaymentHandle = (key, val) => setForm({ ...form, payments:{ ...form.payments, [key]:{ ...form.payments[key], handle:val } } });
   const save = () => { onComplete(form); };
   const skip = () => { onComplete(form); };
   return (
-    <div style={{ minHeight:"100vh", background:C.black, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:24 }}>
+    <div style={{ minHeight:"100vh", background:C.black, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"flex-start", padding:24, paddingTop:40 }}>
       <div style={{ position:"fixed", top:12, right:16, zIndex:99 }}>
         <button onClick={() => setLang(lang==="en"?"es":"en")} style={{ background:"rgba(255,255,255,0.15)", color:C.white, border:"1px solid rgba(255,255,255,0.3)", borderRadius:20, padding:"6px 14px", fontWeight:700, cursor:"pointer", fontSize:13 }}>{t.lang}</button>
       </div>
-      <div style={{ background:C.white, borderRadius:16, padding:28, maxWidth:400, width:"100%", boxShadow:"0 8px 32px rgba(0,0,0,0.4)", borderTop:`4px solid ${C.green}` }}>
+      <div style={{ background:C.white, borderRadius:16, padding:28, maxWidth:420, width:"100%", boxShadow:"0 8px 32px rgba(0,0,0,0.4)", borderTop:`4px solid ${C.green}`, marginBottom:30 }}>
         <div style={{ textAlign:"center", marginBottom:20 }}>
           <img src="/logo.png" alt="Corte Pro" style={{ width:90, marginBottom:12 }} />
           <div style={{ fontSize:18, fontWeight:800, color:C.black, marginBottom:6 }}>{t.setup.title}</div>
@@ -149,7 +202,19 @@ function SetupScreen({ onComplete, t, lang, setLang }) {
         {[["companyName",t.setup.companyName],["ownerName",t.setup.ownerName],["phone",t.setup.phone],["email",t.setup.email],["address",t.setup.address]].map(([key,label]) => (
           <input key={key} value={form[key]} onChange={e => setForm({ ...form, [key]:e.target.value })} placeholder={label} style={{ width:"100%", padding:"11px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:14, marginBottom:10, boxSizing:"border-box" }} />
         ))}
-        <button onClick={save} style={{ width:"100%", background:C.green, color:C.white, border:"none", borderRadius:8, padding:"13px 0", fontSize:15, fontWeight:800, cursor:"pointer", marginTop:8, marginBottom:8 }}>{t.setup.continue}</button>
+        <div style={{ fontSize:14, fontWeight:700, color:C.black, marginTop:14, marginBottom:8 }}>💳 {t.setup.payments}</div>
+        {["check","cash","zelle","venmo","cashapp","creditCard"].map(key => (
+          <div key={key} style={{ marginBottom:8 }}>
+            <label style={{ display:"flex", alignItems:"center", gap:8, cursor:"pointer", padding:"8px 10px", background:form.payments[key].enabled?C.greenPale:C.gray, borderRadius:6 }}>
+              <input type="checkbox" checked={form.payments[key].enabled} onChange={() => togglePayment(key)} style={{ width:16, height:16, accentColor:C.green }} />
+              <span style={{ fontSize:13, fontWeight:600, color:C.text, flex:1 }}>{t.billing[key]}</span>
+            </label>
+            {form.payments[key].enabled && (key === "zelle" || key === "venmo" || key === "cashapp") && (
+              <input value={form.payments[key].handle} onChange={e => updatePaymentHandle(key, e.target.value)} placeholder={t.billing.paymentHandle} style={{ width:"100%", padding:"8px 10px", borderRadius:6, border:`1px solid ${C.grayMid}`, fontSize:12, marginTop:6, boxSizing:"border-box" }} />
+            )}
+          </div>
+        ))}
+        <button onClick={save} style={{ width:"100%", background:C.green, color:C.white, border:"none", borderRadius:8, padding:"13px 0", fontSize:15, fontWeight:800, cursor:"pointer", marginTop:14, marginBottom:8 }}>{t.setup.continue}</button>
         <button onClick={skip} style={{ width:"100%", background:"none", color:C.grayDark, border:"none", padding:"8px 0", fontSize:13, cursor:"pointer", textDecoration:"underline" }}>{t.setup.skip}</button>
       </div>
     </div>
@@ -403,9 +468,10 @@ function InvoicesTab({ t, clients, invoices, setInvoices, company }) {
               {inv.status==="paid"?t.invoices.paid:t.invoices.pending}
             </span>
             {inv.status!=="paid" && <button onClick={() => setInvoices(invoices.map(x=>x.id===inv.id?{...x,status:"paid"}:x))} style={{ background:C.green, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.markPaid}</button>}
+            <button onClick={() => printInvoice(inv, company, t)} style={{ background:C.black, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.pdf}</button>
             <button onClick={() => { const client = clients.find(c => c.name === inv.client); const text = formatInvoiceText(inv, company, t); sendSMS(client ? client.phone : "", text); }} style={{ background:C.blue, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.textInv}</button>
             <button onClick={() => { const client = clients.find(c => c.name === inv.client); const text = formatInvoiceText(inv, company, t); sendEmail(client ? client.email : "", `${t.invoices.invoiceNum} ${inv.id} — ${company.companyName||""}`, text); }} style={{ background:C.orange, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.emailInv}</button>
-            <a href="https://g.page/r/review" target="_blank" rel="noreferrer" style={{ background:C.black, color:C.white, borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, textDecoration:"none" }}>⭐ {t.invoices.review}</a>
+            <button onClick={() => { if (!company.googleReviewLink) { alert(t.billing.reviewBlurb); return; } window.open(company.googleReviewLink, "_blank"); }} style={{ background:C.black, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>⭐ {t.invoices.review}</button>
             <button onClick={() => { if (window.confirm(t.invoices.confirmDelInv)) setInvoices(invoices.filter(x => x.id !== inv.id)); }} style={{ background:C.red, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.deleteInv}</button>
           </div>
         </div>
@@ -582,6 +648,33 @@ function BillingTab({ t, invoices, estimates, company, setCompany }) {
       </div>
 
       <div style={{ background:C.white, borderRadius:12, padding:16, marginBottom:16, border:`2px solid ${C.green}` }}>
+        <div style={{ fontSize:15, fontWeight:800, color:C.black, marginBottom:4 }}>⭐ {t.billing.reviewTitle}</div>
+        <div style={{ fontSize:12, color:C.grayDark, marginBottom:12, lineHeight:1.5 }}>{t.billing.reviewBlurb}</div>
+        <input value={form.googleReviewLink||""} onChange={e => setForm({ ...form, googleReviewLink:e.target.value })} placeholder={t.billing.reviewPlaceholder} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:13, boxSizing:"border-box" }} />
+      </div>
+
+      <div style={{ background:C.white, borderRadius:12, padding:16, marginBottom:16, border:`2px solid ${C.green}` }}>
+        <div style={{ fontSize:15, fontWeight:800, color:C.black, marginBottom:4 }}>💳 {t.billing.paymentsTitle}</div>
+        <div style={{ fontSize:12, color:C.grayDark, marginBottom:14 }}>{t.billing.paymentsBlurb}</div>
+        {["check","cash","zelle","venmo","cashapp","creditCard"].map(key => {
+          const p = (form.payments && form.payments[key]) || { enabled:false, handle:"" };
+          const togglePayment = () => setForm({ ...form, payments:{ ...(form.payments||{}), [key]:{ ...p, enabled:!p.enabled } } });
+          const updateHandle = (val) => setForm({ ...form, payments:{ ...(form.payments||{}), [key]:{ ...p, handle:val } } });
+          return (
+            <div key={key} style={{ marginBottom:8 }}>
+              <label style={{ display:"flex", alignItems:"center", gap:8, cursor:"pointer", padding:"8px 10px", background:p.enabled?C.greenPale:C.gray, borderRadius:6 }}>
+                <input type="checkbox" checked={p.enabled} onChange={togglePayment} style={{ width:16, height:16, accentColor:C.green }} />
+                <span style={{ fontSize:13, fontWeight:600, color:C.text, flex:1 }}>{t.billing[key]}</span>
+              </label>
+              {p.enabled && (key === "zelle" || key === "venmo" || key === "cashapp") && (
+                <input value={p.handle||""} onChange={e => updateHandle(e.target.value)} placeholder={t.billing.paymentHandle} style={{ width:"100%", padding:"8px 10px", borderRadius:6, border:`1px solid ${C.grayMid}`, fontSize:12, marginTop:6, boxSizing:"border-box" }} />
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      <div style={{ background:C.white, borderRadius:12, padding:16, marginBottom:16, border:`2px solid ${C.green}` }}>
         <div style={{ fontSize:15, fontWeight:800, color:C.black, marginBottom:4 }}>🏢 {t.billing.settings}</div>
         <div style={{ fontSize:12, color:C.grayDark, marginBottom:14 }}>This info appears on your invoices and estimates.</div>
         {[["companyName",t.billing.companyName],["ownerName",t.billing.ownerName],["phone",t.billing.phone],["email",t.billing.email],["address",t.billing.address],["license",t.billing.license]].map(([key,label]) => (
@@ -608,7 +701,7 @@ export default function App() {
   const [clients, setClients] = useState(() => load("cp_clients", []));
   const [invoices, setInvoices] = useState(() => load("cp_invoices", []));
   const [estimates, setEstimates] = useState(() => load("cp_estimates", []));
-  const [company, setCompany] = useState(() => load("cp_company", { companyName:"", ownerName:"", phone:"", email:"", address:"", license:"" }));
+  const [company, setCompany] = useState(() => load("cp_company", { companyName:"", ownerName:"", phone:"", email:"", address:"", license:"", payments:{ check:{enabled:false,handle:""}, cash:{enabled:false,handle:""}, zelle:{enabled:false,handle:""}, venmo:{enabled:false,handle:""}, cashapp:{enabled:false,handle:""}, creditCard:{enabled:false,handle:""} } }));
   const t = TRANSLATIONS[lang];
 
   useEffect(() => { if (load("cp_unlocked", false)) setUnlocked(true); if (load("cp_setup_done", false)) setSetupDone(true); }, []);
