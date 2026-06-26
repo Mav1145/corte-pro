@@ -85,16 +85,28 @@ const C = { green: "#2D6A1F", greenDark: "#1a4011", greenPale: "#f0ebd8", tan: "
 const save = (key, val) => { try { localStorage.setItem(key, JSON.stringify(val)); } catch(e){} };
 const load = (key, fallback) => { try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; } catch(e){ return fallback; } };
 
+// Helper: Format ISO date (YYYY-MM-DD) as M/D/YYYY
+const formatDate = (iso) => {
+  if (!iso) return "";
+  const parts = String(iso).split("-");
+  if (parts.length !== 3) return iso;
+  const [y, m, d] = parts;
+  const monthNum = parseInt(m, 10);
+  const dayNum = parseInt(d, 10);
+  if (isNaN(monthNum) || isNaN(dayNum)) return iso;
+  return `${monthNum}/${dayNum}/${y}`;
+};
+
 // Helper: Format invoice as plain text for SMS/Email
 const formatInvoiceText = (inv, company, t) => {
   let text = "";
   if (company.companyName) text += `${company.companyName}\n`;
   if (company.ownerName) text += `${company.ownerName}\n`;
   if (company.phone) text += `${company.phone}\n`;
-  text += `\n${t.invoices.invoiceNum}: ${inv.id}\n${t.invoices.date}: ${inv.date}\n\n`;
+  text += `\n${t.invoices.invoiceNum}: ${inv.id}\n${t.invoices.date}: ${formatDate(inv.date)}\n\n`;
   text += `${t.invoices.to}: ${inv.client}\n\n`;
   if (inv.lines) {
-    inv.lines.forEach(l => { text += `• ${l.service} (${l.date}) — $${parseFloat(l.amount).toFixed(2)}\n`; });
+    inv.lines.forEach(l => { text += `• ${l.service} (${formatDate(l.date)}) — $${parseFloat(l.amount).toFixed(2)}\n`; });
   }
   text += `\n${t.invoices.total}: $${parseFloat(inv.total).toFixed(2)}\n`;
   text += `${t.invoices.paid}/${t.invoices.pending}: ${inv.status}\n`;
@@ -144,7 +156,7 @@ const printInvoice = (inv, company, t) => {
       <div style="font-weight:bold;color:#2D6A1F;margin-bottom:8px;">${t.billing.paymentsTitle}:</div>
       ${enabledPayments.map(([k,v]) => `<div style="margin:4px 0;font-size:14px;">✓ <strong>${t.billing[k]||k}</strong>${v.handle ? ` — ${v.handle}` : ''}</div>`).join("")}
     </div>` : "";
-  const linesHtml = (inv.lines||[]).map(l => `<tr><td style="padding:8px;border-bottom:1px solid #eee;">${l.service||""}</td><td style="padding:8px;border-bottom:1px solid #eee;">${l.date||""}</td><td style="padding:8px;border-bottom:1px solid #eee;text-align:right;">$${parseFloat(l.amount||0).toFixed(2)}</td></tr>`).join("");
+  const linesHtml = (inv.lines||[]).map(l => `<tr><td style="padding:8px;border-bottom:1px solid #eee;">${l.service||""}</td><td style="padding:8px;border-bottom:1px solid #eee;">${formatDate(l.date)}</td><td style="padding:8px;border-bottom:1px solid #eee;text-align:right;">$${parseFloat(l.amount||0).toFixed(2)}</td></tr>`).join("");
   const html = `<!DOCTYPE html><html><head><title>${t.invoices.invoiceNum} ${inv.id}</title><meta charset="UTF-8"></head>
     <body style="font-family:Arial,sans-serif;max-width:800px;margin:30px auto;padding:30px;color:#1a1a1a;">
       <div style="border-bottom:3px solid #2D6A1F;padding-bottom:20px;margin-bottom:30px;">
@@ -160,7 +172,7 @@ const printInvoice = (inv, company, t) => {
           <div style="text-align:right;">
             <div style="font-size:24px;font-weight:800;color:#1a1a1a;">INVOICE</div>
             <div style="color:#666;">#${inv.id}</div>
-            <div style="color:#666;">${inv.date}</div>
+            <div style="color:#666;">${formatDate(inv.date)}</div>
           </div>
         </div>
       </div>
@@ -210,7 +222,7 @@ const printEstimate = (est, company, t) => {
           <div style="text-align:right;">
             <div style="font-size:24px;font-weight:800;color:#1a1a1a;">${t.estimates.title.toUpperCase()}</div>
             <div style="color:#666;">#${est.id}</div>
-            <div style="color:#666;">${est.date||""}</div>
+            <div style="color:#666;">${formatDate(est.date)}</div>
           </div>
         </div>
       </div>
@@ -642,7 +654,7 @@ function EstimatesTab({ t, clients, estimates, setEstimates, invoices, setInvoic
     if (company.companyName) text += `${company.companyName}\n`;
     if (company.ownerName) text += `${company.ownerName}\n`;
     if (company.phone) text += `${company.phone}\n\n`;
-    text += `${t.estimates.title}\n${t.invoices.date}: ${est.date||""}\n\n${t.invoices.to}: ${est.client}\n\n`;
+    text += `${t.estimates.title}\n${t.invoices.date}: ${formatDate(est.date)}\n\n${t.invoices.to}: ${est.client}\n\n`;
     if (est.lines) est.lines.forEach(l => { text += `• ${l.service} — $${parseFloat(l.amount).toFixed(2)}\n`; });
     text += `\n${t.invoices.total}: $${parseFloat(est.total||est.amount||0).toFixed(2)}\n`;
     if (est.notes) text += `\n${t.estimates.notes}: ${est.notes}\n`;
