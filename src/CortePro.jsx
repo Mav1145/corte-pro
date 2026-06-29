@@ -28,7 +28,7 @@ const TRANSLATIONS = {
       navigate: "Start GPS", remove: "Remove", stop: "Stop", loadToday: "Load Today's Route",
       noScheduled: "No clients scheduled for today.", clearRoute: "Clear Route",
       optimize: "⚡ Optimize Order", optimized: "✓ Route optimized!",
-      crew1: "Crew 1", crew2: "Crew 2", switchCrew: "Switch Crew",
+      crew1: "Crew 1", crew2: "Crew 2",
       scheduled: "Scheduled", completed: "Completed", pending: "Pending",
     },
     clients: {
@@ -62,7 +62,7 @@ const TRANSLATIONS = {
       service: "Service Description", amount: "Estimated Amount ($)", notes: "Notes",
       save: "Save Estimate", convert: "Convert to Invoice", noEstimates: "No estimates yet.",
       approved: "Approved", pending: "Pending", convertConfirm: "Convert this estimate to an invoice?",
-      converted: "✓ Estimate converted to invoice!", textEst: "📱 Text", emailEst: "✉️ Email",
+      converted: "✓ Converted to invoice!", textEst: "📱 Text", emailEst: "✉️ Email",
       deleteEst: "Delete", confirmDelEst: "Delete this estimate?",
     },
     billing: {
@@ -83,14 +83,15 @@ const TRANSLATIONS = {
       reviewTitle: "Google Review Link",
       reviewBlurb: "Paste your Google Business review link here. Get it free at business.google.com → Get more reviews → Share review form.",
       reviewPlaceholder: "https://g.page/r/YOUR-CODE/review",
+      reviewMissing: "No Google Review link set. Add it in Billing settings.",
       backupTitle: "Backup Data",
       backupBlurb: "Email a backup of all your app data. Open your email app and tap Send to save your data.",
       backupBtn: "📧 Email Backup",
       pinTitle: "Set Billing PIN",
       pinBlurb: "Protect the Billing tab with a 4-digit PIN. Only you (the owner) will have access.",
-      pinSet: "Set PIN", pinChange: "Change PIN", pinCurrent: "Current PIN", pinNew: "New PIN (4 digits)",
+      pinSet: "Set PIN", pinChange: "Change PIN", pinNew: "New PIN (4 digits)",
       pinConfirm: "Confirm PIN", pinSaved: "PIN saved!", pinError: "PINs do not match.",
-      pinRemove: "Remove PIN",
+      pinRemove: "Remove PIN", pinTooShort: "PIN must be 4 digits.",
     },
     access: {
       title: "Enter Access Code",
@@ -107,6 +108,7 @@ const TRANSLATIONS = {
     pdf: "🖨️ Print/PDF",
     lang: "Español",
     pinScreen: { title: "Owner Access", subtitle: "Enter your PIN to access Billing", placeholder: "Enter PIN", btn: "Unlock", error: "Incorrect PIN. Try again.", forgot: "Contact support to reset." },
+    toast: { clientSaved: "Client saved!", clientDeleted: "Client deleted.", importSuccess: "clients imported!", importError: "Could not read file. Make sure it's a CSV.", noScheduled: "No clients scheduled for today.", noData: "No data to export yet.", backupSent: "Backup email opened!", reviewMissing: "Add a Google Review link in Billing settings first.", converted: "✓ Converted to invoice!", invoiceDeleted: "Invoice deleted.", estimateDeleted: "Estimate deleted.", pinSaved: "PIN saved!", pinRemoved: "PIN removed.", pinError: "PINs do not match.", pinTooShort: "PIN must be 4 digits.", settingsSaved: "Settings saved!" },
   },
   es: {
     appName: "Corte Pro",
@@ -118,7 +120,7 @@ const TRANSLATIONS = {
       navigate: "Iniciar GPS", remove: "Eliminar", stop: "Parada", loadToday: "Cargar Ruta de Hoy",
       noScheduled: "No hay clientes programados para hoy.", clearRoute: "Borrar Ruta",
       optimize: "⚡ Optimizar Orden", optimized: "✓ ¡Ruta optimizada!",
-      crew1: "Equipo 1", crew2: "Equipo 2", switchCrew: "Cambiar Equipo",
+      crew1: "Equipo 1", crew2: "Equipo 2",
       scheduled: "Programados", completed: "Completados", pending: "Pendientes",
     },
     clients: {
@@ -152,7 +154,7 @@ const TRANSLATIONS = {
       service: "Descripción del Servicio", amount: "Cantidad Estimada ($)", notes: "Notas",
       save: "Guardar Estimado", convert: "Convertir a Factura", noEstimates: "No hay estimados.",
       approved: "Aprobado", pending: "Pendiente", convertConfirm: "¿Convertir este estimado a factura?",
-      converted: "✓ ¡Estimado convertido a factura!", textEst: "📱 Mensaje", emailEst: "✉️ Correo",
+      converted: "✓ ¡Convertido a factura!", textEst: "📱 Mensaje", emailEst: "✉️ Correo",
       deleteEst: "Eliminar", confirmDelEst: "¿Eliminar este estimado?",
     },
     billing: {
@@ -171,16 +173,17 @@ const TRANSLATIONS = {
       check: "Cheque", cash: "Efectivo", zelle: "Zelle", venmo: "Venmo", cashapp: "Cash App",
       creditCard: "Tarjeta de Crédito", paymentHandle: "Usuario/Número (ej. @TuNombre o teléfono)",
       reviewTitle: "Link de Reseñas de Google",
-      reviewBlurb: "Pega aquí el link de reseñas de tu Negocio en Google. Consíguelo gratis en business.google.com → Conseguir más reseñas → Compartir formulario.",
+      reviewBlurb: "Pega aquí el link de reseñas de tu Negocio en Google.",
       reviewPlaceholder: "https://g.page/r/TU-CODIGO/review",
+      reviewMissing: "No hay link de reseña. Agrégalo en Facturación.",
       backupTitle: "Respaldar Datos",
       backupBlurb: "Envía un respaldo de todos tus datos por correo. Abre tu correo y toca Enviar para guardar tus datos.",
       backupBtn: "📧 Respaldar por Correo",
       pinTitle: "PIN de Facturación",
       pinBlurb: "Protege la pestaña de Facturación con un PIN de 4 dígitos. Solo tú (el dueño) tendrás acceso.",
-      pinSet: "Establecer PIN", pinChange: "Cambiar PIN", pinCurrent: "PIN Actual", pinNew: "PIN Nuevo (4 dígitos)",
+      pinSet: "Establecer PIN", pinChange: "Cambiar PIN", pinNew: "PIN Nuevo (4 dígitos)",
       pinConfirm: "Confirmar PIN", pinSaved: "¡PIN guardado!", pinError: "Los PINs no coinciden.",
-      pinRemove: "Quitar PIN",
+      pinRemove: "Quitar PIN", pinTooShort: "El PIN debe tener 4 dígitos.",
     },
     access: {
       title: "Ingresa tu Código", subtitle: "Ingresa tu código de acceso de Corte Pro para comenzar.",
@@ -196,6 +199,7 @@ const TRANSLATIONS = {
     pdf: "🖨️ Imprimir/PDF",
     lang: "English",
     pinScreen: { title: "Acceso del Dueño", subtitle: "Ingresa tu PIN para acceder a Facturación", placeholder: "Ingresa PIN", btn: "Desbloquear", error: "PIN incorrecto. Intenta de nuevo.", forgot: "Contacta soporte para restablecer." },
+    toast: { clientSaved: "¡Cliente guardado!", clientDeleted: "Cliente eliminado.", importSuccess: "¡clientes importados!", importError: "No se pudo leer el archivo. Asegúrate que sea CSV.", noScheduled: "No hay clientes programados para hoy.", noData: "No hay datos para exportar.", backupSent: "¡Correo de respaldo abierto!", reviewMissing: "Agrega un link de reseña de Google en Facturación primero.", converted: "✓ ¡Convertido a factura!", invoiceDeleted: "Factura eliminada.", estimateDeleted: "Estimado eliminado.", pinSaved: "¡PIN guardado!", pinRemoved: "PIN eliminado.", pinError: "Los PINs no coinciden.", pinTooShort: "El PIN debe tener 4 dígitos.", settingsSaved: "¡Información guardada!" },
   },
 };
 
@@ -241,36 +245,68 @@ const optimizeRoute = (stops) => {
   const getKey = (s) => { const zipMatch = (s.address||"").match(/\b\d{5}\b/); if (zipMatch) return zipMatch[0]; const parts = (s.address||"").split(","); return parts.length > 1 ? parts[1].trim().toLowerCase() : (s.address||"").toLowerCase(); };
   const grouped = {};
   stops.forEach(s => { const k = getKey(s); if (!grouped[k]) grouped[k] = []; grouped[k].push(s); });
-  const sortedKeys = Object.keys(grouped).sort();
   const result = [];
-  sortedKeys.forEach(k => grouped[k].forEach(s => result.push(s)));
+  Object.keys(grouped).sort().forEach(k => grouped[k].forEach(s => result.push(s)));
   return result;
 };
 
+// FIX: Use data URL instead of window.open("","_blank") to avoid mobile pop-up blocking
+const printDoc = (html) => {
+  const encoded = encodeURIComponent(html);
+  const win = window.open(`data:text/html;charset=utf-8,${encoded}`, "_blank");
+  if (!win) {
+    // Fallback: create a blob URL
+    const blob = new Blob([html], { type: "text/html;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    window.open(url, "_blank");
+  }
+};
+
 const printInvoice = (inv, company, t) => {
-  const win = window.open("", "_blank");
-  if (!win) return;
   const payments = company.payments || {};
   const enabledPayments = Object.entries(payments).filter(([k,v]) => v && v.enabled);
-  const paymentsHtml = enabledPayments.length > 0 ? `<div style="margin-top:30px;padding:16px;background:#f0ebd8;border-radius:8px;border-left:4px solid #2D6A1F;"><div style="font-weight:bold;color:#2D6A1F;margin-bottom:8px;">${t.billing.paymentsTitle}:</div>${enabledPayments.map(([k,v]) => `<div style="margin:4px 0;font-size:14px;">✓ <strong>${t.billing[k]||k}</strong>${v.handle ? ` — ${v.handle}` : ''}</div>`).join("")}</div>` : "";
+  const paymentsHtml = enabledPayments.length > 0 ? `<div style="margin-top:30px;padding:16px;background:#f0ebd8;border-radius:8px;border-left:4px solid #2D6A1F;"><div style="font-weight:bold;color:#2D6A1F;margin-bottom:8px;">${t.billing.paymentsTitle}:</div>${enabledPayments.map(([k,v]) => `<div style="margin:4px 0;font-size:14px;">&#10003; <strong>${t.billing[k]||k}</strong>${v.handle ? ` — ${v.handle}` : ""}</div>`).join("")}</div>` : "";
   const linesHtml = (inv.lines||[]).map(l => `<tr><td style="padding:8px;border-bottom:1px solid #eee;">${l.service||""}</td><td style="padding:8px;border-bottom:1px solid #eee;">${formatDate(l.date)}</td><td style="padding:8px;border-bottom:1px solid #eee;text-align:right;">$${parseFloat(l.amount||0).toFixed(2)}</td></tr>`).join("");
-  const html = `<!DOCTYPE html><html><head><title>${t.invoices.invoiceNum} ${inv.id}</title><meta charset="UTF-8"></head><body style="font-family:Arial,sans-serif;max-width:800px;margin:30px auto;padding:30px;color:#1a1a1a;"><div style="border-bottom:3px solid #2D6A1F;padding-bottom:20px;margin-bottom:30px;"><div style="display:flex;justify-content:space-between;align-items:flex-start;"><div><div style="font-size:28px;font-weight:800;color:#2D6A1F;">${company.companyName||"Your Company"}</div>${company.ownerName?`<div style="color:#666;">${company.ownerName}</div>`:""}${company.phone?`<div style="color:#666;">📞 ${company.phone}</div>`:""}${company.email?`<div style="color:#666;">✉️ ${company.email}</div>`:""}${company.address?`<div style="color:#666;">${company.address}</div>`:""}${company.license?`<div style="color:#666;font-size:11px;">License: ${company.license}</div>`:""}</div><div style="text-align:right;"><div style="font-size:24px;font-weight:800;color:#1a1a1a;">INVOICE</div><div style="color:#666;">#${inv.id}</div><div style="color:#666;">${formatDate(inv.date)}</div></div></div></div><div style="margin-bottom:24px;"><div style="font-size:12px;color:#666;font-weight:bold;">${t.invoices.to}:</div><div style="font-size:18px;font-weight:bold;">${inv.client}</div></div><table style="width:100%;border-collapse:collapse;margin-bottom:20px;"><thead><tr style="background:#2D6A1F;color:white;"><th style="padding:10px;text-align:left;">${t.invoices.service}</th><th style="padding:10px;text-align:left;">${t.invoices.date}</th><th style="padding:10px;text-align:right;">${t.invoices.amount}</th></tr></thead><tbody>${linesHtml}</tbody></table><div style="text-align:right;font-size:22px;font-weight:800;color:#2D6A1F;padding:14px;background:#e8f5e3;border-radius:8px;">${t.invoices.total}: $${parseFloat(inv.total||0).toFixed(2)}</div><div style="margin-top:14px;text-align:right;font-size:14px;font-weight:600;color:${inv.status==='paid'?'#2D6A1F':'#e67e22'};">${inv.status==='paid'?t.invoices.paid.toUpperCase():t.invoices.pending.toUpperCase()}</div>${paymentsHtml}<div style="margin-top:40px;padding-top:20px;border-top:1px solid #eee;text-align:center;color:#999;font-size:11px;">Generated by Corte Pro · cortepro.app</div></body></html>`;
-  win.document.write(html); win.document.close(); setTimeout(() => { win.print(); }, 500);
+  const html = `<!DOCTYPE html><html><head><title>${t.invoices.invoiceNum} ${inv.id}</title><meta charset="UTF-8"><script>window.onload=function(){window.print();}<\/script></head><body style="font-family:Arial,sans-serif;max-width:800px;margin:30px auto;padding:30px;color:#1a1a1a;"><div style="border-bottom:3px solid #2D6A1F;padding-bottom:20px;margin-bottom:30px;"><div style="display:flex;justify-content:space-between;align-items:flex-start;"><div><div style="font-size:28px;font-weight:800;color:#2D6A1F;">${company.companyName||"Your Company"}</div>${company.ownerName?`<div style="color:#666;">${company.ownerName}</div>`:""}${company.phone?`<div style="color:#666;">&#128222; ${company.phone}</div>`:""}${company.email?`<div style="color:#666;">&#9993; ${company.email}</div>`:""}${company.address?`<div style="color:#666;">${company.address}</div>`:""}${company.license?`<div style="color:#666;font-size:11px;">License: ${company.license}</div>`:""}</div><div style="text-align:right;"><div style="font-size:24px;font-weight:800;color:#1a1a1a;">INVOICE</div><div style="color:#666;">#${inv.id}</div><div style="color:#666;">${formatDate(inv.date)}</div></div></div></div><div style="margin-bottom:24px;"><div style="font-size:12px;color:#666;font-weight:bold;">${t.invoices.to}:</div><div style="font-size:18px;font-weight:bold;">${inv.client}</div></div><table style="width:100%;border-collapse:collapse;margin-bottom:20px;"><thead><tr style="background:#2D6A1F;color:white;"><th style="padding:10px;text-align:left;">${t.invoices.service}</th><th style="padding:10px;text-align:left;">${t.invoices.date}</th><th style="padding:10px;text-align:right;">${t.invoices.amount}</th></tr></thead><tbody>${linesHtml}</tbody></table><div style="text-align:right;font-size:22px;font-weight:800;color:#2D6A1F;padding:14px;background:#e8f5e3;border-radius:8px;">${t.invoices.total}: $${parseFloat(inv.total||0).toFixed(2)}</div><div style="margin-top:14px;text-align:right;font-size:14px;font-weight:600;color:${inv.status==="paid"?"#2D6A1F":"#e67e22"};">${inv.status==="paid"?t.invoices.paid.toUpperCase():t.invoices.pending.toUpperCase()}</div>${paymentsHtml}<div style="margin-top:40px;padding-top:20px;border-top:1px solid #eee;text-align:center;color:#999;font-size:11px;">Generated by Corte Pro</div></body></html>`;
+  printDoc(html);
 };
 
 const printEstimate = (est, company, t) => {
-  const win = window.open("", "_blank");
-  if (!win) return;
   const payments = company.payments || {};
   const enabledPayments = Object.entries(payments).filter(([k,v]) => v && v.enabled);
-  const paymentsHtml = enabledPayments.length > 0 ? `<div style="margin-top:30px;padding:16px;background:#f0ebd8;border-radius:8px;border-left:4px solid #2D6A1F;"><div style="font-weight:bold;color:#2D6A1F;margin-bottom:8px;">${t.billing.paymentsTitle}:</div>${enabledPayments.map(([k,v]) => `<div style="margin:4px 0;font-size:14px;">✓ <strong>${t.billing[k]||k}</strong>${v.handle ? ` — ${v.handle}` : ''}</div>`).join("")}</div>` : "";
+  const paymentsHtml = enabledPayments.length > 0 ? `<div style="margin-top:30px;padding:16px;background:#f0ebd8;border-radius:8px;border-left:4px solid #2D6A1F;"><div style="font-weight:bold;color:#2D6A1F;margin-bottom:8px;">${t.billing.paymentsTitle}:</div>${enabledPayments.map(([k,v]) => `<div style="margin:4px 0;font-size:14px;">&#10003; <strong>${t.billing[k]||k}</strong>${v.handle ? ` — ${v.handle}` : ""}</div>`).join("")}</div>` : "";
   const linesHtml = (est.lines||[]).map(l => `<tr><td style="padding:8px;border-bottom:1px solid #eee;">${l.service||""}</td><td style="padding:8px;border-bottom:1px solid #eee;text-align:right;">$${parseFloat(l.amount||0).toFixed(2)}</td></tr>`).join("");
   const notesHtml = est.notes ? `<div style="margin-top:20px;padding:14px;background:#f8f8f8;border-radius:8px;border-left:4px solid #888;"><div style="font-weight:bold;color:#333;margin-bottom:6px;">${t.estimates.notes}:</div><div style="color:#555;font-style:italic;">${est.notes}</div></div>` : "";
-  const html = `<!DOCTYPE html><html><head><title>${t.estimates.title} ${est.id}</title><meta charset="UTF-8"></head><body style="font-family:Arial,sans-serif;max-width:800px;margin:30px auto;padding:30px;color:#1a1a1a;"><div style="border-bottom:3px solid #2D6A1F;padding-bottom:20px;margin-bottom:30px;"><div style="display:flex;justify-content:space-between;align-items:flex-start;"><div><div style="font-size:28px;font-weight:800;color:#2D6A1F;">${company.companyName||"Your Company"}</div>${company.ownerName?`<div style="color:#666;">${company.ownerName}</div>`:""}${company.phone?`<div style="color:#666;">📞 ${company.phone}</div>`:""}${company.email?`<div style="color:#666;">✉️ ${company.email}</div>`:""}${company.address?`<div style="color:#666;">${company.address}</div>`:""}${company.license?`<div style="color:#666;font-size:11px;">License: ${company.license}</div>`:""}</div><div style="text-align:right;"><div style="font-size:24px;font-weight:800;color:#1a1a1a;">${t.estimates.title.toUpperCase()}</div><div style="color:#666;">#${est.id}</div><div style="color:#666;">${formatDate(est.date)}</div></div></div></div><div style="margin-bottom:24px;"><div style="font-size:12px;color:#666;font-weight:bold;">${t.invoices.to}:</div><div style="font-size:18px;font-weight:bold;">${est.client}</div></div><table style="width:100%;border-collapse:collapse;margin-bottom:20px;"><thead><tr style="background:#2D6A1F;color:white;"><th style="padding:10px;text-align:left;">${t.invoices.service}</th><th style="padding:10px;text-align:right;">${t.invoices.amount}</th></tr></thead><tbody>${linesHtml}</tbody></table><div style="text-align:right;font-size:22px;font-weight:800;color:#2D6A1F;padding:14px;background:#e8f5e3;border-radius:8px;">${t.invoices.total}: $${parseFloat(est.total||0).toFixed(2)}</div><div style="margin-top:14px;text-align:right;font-size:14px;font-weight:600;color:${est.status==='approved'?'#2D6A1F':'#e67e22'};">${est.status==='approved'?t.estimates.approved.toUpperCase():t.estimates.pending.toUpperCase()}</div>${notesHtml}${paymentsHtml}<div style="margin-top:40px;padding-top:20px;border-top:1px solid #eee;text-align:center;color:#999;font-size:11px;">Generated by Corte Pro · cortepro.app</div></body></html>`;
-  win.document.write(html); win.document.close(); setTimeout(() => { win.print(); }, 500);
+  const html = `<!DOCTYPE html><html><head><title>${t.estimates.title} ${est.id}</title><meta charset="UTF-8"><script>window.onload=function(){window.print();}<\/script></head><body style="font-family:Arial,sans-serif;max-width:800px;margin:30px auto;padding:30px;color:#1a1a1a;"><div style="border-bottom:3px solid #2D6A1F;padding-bottom:20px;margin-bottom:30px;"><div style="display:flex;justify-content:space-between;align-items:flex-start;"><div><div style="font-size:28px;font-weight:800;color:#2D6A1F;">${company.companyName||"Your Company"}</div>${company.ownerName?`<div style="color:#666;">${company.ownerName}</div>`:""}${company.phone?`<div style="color:#666;">&#128222; ${company.phone}</div>`:""}${company.email?`<div style="color:#666;">&#9993; ${company.email}</div>`:""}${company.address?`<div style="color:#666;">${company.address}</div>`:""}${company.license?`<div style="color:#666;font-size:11px;">License: ${company.license}</div>`:""}</div><div style="text-align:right;"><div style="font-size:24px;font-weight:800;color:#1a1a1a;">${t.estimates.title.toUpperCase()}</div><div style="color:#666;">#${est.id}</div><div style="color:#666;">${formatDate(est.date)}</div></div></div></div><div style="margin-bottom:24px;"><div style="font-size:12px;color:#666;font-weight:bold;">${t.invoices.to}:</div><div style="font-size:18px;font-weight:bold;">${est.client}</div></div><table style="width:100%;border-collapse:collapse;margin-bottom:20px;"><thead><tr style="background:#2D6A1F;color:white;"><th style="padding:10px;text-align:left;">${t.invoices.service}</th><th style="padding:10px;text-align:right;">${t.invoices.amount}</th></tr></thead><tbody>${linesHtml}</tbody></table><div style="text-align:right;font-size:22px;font-weight:800;color:#2D6A1F;padding:14px;background:#e8f5e3;border-radius:8px;">${t.invoices.total}: $${parseFloat(est.total||0).toFixed(2)}</div><div style="margin-top:14px;text-align:right;font-size:14px;font-weight:600;color:${est.status==="approved"?"#2D6A1F":"#e67e22"};">${est.status==="approved"?t.estimates.approved.toUpperCase():t.estimates.pending.toUpperCase()}</div>${notesHtml}${paymentsHtml}<div style="margin-top:40px;padding-top:20px;border-top:1px solid #eee;text-align:center;color:#999;font-size:11px;">Generated by Corte Pro</div></body></html>`;
+  printDoc(html);
 };
 
-// ─── PIN SCREEN COMPONENT (standalone, above App) ───────────────────────────
+// TOAST SYSTEM
+const ToastContext = React.createContext(null);
+function ToastProvider({ children }) {
+  const [toasts, setToasts] = useState([]);
+  const showToast = (message, type = "info") => {
+    const id = Date.now() + Math.random();
+    setToasts(prev => [...prev, { id, message, type }]);
+    setTimeout(() => setToasts(prev => prev.filter(t => t.id !== id)), 3000);
+  };
+  const colorMap = { success: C.green, error: C.red, info: C.black, warning: C.orange };
+  return (
+    <ToastContext.Provider value={showToast}>
+      {children}
+      <div style={{ position:"fixed", top:80, left:"50%", transform:"translateX(-50%)", zIndex:9999, display:"flex", flexDirection:"column", gap:8, alignItems:"center", width:"90%", maxWidth:400, pointerEvents:"none" }}>
+        {toasts.map(toast => (
+          <div key={toast.id} style={{ background:colorMap[toast.type]||C.black, color:C.white, padding:"12px 20px", borderRadius:10, fontSize:14, fontWeight:700, boxShadow:"0 4px 16px rgba(0,0,0,0.35)", textAlign:"center", width:"100%", boxSizing:"border-box" }}>
+            {toast.message}
+          </div>
+        ))}
+      </div>
+    </ToastContext.Provider>
+  );
+}
+const useToast = () => React.useContext(ToastContext);
+
+// PIN SCREEN
 function PinScreen({ t, onUnlock }) {
   const [pin, setPin] = useState("");
   const [error, setError] = useState(false);
@@ -285,13 +321,7 @@ function PinScreen({ t, onUnlock }) {
         <div style={{ fontSize:48, marginBottom:12 }}>🔐</div>
         <div style={{ fontSize:18, fontWeight:800, color:C.black, marginBottom:6 }}>{t.pinScreen.title}</div>
         <div style={{ fontSize:13, color:C.grayDark, marginBottom:20 }}>{t.pinScreen.subtitle}</div>
-        <input
-          type="password" inputMode="numeric" maxLength={4}
-          value={pin} onChange={e => setPin(e.target.value.replace(/\D/g,"").slice(0,4))}
-          onKeyDown={e => e.key === "Enter" && handleUnlock()}
-          placeholder={t.pinScreen.placeholder}
-          style={{ width:"100%", padding:"14px 12px", borderRadius:8, border:`2px solid ${error ? C.red : C.grayMid}`, fontSize:22, marginBottom:12, boxSizing:"border-box", textAlign:"center", letterSpacing:8, outline:"none" }}
-        />
+        <input type="password" inputMode="numeric" maxLength={4} value={pin} onChange={e => setPin(e.target.value.replace(/\D/g,"").slice(0,4))} onKeyDown={e => e.key==="Enter" && handleUnlock()} placeholder={t.pinScreen.placeholder} style={{ width:"100%", padding:"14px 12px", borderRadius:8, border:`2px solid ${error ? C.red : C.grayMid}`, fontSize:22, marginBottom:12, boxSizing:"border-box", textAlign:"center", letterSpacing:8, outline:"none" }} />
         {error && <div style={{ color:C.red, fontSize:13, marginBottom:10 }}>{t.pinScreen.error}</div>}
         <button onClick={handleUnlock} style={{ width:"100%", background:C.green, color:C.white, border:"none", borderRadius:8, padding:"13px 0", fontSize:15, fontWeight:800, cursor:"pointer" }}>{t.pinScreen.btn}</button>
         <div style={{ color:C.grayDark, fontSize:11, marginTop:14 }}>{t.pinScreen.forgot}</div>
@@ -325,7 +355,7 @@ function SetupScreen({ onComplete, t, lang, setLang }) {
               <input type="checkbox" checked={form.payments[key].enabled} onChange={() => togglePayment(key)} style={{ width:16, height:16, accentColor:C.green }} />
               <span style={{ fontSize:13, fontWeight:600, color:C.text, flex:1 }}>{t.billing[key]}</span>
             </label>
-            {form.payments[key].enabled && (key === "zelle" || key === "venmo" || key === "cashapp") && (
+            {form.payments[key].enabled && (key==="zelle"||key==="venmo"||key==="cashapp") && (
               <input value={form.payments[key].handle} onChange={e => updatePaymentHandle(key, e.target.value)} placeholder={t.billing.paymentHandle} style={{ width:"100%", padding:"8px 10px", borderRadius:6, border:`1px solid ${C.grayMid}`, fontSize:12, marginTop:6, boxSizing:"border-box" }} />
             )}
           </div>
@@ -358,8 +388,8 @@ function AccessGate({ onUnlock, t }) {
   );
 }
 
-// ─── ROUTE TAB ───────────────────────────────────────────────────────────────
 function RouteTab({ t, clients }) {
+  const showToast = useToast();
   const [activeCrew, setActiveCrew] = useState(() => load("cp_active_crew", 1));
   const crewKey = (n) => `cp_stops_crew${n}`;
   const [stops, setStops] = useState(() => load(crewKey(load("cp_active_crew", 1)), []));
@@ -370,31 +400,31 @@ function RouteTab({ t, clients }) {
 
   const switchCrew = (n) => {
     save(crewKey(activeCrew), stops);
-    setActiveCrew(n);
-    save("cp_active_crew", n);
-    setStops(load(crewKey(n), []));
-    setShowForm(false);
+    setActiveCrew(n); save("cp_active_crew", n);
+    setStops(load(crewKey(n), [])); setShowForm(false);
   };
 
   const addStop = () => { if (!form.address) return; setStops([...stops, { ...form, id:Date.now(), done:false }]); setForm({ client:"", address:"" }); setShowForm(false); };
   const startGPS = (address) => { window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}&travelmode=driving&dir_action=navigate`, "_blank"); };
 
   const todayDayIdx = ((new Date().getDay() + 6) % 7);
-  const weekNum = (() => { const d = new Date(); const start = new Date(d.getFullYear(),0,1); return Math.ceil(((d - start) / 86400000 + start.getDay() + 1) / 7); })();
+  const weekNum = (() => { const d = new Date(); const start = new Date(d.getFullYear(),0,1); return Math.ceil(((d-start)/86400000+start.getDay()+1)/7); })();
   const isWeekA = weekNum % 2 === 1;
 
   const loadTodaysRoute = () => {
     const scheduled = clients.filter(c => {
-      if (!c.scheduleType || c.scheduleType === "oneTime") return false;
+      if (!c.scheduleType || c.scheduleType==="oneTime") return false;
       if (!c.days || !c.days.includes(todayDayIdx)) return false;
-      if (c.scheduleType === "weekly") return true;
-      if (c.scheduleType === "biweeklyA" && isWeekA) return true;
-      if (c.scheduleType === "biweeklyB" && !isWeekA) return true;
+      if (c.scheduleType==="weekly") return true;
+      if (c.scheduleType==="biweeklyA" && isWeekA) return true;
+      if (c.scheduleType==="biweeklyB" && !isWeekA) return true;
       return false;
     });
-    if (scheduled.length === 0) { alert(t.route.noScheduled); return; }
+    if (scheduled.length === 0) { showToast(t.toast.noScheduled, "warning"); return; }
     setStops(scheduled.map(c => ({ id:Date.now()+Math.random(), client:c.name, address:c.address, done:false })));
   };
+
+
 
   const totalScheduled = stops.length;
   const totalCompleted = stops.filter(s => s.done).length;
@@ -402,40 +432,31 @@ function RouteTab({ t, clients }) {
 
   return (
     <div style={{ padding:16 }}>
-      {/* Crew Switcher */}
       <div style={{ display:"flex", gap:8, marginBottom:14 }}>
         {[1,2].map(n => (
-          <button key={n} onClick={() => switchCrew(n)} style={{ flex:1, padding:"10px 0", borderRadius:10, border:`2px solid ${activeCrew===n ? C.green : C.grayMid}`, background:activeCrew===n ? C.green : C.white, color:activeCrew===n ? C.white : C.grayDark, fontWeight:800, fontSize:14, cursor:"pointer" }}>
-            👷 {t.route[`crew${n}`]}
+          <button key={n} onClick={() => switchCrew(n)} style={{ flex:1, padding:"10px 0", borderRadius:10, border:`2px solid ${activeCrew===n?C.green:C.grayMid}`, background:activeCrew===n?C.green:C.white, color:activeCrew===n?C.white:C.grayDark, fontWeight:800, fontSize:14, cursor:"pointer" }}>
+            {t.route[`crew${n}`]}
           </button>
         ))}
       </div>
 
-      {/* Job Tracker */}
       <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:8, marginBottom:14 }}>
-        {[
-          [t.route.scheduled, totalScheduled, C.blue],
-          [t.route.completed, totalCompleted, C.green],
-          [t.route.pending, totalPending, C.orange],
-        ].map(([label, val, color]) => (
+        {[[t.route.scheduled,totalScheduled,C.blue],[t.route.completed,totalCompleted,C.green],[t.route.pending,totalPending,C.orange]].map(([label,val,color]) => (
           <div key={label} style={{ background:C.white, borderRadius:10, padding:"10px 6px", textAlign:"center", border:`2px solid ${color}` }}>
             <div style={{ fontSize:22, fontWeight:800, color }}>{val}</div>
             <div style={{ fontSize:11, color:C.grayDark, fontWeight:600 }}>{label}</div>
           </div>
         ))}
       </div>
-
       <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:12 }}>
         <h2 style={{ margin:0, color:C.green, fontSize:20, fontWeight:800 }}>{t.route.title}</h2>
         <button onClick={() => setShowForm(!showForm)} style={{ background:C.green, color:C.white, border:"none", borderRadius:8, padding:"8px 14px", fontWeight:700, cursor:"pointer", fontSize:13 }}>+ {t.route.addStop}</button>
       </div>
-
       <div style={{ display:"flex", gap:8, marginBottom:14, flexWrap:"wrap" }}>
         <button onClick={loadTodaysRoute} style={{ flex:"1 1 auto", minWidth:140, background:C.black, color:C.white, border:`2px solid ${C.green}`, borderRadius:8, padding:"10px 12px", fontWeight:700, cursor:"pointer", fontSize:13 }}>📅 {t.route.loadToday}</button>
         {stops.length > 1 && <button onClick={() => setStops(optimizeRoute(stops))} style={{ background:C.green, color:C.white, border:"none", borderRadius:8, padding:"10px 14px", fontWeight:700, cursor:"pointer", fontSize:13 }}>{t.route.optimize}</button>}
         {stops.length > 0 && <button onClick={() => setStops([])} style={{ background:C.white, color:C.red, border:`2px solid ${C.red}`, borderRadius:8, padding:"10px 14px", fontWeight:700, cursor:"pointer", fontSize:13 }}>{t.route.clearRoute}</button>}
       </div>
-
       {showForm && (
         <div style={{ background:C.greenPale, borderRadius:12, padding:16, marginBottom:16 }}>
           <select value={form.client} onChange={e => { const c=clients.find(cl=>cl.name===e.target.value); setForm({ client:e.target.value, address:c?c.address:form.address }); }} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:14, marginBottom:10, boxSizing:"border-box" }}>
@@ -446,7 +467,6 @@ function RouteTab({ t, clients }) {
           <button onClick={addStop} style={{ width:"100%", background:C.green, color:C.white, border:"none", borderRadius:8, padding:"11px 0", fontWeight:700, cursor:"pointer" }}>{t.route.addBtn}</button>
         </div>
       )}
-
       {stops.length === 0
         ? <div style={{ textAlign:"center", color:C.grayDark, padding:"40px 16px", fontSize:14 }}>{t.route.noStops}</div>
         : stops.map((s,i) => (
@@ -466,28 +486,27 @@ function RouteTab({ t, clients }) {
 }
 
 function ClientsTab({ t, clients, setClients }) {
+  const showToast = useToast();
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [form, setForm] = useState({ name:"", phone:"", address:"", email:"", scheduleType:"oneTime", days:[] });
   const fileInputRef = useRef(null);
   const openAdd = () => { setEditingId(null); setForm({ name:"", phone:"", address:"", email:"", scheduleType:"oneTime", days:[] }); setShowForm(true); };
   const openEdit = (c) => { setEditingId(c.id); setForm({ name:c.name, phone:c.phone, address:c.address, email:c.email, scheduleType:c.scheduleType||"oneTime", days:c.days||[] }); setShowForm(true); };
-  const toggleDay = (dayIdx) => { const newDays = form.days.includes(dayIdx) ? form.days.filter(d => d !== dayIdx) : [...form.days, dayIdx].sort(); setForm({ ...form, days:newDays }); };
+  const toggleDay = (dayIdx) => { const newDays = form.days.includes(dayIdx) ? form.days.filter(d=>d!==dayIdx) : [...form.days,dayIdx].sort(); setForm({ ...form, days:newDays }); };
   const saveClient = () => {
     if (!form.name) return;
-    if (editingId) { setClients(clients.map(c => c.id === editingId ? { ...form, id:editingId } : c)); }
+    if (editingId) { setClients(clients.map(c=>c.id===editingId?{...form,id:editingId}:c)); }
     else { setClients([...clients, { ...form, id:Date.now() }]); }
     setForm({ name:"", phone:"", address:"", email:"", scheduleType:"oneTime", days:[] }); setEditingId(null); setShowForm(false);
+    showToast(t.toast.clientSaved, "success");
   };
-  const deleteClient = (id) => { if (window.confirm(t.clients.confirmDelete)) setClients(clients.filter(c => c.id !== id)); };
+  const deleteClient = (id) => { setClients(clients.filter(c=>c.id!==id)); showToast(t.toast.clientDeleted, "info"); };
   const scheduleLabel = (c) => {
-    if (!c.scheduleType || c.scheduleType === "oneTime") return null;
-    const dayNames = (c.days||[]).map(d => t.clients.days[d]).join(", ");
+    if (!c.scheduleType || c.scheduleType==="oneTime") return null;
+    const dayNames = (c.days||[]).map(d=>t.clients.days[d]).join(", ");
     if (!dayNames) return null;
-    let prefix = "";
-    if (c.scheduleType === "weekly") prefix = t.clients.weekly;
-    if (c.scheduleType === "biweeklyA") prefix = t.clients.biweeklyA;
-    if (c.scheduleType === "biweeklyB") prefix = t.clients.biweeklyB;
+    let prefix = c.scheduleType==="weekly"?t.clients.weekly:c.scheduleType==="biweeklyA"?t.clients.biweeklyA:t.clients.biweeklyB;
     return `${prefix}: ${dayNames}`;
   };
   const downloadTemplate = () => {
@@ -505,47 +524,34 @@ function ClientsTab({ t, clients, setClients }) {
     reader.onload = (evt) => {
       try {
         const text = evt.target.result;
-        const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
-        if (lines.length < 2) { alert(t.clients.importError); return; }
+        const lines = text.split(/\r?\n/).filter(l=>l.trim().length>0);
+        if (lines.length < 2) { showToast(t.toast.importError, "error"); return; }
         const parseLine = (line) => {
-          const result = []; let cur = ""; let inQuotes = false;
-          for (let i = 0; i < line.length; i++) {
-            const ch = line[i];
-            if (ch === '"') { if (inQuotes && line[i+1] === '"') { cur += '"'; i++; } else { inQuotes = !inQuotes; } }
-            else if (ch === "," && !inQuotes) { result.push(cur.trim()); cur = ""; }
-            else { cur += ch; }
-          }
+          const result=[]; let cur=""; let inQuotes=false;
+          for (let i=0;i<line.length;i++) { const ch=line[i]; if (ch==='"') { if (inQuotes&&line[i+1]==='"'){cur+='"';i++;}else{inQuotes=!inQuotes;} } else if (ch===","&&!inQuotes){result.push(cur.trim());cur="";}else{cur+=ch;} }
           result.push(cur.trim()); return result;
         };
-        const headers = parseLine(lines[0]).map(h => h.toLowerCase());
-        const idxName = headers.findIndex(h => h.includes("name"));
-        const idxPhone = headers.findIndex(h => h.includes("phone"));
-        const idxAddr = headers.findIndex(h => h.includes("address"));
-        const idxEmail = headers.findIndex(h => h.includes("email"));
-        const idxSched = headers.findIndex(h => h.includes("schedule"));
-        const idxDays = headers.findIndex(h => h.includes("day"));
-        const dayMap = { "mon":0,"tue":1,"wed":2,"thu":3,"fri":4,"sat":5,"sun":6,"lun":0,"mar":1,"mié":2,"mie":2,"jue":3,"vie":4,"sáb":5,"sab":5,"dom":6 };
-        const imported = [];
-        for (let i = 1; i < lines.length; i++) {
-          const fields = parseLine(lines[i]);
-          const name = idxName >= 0 ? fields[idxName] : "";
-          if (!name) continue;
-          const schedRaw = idxSched >= 0 ? (fields[idxSched]||"").toLowerCase() : "onetime";
-          let scheduleType = "oneTime";
-          if (schedRaw.includes("weekly") && !schedRaw.includes("biweekly")) scheduleType = "weekly";
-          else if (schedRaw.includes("biweeklya") || schedRaw === "a") scheduleType = "biweeklyA";
-          else if (schedRaw.includes("biweeklyb") || schedRaw === "b") scheduleType = "biweeklyB";
-          const daysRaw = idxDays >= 0 ? (fields[idxDays]||"") : "";
-          const days = daysRaw.split(",").map(d => dayMap[d.trim().toLowerCase().substring(0,3)]).filter(d => d !== undefined);
+        const headers = parseLine(lines[0]).map(h=>h.toLowerCase());
+        const idxName=headers.findIndex(h=>h.includes("name")); const idxPhone=headers.findIndex(h=>h.includes("phone")); const idxAddr=headers.findIndex(h=>h.includes("address")); const idxEmail=headers.findIndex(h=>h.includes("email")); const idxSched=headers.findIndex(h=>h.includes("schedule")); const idxDays=headers.findIndex(h=>h.includes("day"));
+        const dayMap={"mon":0,"tue":1,"wed":2,"thu":3,"fri":4,"sat":5,"sun":6,"lun":0,"mar":1,"mié":2,"mie":2,"jue":3,"vie":4,"sáb":5,"sab":5,"dom":6};
+        const imported=[];
+        for (let i=1;i<lines.length;i++) {
+          const fields=parseLine(lines[i]); const name=idxName>=0?fields[idxName]:""; if (!name) continue;
+          const schedRaw=idxSched>=0?(fields[idxSched]||"").toLowerCase():"onetime";
+          let scheduleType="oneTime";
+          if (schedRaw.includes("weekly")&&!schedRaw.includes("biweekly")) scheduleType="weekly";
+          else if (schedRaw.includes("biweeklya")||schedRaw==="a") scheduleType="biweeklyA";
+          else if (schedRaw.includes("biweeklyb")||schedRaw==="b") scheduleType="biweeklyB";
+          const daysRaw=idxDays>=0?(fields[idxDays]||""):"";
+          const days=daysRaw.split(",").map(d=>dayMap[d.trim().toLowerCase().substring(0,3)]).filter(d=>d!==undefined);
           imported.push({ id:Date.now()+Math.random(), name, phone:idxPhone>=0?fields[idxPhone]:"", address:idxAddr>=0?fields[idxAddr]:"", email:idxEmail>=0?fields[idxEmail]:"", scheduleType, days });
         }
-        if (imported.length === 0) { alert(t.clients.importError); return; }
-        setClients([...clients, ...imported]);
-        alert(`${imported.length} ${t.clients.importSuccess}`);
-      } catch (err) { alert(t.clients.importError); }
+        if (imported.length===0) { showToast(t.toast.importError, "error"); return; }
+        setClients([...clients,...imported]);
+        showToast(`${imported.length} ${t.toast.importSuccess}`, "success");
+      } catch(err) { showToast(t.toast.importError, "error"); }
     };
-    reader.readAsText(file);
-    e.target.value = "";
+    reader.readAsText(file); e.target.value="";
   };
   return (
     <div style={{ padding:16 }}>
@@ -559,33 +565,33 @@ function ClientsTab({ t, clients, setClients }) {
         <div style={{ fontSize:11, color:"rgba(255,255,255,0.7)", marginBottom:10, fontStyle:"italic" }}>{t.clients.schedHelp}</div>
         <div style={{ display:"flex", gap:8, flexWrap:"wrap" }}>
           <button onClick={downloadTemplate} style={{ flex:"1 1 auto", background:"transparent", color:C.white, border:`2px solid ${C.green}`, borderRadius:8, padding:"9px 12px", fontWeight:700, cursor:"pointer", fontSize:13 }}>{t.clients.downloadTemplate}</button>
-          <button onClick={() => fileInputRef.current && fileInputRef.current.click()} style={{ flex:"1 1 auto", background:C.green, color:C.white, border:"none", borderRadius:8, padding:"10px 12px", fontWeight:700, cursor:"pointer", fontSize:13 }}>{t.clients.import}</button>
+          <button onClick={() => fileInputRef.current&&fileInputRef.current.click()} style={{ flex:"1 1 auto", background:C.green, color:C.white, border:"none", borderRadius:8, padding:"10px 12px", fontWeight:700, cursor:"pointer", fontSize:13 }}>{t.clients.import}</button>
           <input ref={fileInputRef} type="file" accept=".csv,text/csv" onChange={handleImport} style={{ display:"none" }} />
         </div>
       </div>
       {showForm && (
         <div style={{ background:C.greenPale, borderRadius:12, padding:16, marginBottom:16 }}>
           {[["name",t.clients.name],["phone",t.clients.phone],["address",t.clients.address],["email",t.clients.email]].map(([key,label]) => (
-            <input key={key} value={form[key]} onChange={e => setForm({ ...form, [key]:e.target.value })} placeholder={label} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:14, marginBottom:10, boxSizing:"border-box" }} />
+            <input key={key} value={form[key]} onChange={e=>setForm({...form,[key]:e.target.value})} placeholder={label} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:14, marginBottom:10, boxSizing:"border-box" }} />
           ))}
           <div style={{ fontSize:13, fontWeight:700, color:C.black, marginBottom:8, marginTop:6 }}>📅 {t.clients.schedule}</div>
-          <select value={form.scheduleType} onChange={e => setForm({ ...form, scheduleType:e.target.value })} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:14, marginBottom:10, boxSizing:"border-box" }}>
+          <select value={form.scheduleType} onChange={e=>setForm({...form,scheduleType:e.target.value})} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:14, marginBottom:10, boxSizing:"border-box" }}>
             <option value="oneTime">{t.clients.oneTime}</option>
             <option value="weekly">{t.clients.weekly}</option>
             <option value="biweeklyA">{t.clients.biweeklyA}</option>
             <option value="biweeklyB">{t.clients.biweeklyB}</option>
           </select>
-          {form.scheduleType !== "oneTime" && (
+          {form.scheduleType!=="oneTime" && (
             <div style={{ display:"flex", gap:4, marginBottom:10, flexWrap:"wrap" }}>
-              {t.clients.days.map((day, idx) => (
-                <button key={day} onClick={() => toggleDay(idx)} style={{ flex:"1 1 auto", minWidth:42, padding:"8px 4px", borderRadius:6, border:`2px solid ${form.days.includes(idx) ? C.green : C.grayMid}`, background:form.days.includes(idx) ? C.green : C.white, color:form.days.includes(idx) ? C.white : C.grayDark, fontWeight:700, fontSize:12, cursor:"pointer" }}>{day}</button>
+              {t.clients.days.map((day,idx) => (
+                <button key={day} onClick={()=>toggleDay(idx)} style={{ flex:"1 1 auto", minWidth:42, padding:"8px 4px", borderRadius:6, border:`2px solid ${form.days.includes(idx)?C.green:C.grayMid}`, background:form.days.includes(idx)?C.green:C.white, color:form.days.includes(idx)?C.white:C.grayDark, fontWeight:700, fontSize:12, cursor:"pointer" }}>{day}</button>
               ))}
             </div>
           )}
-          <button onClick={saveClient} style={{ width:"100%", background:C.green, color:C.white, border:"none", borderRadius:8, padding:"11px 0", fontWeight:700, cursor:"pointer" }}>{editingId ? t.clients.update : t.clients.save}</button>
+          <button onClick={saveClient} style={{ width:"100%", background:C.green, color:C.white, border:"none", borderRadius:8, padding:"11px 0", fontWeight:700, cursor:"pointer" }}>{editingId?t.clients.update:t.clients.save}</button>
         </div>
       )}
-      {clients.length === 0
+      {clients.length===0
         ? <div style={{ textAlign:"center", color:C.grayDark, padding:"40px 16px", fontSize:14 }}>{t.clients.noClients}</div>
         : clients.map(c => (
           <div key={c.id} style={{ background:C.white, borderRadius:12, padding:14, marginBottom:10, border:`1px solid ${C.grayMid}` }}>
@@ -596,8 +602,8 @@ function ClientsTab({ t, clients, setClients }) {
             <div style={{ display:"flex", gap:8, flexWrap:"wrap" }}>
               {c.phone && <a href={`tel:${c.phone}`} style={{ background:C.green, color:C.white, borderRadius:6, padding:"6px 12px", fontSize:12, fontWeight:600, textDecoration:"none" }}>{t.clients.call}</a>}
               {c.address && <a href={`https://maps.google.com/?q=${encodeURIComponent(c.address)}`} target="_blank" rel="noreferrer" style={{ background:C.blue, color:C.white, borderRadius:6, padding:"6px 12px", fontSize:12, fontWeight:600, textDecoration:"none" }}>{t.clients.directions}</a>}
-              <button onClick={() => openEdit(c)} style={{ background:C.orange, color:C.white, border:"none", borderRadius:6, padding:"6px 12px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.clients.edit}</button>
-              <button onClick={() => deleteClient(c.id)} style={{ background:C.red, color:C.white, border:"none", borderRadius:6, padding:"6px 12px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.clients.delete}</button>
+              <button onClick={()=>openEdit(c)} style={{ background:C.orange, color:C.white, border:"none", borderRadius:6, padding:"6px 12px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.clients.edit}</button>
+              <button onClick={()=>deleteClient(c.id)} style={{ background:C.red, color:C.white, border:"none", borderRadius:6, padding:"6px 12px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.clients.delete}</button>
             </div>
           </div>
         ))
@@ -607,28 +613,28 @@ function ClientsTab({ t, clients, setClients }) {
 }
 
 function InvoicesTab({ t, clients, invoices, setInvoices, company }) {
+  const showToast = useToast();
   const [showForm, setShowForm] = useState(false);
   const emptyLine = () => ({ service:"", amount:"", date:new Date().toISOString().split("T")[0], id:Date.now()+Math.random() });
   const [form, setForm] = useState({ client:"", lines:[emptyLine()] });
-  const addLine = () => setForm({ ...form, lines:[...form.lines, emptyLine()] });
-  const removeLine = (id) => setForm({ ...form, lines:form.lines.filter(l => l.id !== id) });
-  const updateLine = (id, field, val) => setForm({ ...form, lines:form.lines.map(l => l.id === id ? { ...l, [field]:val } : l) });
-  const lineTotal = (lines) => lines.reduce((s,l) => s+parseFloat(l.amount||0), 0);
+  const addLine = () => setForm({ ...form, lines:[...form.lines,emptyLine()] });
+  const removeLine = (id) => setForm({ ...form, lines:form.lines.filter(l=>l.id!==id) });
+  const updateLine = (id,field,val) => setForm({ ...form, lines:form.lines.map(l=>l.id===id?{...l,[field]:val}:l) });
+  const lineTotal = (lines) => lines.reduce((s,l)=>s+parseFloat(l.amount||0),0);
   const create = () => {
     if (!form.client) return;
-    const validLines = form.lines.filter(l => l.amount && parseFloat(l.amount) > 0);
-    if (validLines.length === 0) return;
-    const total = lineTotal(validLines);
-    setInvoices([...invoices, { id:Date.now(), client:form.client, lines:validLines, total, status:"pending", date:new Date().toISOString().split("T")[0] }]);
+    const validLines = form.lines.filter(l=>l.amount&&parseFloat(l.amount)>0);
+    if (validLines.length===0) return;
+    setInvoices([...invoices, { id:Date.now(), client:form.client, lines:validLines, total:lineTotal(validLines), status:"pending", date:new Date().toISOString().split("T")[0] }]);
     setForm({ client:"", lines:[emptyLine()] }); setShowForm(false);
   };
-  const total = invoices.reduce((s,i) => s+parseFloat(i.total||0),0);
-  const paid = invoices.filter(i=>i.status==="paid").reduce((s,i) => s+parseFloat(i.total||0),0);
+  const total = invoices.reduce((s,i)=>s+parseFloat(i.total||0),0);
+  const paid = invoices.filter(i=>i.status==="paid").reduce((s,i)=>s+parseFloat(i.total||0),0);
   return (
     <div style={{ padding:16 }}>
       <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:12 }}>
         <h2 style={{ margin:0, color:C.green, fontSize:20, fontWeight:800 }}>{t.invoices.title}</h2>
-        <button onClick={() => setShowForm(!showForm)} style={{ background:C.green, color:C.white, border:"none", borderRadius:8, padding:"8px 14px", fontWeight:700, cursor:"pointer", fontSize:13 }}>+ {t.invoices.create}</button>
+        <button onClick={()=>setShowForm(!showForm)} style={{ background:C.green, color:C.white, border:"none", borderRadius:8, padding:"8px 14px", fontWeight:700, cursor:"pointer", fontSize:13 }}>+ {t.invoices.create}</button>
       </div>
       <div style={{ display:"flex", gap:10, marginBottom:16 }}>
         <div style={{ flex:1, background:C.greenPale, borderRadius:10, padding:12, textAlign:"center" }}>
@@ -642,20 +648,20 @@ function InvoicesTab({ t, clients, invoices, setInvoices, company }) {
       </div>
       {showForm && (
         <div style={{ background:C.greenPale, borderRadius:12, padding:16, marginBottom:16 }}>
-          <select value={form.client} onChange={e => setForm({ ...form, client:e.target.value })} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:14, marginBottom:12, boxSizing:"border-box" }}>
+          <select value={form.client} onChange={e=>setForm({...form,client:e.target.value})} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:14, marginBottom:12, boxSizing:"border-box" }}>
             <option value="">-- {t.invoices.client} --</option>
-            {clients.map(c => <option key={c.id} value={c.name}>{c.name}</option>)}
+            {clients.map(c=><option key={c.id} value={c.name}>{c.name}</option>)}
           </select>
           <div style={{ fontSize:12, fontWeight:700, color:C.grayDark, marginBottom:8 }}>{t.invoices.lineItems}</div>
           {form.lines.map((line) => (
             <div key={line.id} style={{ background:C.white, borderRadius:8, padding:10, marginBottom:8, border:`1px solid ${C.grayMid}` }}>
-              <select value={line.service} onChange={e => updateLine(line.id, "service", e.target.value)} style={{ width:"100%", padding:"8px 10px", borderRadius:6, border:`1px solid ${C.grayMid}`, fontSize:13, marginBottom:6, boxSizing:"border-box" }}>
+              <select value={line.service} onChange={e=>updateLine(line.id,"service",e.target.value)} style={{ width:"100%", padding:"8px 10px", borderRadius:6, border:`1px solid ${C.grayMid}`, fontSize:13, marginBottom:6, boxSizing:"border-box" }}>
                 <option value="">-- {t.invoices.service} --</option>
-                {t.invoices.services.map(s => <option key={s} value={s}>{s}</option>)}
+                {t.invoices.services.map(s=><option key={s} value={s}>{s}</option>)}
               </select>
-              <input value={line.date} onChange={e => updateLine(line.id, "date", e.target.value)} type="date" style={{ width:"100%", padding:"8px 10px", borderRadius:6, border:`1px solid ${C.grayMid}`, fontSize:13, marginBottom:6, boxSizing:"border-box" }} />
-              <input value={line.amount} onChange={e => updateLine(line.id, "amount", e.target.value)} placeholder={t.invoices.amount} type="number" style={{ width:"100%", padding:"8px 10px", borderRadius:6, border:`1px solid ${C.grayMid}`, fontSize:13, marginBottom:6, boxSizing:"border-box" }} />
-              {form.lines.length > 1 && <button onClick={() => removeLine(line.id)} style={{ background:C.red, color:C.white, border:"none", borderRadius:6, padding:"6px 10px", fontSize:11, fontWeight:600, cursor:"pointer" }}>{t.invoices.removeLine}</button>}
+              <input value={line.date} onChange={e=>updateLine(line.id,"date",e.target.value)} type="date" style={{ width:"100%", padding:"8px 10px", borderRadius:6, border:`1px solid ${C.grayMid}`, fontSize:13, marginBottom:6, boxSizing:"border-box" }} />
+              <input value={line.amount} onChange={e=>updateLine(line.id,"amount",e.target.value)} placeholder={t.invoices.amount} type="number" style={{ width:"100%", padding:"8px 10px", borderRadius:6, border:`1px solid ${C.grayMid}`, fontSize:13, marginBottom:6, boxSizing:"border-box" }} />
+              {form.lines.length>1 && <button onClick={()=>removeLine(line.id)} style={{ background:C.red, color:C.white, border:"none", borderRadius:6, padding:"6px 10px", fontSize:11, fontWeight:600, cursor:"pointer" }}>{t.invoices.removeLine}</button>}
             </div>
           ))}
           <button onClick={addLine} style={{ width:"100%", background:C.white, color:C.green, border:`2px dashed ${C.green}`, borderRadius:8, padding:"10px 0", fontWeight:700, cursor:"pointer", marginBottom:10, fontSize:13 }}>{t.invoices.addLine}</button>
@@ -663,7 +669,7 @@ function InvoicesTab({ t, clients, invoices, setInvoices, company }) {
           <button onClick={create} style={{ width:"100%", background:C.green, color:C.white, border:"none", borderRadius:8, padding:"11px 0", fontWeight:700, cursor:"pointer" }}>{t.invoices.send}</button>
         </div>
       )}
-      {invoices.length === 0
+      {invoices.length===0
         ? <div style={{ textAlign:"center", color:C.grayDark, padding:"40px 16px", fontSize:14 }}>{t.invoices.noInvoices}</div>
         : invoices.map(inv => (
           <div key={inv.id} style={{ background:C.white, borderRadius:12, padding:14, marginBottom:10, border:`1px solid ${C.grayMid}` }}>
@@ -693,12 +699,12 @@ function InvoicesTab({ t, clients, invoices, setInvoices, company }) {
             ))}
             <div style={{ display:"flex", gap:6, flexWrap:"wrap", marginTop:10 }}>
               <span style={{ background:inv.status==="paid"?"#e8f5e3":"#fff3cd", color:inv.status==="paid"?C.green:C.orange, borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600 }}>{inv.status==="paid"?t.invoices.paid:t.invoices.pending}</span>
-              {inv.status!=="paid" && <button onClick={() => setInvoices(invoices.map(x=>x.id===inv.id?{...x,status:"paid"}:x))} style={{ background:C.green, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.markPaid}</button>}
-              <button onClick={() => printInvoice(inv, company, t)} style={{ background:C.black, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.pdf}</button>
-              <button onClick={() => { const client = clients.find(c => c.name === inv.client); const text = formatInvoiceText(inv, company, t); sendSMS(client ? client.phone : "", text); }} style={{ background:C.blue, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.textInv}</button>
-              <button onClick={() => { const client = clients.find(c => c.name === inv.client); const text = formatInvoiceText(inv, company, t); sendEmail(client ? client.email : "", `${t.invoices.invoiceNum} ${inv.id} — ${company.companyName||""}`, text); }} style={{ background:C.orange, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.emailInv}</button>
-              <button onClick={() => { if (!company.googleReviewLink) { alert(t.billing.reviewBlurb); return; } window.open(company.googleReviewLink, "_blank"); }} style={{ background:C.black, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>⭐ {t.invoices.review}</button>
-              <button onClick={() => { if (window.confirm(t.invoices.confirmDelInv)) setInvoices(invoices.filter(x => x.id !== inv.id)); }} style={{ background:C.red, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.deleteInv}</button>
+              {inv.status!=="paid" && <button onClick={()=>setInvoices(invoices.map(x=>x.id===inv.id?{...x,status:"paid"}:x))} style={{ background:C.green, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.markPaid}</button>}
+              <button onClick={()=>printInvoice(inv,company,t)} style={{ background:C.black, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.pdf}</button>
+              <button onClick={()=>{ const client=clients.find(c=>c.name===inv.client); sendSMS(client?client.phone:"",formatInvoiceText(inv,company,t)); }} style={{ background:C.blue, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.textInv}</button>
+              <button onClick={()=>{ const client=clients.find(c=>c.name===inv.client); sendEmail(client?client.email:"",`${t.invoices.invoiceNum} ${inv.id} — ${company.companyName||""}`,formatInvoiceText(inv,company,t)); }} style={{ background:C.orange, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.emailInv}</button>
+              <button onClick={()=>{ if (!company.googleReviewLink) { showToast(t.toast.reviewMissing,"warning"); return; } window.open(company.googleReviewLink,"_blank"); }} style={{ background:C.black, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>⭐ {t.invoices.review}</button>
+              <button onClick={()=>{ setInvoices(invoices.filter(x=>x.id!==inv.id)); showToast(t.toast.invoiceDeleted,"info"); }} style={{ background:C.red, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.deleteInv}</button>
             </div>
           </div>
         ))
@@ -708,68 +714,67 @@ function InvoicesTab({ t, clients, invoices, setInvoices, company }) {
 }
 
 function EstimatesTab({ t, clients, estimates, setEstimates, invoices, setInvoices, company }) {
+  const showToast = useToast();
   const [showForm, setShowForm] = useState(false);
   const emptyLine = () => ({ service:"", amount:"", id:Date.now()+Math.random() });
   const [form, setForm] = useState({ client:"", lines:[emptyLine()], notes:"" });
-  const addLine = () => setForm({ ...form, lines:[...form.lines, emptyLine()] });
-  const removeLine = (id) => setForm({ ...form, lines:form.lines.filter(l => l.id !== id) });
-  const updateLine = (id, field, val) => setForm({ ...form, lines:form.lines.map(l => l.id === id ? { ...l, [field]:val } : l) });
-  const lineTotal = (lines) => lines.reduce((s,l) => s+parseFloat(l.amount||0), 0);
+  const addLine = () => setForm({ ...form, lines:[...form.lines,emptyLine()] });
+  const removeLine = (id) => setForm({ ...form, lines:form.lines.filter(l=>l.id!==id) });
+  const updateLine = (id,field,val) => setForm({ ...form, lines:form.lines.map(l=>l.id===id?{...l,[field]:val}:l) });
+  const lineTotal = (lines) => lines.reduce((s,l)=>s+parseFloat(l.amount||0),0);
   const saveEst = () => {
     if (!form.client) return;
-    const validLines = form.lines.filter(l => l.amount && parseFloat(l.amount) > 0);
-    if (validLines.length === 0) return;
-    const total = lineTotal(validLines);
-    setEstimates([...estimates, { id:Date.now(), client:form.client, lines:validLines, notes:form.notes, total, status:"pending", date:new Date().toISOString().split("T")[0] }]);
+    const validLines = form.lines.filter(l=>l.amount&&parseFloat(l.amount)>0);
+    if (validLines.length===0) return;
+    setEstimates([...estimates, { id:Date.now(), client:form.client, lines:validLines, notes:form.notes, total:lineTotal(validLines), status:"pending", date:new Date().toISOString().split("T")[0] }]);
     setForm({ client:"", lines:[emptyLine()], notes:"" }); setShowForm(false);
   };
   const convertToInvoice = (est) => {
-    if (!window.confirm(t.estimates.convertConfirm)) return;
-    setInvoices([...invoices, { id:Date.now(), client:est.client, lines:est.lines || [], total:est.total||est.amount||0, status:"pending", date:new Date().toISOString().split("T")[0] }]);
-    setEstimates(estimates.map(e => e.id === est.id ? { ...e, status:"approved" } : e));
-    alert(t.estimates.converted);
+    setInvoices([...invoices, { id:Date.now(), client:est.client, lines:est.lines||[], total:est.total||est.amount||0, status:"pending", date:new Date().toISOString().split("T")[0] }]);
+    setEstimates(estimates.map(e=>e.id===est.id?{...e,status:"approved"}:e));
+    showToast(t.toast.converted, "success");
   };
   const formatEstText = (est) => {
-    let text = "";
-    if (company.companyName) text += `${company.companyName}\n`;
-    if (company.ownerName) text += `${company.ownerName}\n`;
-    if (company.phone) text += `${company.phone}\n\n`;
-    text += `${t.estimates.title}\n${t.invoices.date}: ${formatDate(est.date)}\n\n${t.invoices.to}: ${est.client}\n\n`;
-    if (est.lines) est.lines.forEach(l => { text += `• ${l.service} — $${parseFloat(l.amount).toFixed(2)}\n`; });
-    text += `\n${t.invoices.total}: $${parseFloat(est.total||est.amount||0).toFixed(2)}\n`;
-    if (est.notes) text += `\n${t.estimates.notes}: ${est.notes}\n`;
+    let text="";
+    if (company.companyName) text+=`${company.companyName}\n`;
+    if (company.ownerName) text+=`${company.ownerName}\n`;
+    if (company.phone) text+=`${company.phone}\n\n`;
+    text+=`${t.estimates.title}\n${t.invoices.date}: ${formatDate(est.date)}\n\n${t.invoices.to}: ${est.client}\n\n`;
+    if (est.lines) est.lines.forEach(l=>{ text+=`• ${l.service} — $${parseFloat(l.amount).toFixed(2)}\n`; });
+    text+=`\n${t.invoices.total}: $${parseFloat(est.total||est.amount||0).toFixed(2)}\n`;
+    if (est.notes) text+=`\n${t.estimates.notes}: ${est.notes}\n`;
     return text;
   };
   return (
     <div style={{ padding:16 }}>
       <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:16 }}>
         <h2 style={{ margin:0, color:C.green, fontSize:20, fontWeight:800 }}>{t.estimates.title}</h2>
-        <button onClick={() => setShowForm(!showForm)} style={{ background:C.green, color:C.white, border:"none", borderRadius:8, padding:"8px 14px", fontWeight:700, cursor:"pointer", fontSize:13 }}>+ {t.estimates.create}</button>
+        <button onClick={()=>setShowForm(!showForm)} style={{ background:C.green, color:C.white, border:"none", borderRadius:8, padding:"8px 14px", fontWeight:700, cursor:"pointer", fontSize:13 }}>+ {t.estimates.create}</button>
       </div>
       {showForm && (
         <div style={{ background:C.greenPale, borderRadius:12, padding:16, marginBottom:16 }}>
-          <select value={form.client} onChange={e => setForm({ ...form, client:e.target.value })} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:14, marginBottom:12, boxSizing:"border-box" }}>
+          <select value={form.client} onChange={e=>setForm({...form,client:e.target.value})} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:14, marginBottom:12, boxSizing:"border-box" }}>
             <option value="">-- {t.estimates.client} --</option>
-            {clients.map(c => <option key={c.id} value={c.name}>{c.name}</option>)}
+            {clients.map(c=><option key={c.id} value={c.name}>{c.name}</option>)}
           </select>
           <div style={{ fontSize:12, fontWeight:700, color:C.grayDark, marginBottom:8 }}>{t.invoices.lineItems}</div>
           {form.lines.map((line) => (
             <div key={line.id} style={{ background:C.white, borderRadius:8, padding:10, marginBottom:8, border:`1px solid ${C.grayMid}` }}>
-              <select value={line.service} onChange={e => updateLine(line.id, "service", e.target.value)} style={{ width:"100%", padding:"8px 10px", borderRadius:6, border:`1px solid ${C.grayMid}`, fontSize:13, marginBottom:6, boxSizing:"border-box" }}>
+              <select value={line.service} onChange={e=>updateLine(line.id,"service",e.target.value)} style={{ width:"100%", padding:"8px 10px", borderRadius:6, border:`1px solid ${C.grayMid}`, fontSize:13, marginBottom:6, boxSizing:"border-box" }}>
                 <option value="">-- {t.invoices.service} --</option>
-                {t.invoices.services.map(s => <option key={s} value={s}>{s}</option>)}
+                {t.invoices.services.map(s=><option key={s} value={s}>{s}</option>)}
               </select>
-              <input value={line.amount} onChange={e => updateLine(line.id, "amount", e.target.value)} placeholder={t.estimates.amount} type="number" style={{ width:"100%", padding:"8px 10px", borderRadius:6, border:`1px solid ${C.grayMid}`, fontSize:13, marginBottom:6, boxSizing:"border-box" }} />
-              {form.lines.length > 1 && <button onClick={() => removeLine(line.id)} style={{ background:C.red, color:C.white, border:"none", borderRadius:6, padding:"6px 10px", fontSize:11, fontWeight:600, cursor:"pointer" }}>{t.invoices.removeLine}</button>}
+              <input value={line.amount} onChange={e=>updateLine(line.id,"amount",e.target.value)} placeholder={t.estimates.amount} type="number" style={{ width:"100%", padding:"8px 10px", borderRadius:6, border:`1px solid ${C.grayMid}`, fontSize:13, marginBottom:6, boxSizing:"border-box" }} />
+              {form.lines.length>1 && <button onClick={()=>removeLine(line.id)} style={{ background:C.red, color:C.white, border:"none", borderRadius:6, padding:"6px 10px", fontSize:11, fontWeight:600, cursor:"pointer" }}>{t.invoices.removeLine}</button>}
             </div>
           ))}
           <button onClick={addLine} style={{ width:"100%", background:C.white, color:C.green, border:`2px dashed ${C.green}`, borderRadius:8, padding:"10px 0", fontWeight:700, cursor:"pointer", marginBottom:10, fontSize:13 }}>{t.invoices.addLine}</button>
-          <input value={form.notes} onChange={e => setForm({ ...form, notes:e.target.value })} placeholder={t.estimates.notes} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:14, marginBottom:10, boxSizing:"border-box" }} />
+          <input value={form.notes} onChange={e=>setForm({...form,notes:e.target.value})} placeholder={t.estimates.notes} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:14, marginBottom:10, boxSizing:"border-box" }} />
           <div style={{ background:C.white, padding:"10px 12px", borderRadius:8, marginBottom:10, textAlign:"right", fontWeight:700, color:C.green, fontSize:15 }}>{t.invoices.total}: ${lineTotal(form.lines).toFixed(2)}</div>
           <button onClick={saveEst} style={{ width:"100%", background:C.green, color:C.white, border:"none", borderRadius:8, padding:"11px 0", fontWeight:700, cursor:"pointer" }}>{t.estimates.save}</button>
         </div>
       )}
-      {estimates.length === 0
+      {estimates.length===0
         ? <div style={{ textAlign:"center", color:C.grayDark, padding:"40px 16px", fontSize:14 }}>{t.estimates.noEstimates}</div>
         : estimates.map(est => (
           <div key={est.id} style={{ background:C.white, borderRadius:12, padding:14, marginBottom:10, border:`1px solid ${C.grayMid}` }}>
@@ -786,11 +791,11 @@ function EstimatesTab({ t, clients, estimates, setEstimates, invoices, setInvoic
             {est.notes && <div style={{ color:C.grayDark, fontSize:12, marginTop:6, fontStyle:"italic" }}>{est.notes}</div>}
             <div style={{ display:"flex", gap:6, flexWrap:"wrap", marginTop:10 }}>
               <span style={{ background:est.status==="approved"?"#e8f5e3":"#fff3cd", color:est.status==="approved"?C.green:C.orange, borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600 }}>{est.status==="approved"?t.estimates.approved:t.estimates.pending}</span>
-              {est.status!=="approved" && <button onClick={() => convertToInvoice(est)} style={{ background:C.green, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.convert}</button>}
-              <button onClick={() => printEstimate(est, company, t)} style={{ background:C.black, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.pdf}</button>
-              <button onClick={() => { const client = clients.find(c => c.name === est.client); sendSMS(client ? client.phone : "", formatEstText(est)); }} style={{ background:C.blue, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.textEst}</button>
-              <button onClick={() => { const client = clients.find(c => c.name === est.client); sendEmail(client ? client.email : "", `${t.estimates.title} — ${company.companyName||""}`, formatEstText(est)); }} style={{ background:C.orange, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.emailEst}</button>
-              <button onClick={() => { if (window.confirm(t.estimates.confirmDelEst)) setEstimates(estimates.filter(x => x.id !== est.id)); }} style={{ background:C.red, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.deleteEst}</button>
+              {est.status!=="approved" && <button onClick={()=>convertToInvoice(est)} style={{ background:C.green, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.convert}</button>}
+              <button onClick={()=>printEstimate(est,company,t)} style={{ background:C.black, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.pdf}</button>
+              <button onClick={()=>{ const client=clients.find(c=>c.name===est.client); sendSMS(client?client.phone:"",formatEstText(est)); }} style={{ background:C.blue, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.textEst}</button>
+              <button onClick={()=>{ const client=clients.find(c=>c.name===est.client); sendEmail(client?client.email:"",`${t.estimates.title} — ${company.companyName||""}`,formatEstText(est)); }} style={{ background:C.orange, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.emailEst}</button>
+              <button onClick={()=>{ setEstimates(estimates.filter(x=>x.id!==est.id)); showToast(t.toast.estimateDeleted,"info"); }} style={{ background:C.red, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.deleteEst}</button>
             </div>
           </div>
         ))
@@ -799,95 +804,69 @@ function EstimatesTab({ t, clients, estimates, setEstimates, invoices, setInvoic
   );
 }
 
-// ─── BILLING TAB ─────────────────────────────────────────────────────────────
 function BillingTab({ t, invoices, estimates, company, setCompany }) {
+  const showToast = useToast();
   const [pinUnlocked, setPinUnlocked] = useState(false);
   const [form, setForm] = useState(company);
-  const [showSaved, setShowSaved] = useState(false);
   const [pinForm, setPinForm] = useState({ newPin:"", confirmPin:"" });
-  const [pinMsg, setPinMsg] = useState("");
   const savedPin = load("cp_billing_pin", null);
 
   useEffect(() => { setForm(company); }, [company]);
 
-  // If PIN is set and not yet unlocked, show PIN screen
-  if (savedPin && !pinUnlocked) {
-    return <PinScreen t={t} onUnlock={() => setPinUnlocked(true)} />;
-  }
+  if (savedPin && !pinUnlocked) return <PinScreen t={t} onUnlock={()=>setPinUnlocked(true)} />;
 
-  const total = invoices.reduce((s,i) => s+parseFloat(i.total||0), 0);
-  const paid = invoices.filter(i=>i.status==="paid").reduce((s,i) => s+parseFloat(i.total||0), 0);
+  const total = invoices.reduce((s,i)=>s+parseFloat(i.total||0),0);
+  const paid = invoices.filter(i=>i.status==="paid").reduce((s,i)=>s+parseFloat(i.total||0),0);
   const pending = total - paid;
-  const thisMonth = invoices.filter(i => { const d = new Date(i.date); const n = new Date(); return d.getMonth() === n.getMonth() && d.getFullYear() === n.getFullYear(); }).reduce((s,i) => s+parseFloat(i.total||0), 0);
-  const saveSettings = () => { setCompany(form); setShowSaved(true); setTimeout(() => setShowSaved(false), 2000); };
+  const thisMonth = invoices.filter(i=>{ const d=new Date(i.date); const n=new Date(); return d.getMonth()===n.getMonth()&&d.getFullYear()===n.getFullYear(); }).reduce((s,i)=>s+parseFloat(i.total||0),0);
+
+  const saveSettings = () => { setCompany(form); showToast(t.toast.settingsSaved, "success"); };
 
   const downloadCSV = (data, filename) => {
     const blob = new Blob([data], { type:"text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
-    link.href = url; link.setAttribute("download", filename);
+    link.href=url; link.setAttribute("download",filename);
     document.body.appendChild(link); link.click(); document.body.removeChild(link);
   };
-  const escapeCsv = (val) => { if (val === null || val === undefined) return ""; const s = String(val); if (s.includes(",") || s.includes("\"") || s.includes("\n")) return `"${s.replace(/"/g, '""')}"`; return s; };
+  const escapeCsv = (val) => { if (val===null||val===undefined) return ""; const s=String(val); if (s.includes(",")||s.includes('"')||s.includes("\n")) return `"${s.replace(/"/g,'""')}"`; return s; };
 
   const exportInvoices = () => {
-    if (!invoices || invoices.length === 0) { alert(t.billing.noData); return; }
-    const headers = ["Invoice Date","Client","Service","Amount","Status","Company"];
-    const rows = [];
-    invoices.forEach(inv => {
-      if (inv.lines && inv.lines.length > 0) {
-        inv.lines.forEach(l => { rows.push([l.date||inv.date, inv.client, l.service, parseFloat(l.amount||0).toFixed(2), inv.status, company.companyName||""].map(escapeCsv).join(",")); });
-      } else {
-        rows.push([inv.date, inv.client, "", parseFloat(inv.total||inv.amount||0).toFixed(2), inv.status, company.companyName||""].map(escapeCsv).join(","));
-      }
-    });
-    downloadCSV([headers.join(","), ...rows].join("\n"), `corte-pro-invoices-${new Date().toISOString().split("T")[0]}.csv`);
+    if (!invoices||invoices.length===0) { showToast(t.toast.noData,"warning"); return; }
+    const headers=["Invoice Date","Client","Service","Amount","Status","Company"];
+    const rows=[];
+    invoices.forEach(inv=>{ if (inv.lines&&inv.lines.length>0) { inv.lines.forEach(l=>{ rows.push([l.date||inv.date,inv.client,l.service,parseFloat(l.amount||0).toFixed(2),inv.status,company.companyName||""].map(escapeCsv).join(",")); }); } else { rows.push([inv.date,inv.client,"",parseFloat(inv.total||inv.amount||0).toFixed(2),inv.status,company.companyName||""].map(escapeCsv).join(",")); } });
+    downloadCSV([headers.join(","),...rows].join("\n"),`corte-pro-invoices-${new Date().toISOString().split("T")[0]}.csv`);
   };
-
   const exportEstimates = () => {
-    if (!estimates || estimates.length === 0) { alert(t.billing.noData); return; }
-    const headers = ["Estimate Date","Client","Service","Amount","Status","Notes","Company"];
-    const rows = [];
-    estimates.forEach(est => {
-      if (est.lines && est.lines.length > 0) {
-        est.lines.forEach(l => { rows.push([est.date||"", est.client, l.service, parseFloat(l.amount||0).toFixed(2), est.status, est.notes||"", company.companyName||""].map(escapeCsv).join(",")); });
-      } else {
-        rows.push([est.date||"", est.client, est.service||"", parseFloat(est.total||est.amount||0).toFixed(2), est.status, est.notes||"", company.companyName||""].map(escapeCsv).join(","));
-      }
-    });
-    downloadCSV([headers.join(","), ...rows].join("\n"), `corte-pro-estimates-${new Date().toISOString().split("T")[0]}.csv`);
+    if (!estimates||estimates.length===0) { showToast(t.toast.noData,"warning"); return; }
+    const headers=["Estimate Date","Client","Service","Amount","Status","Notes","Company"];
+    const rows=[];
+    estimates.forEach(est=>{ if (est.lines&&est.lines.length>0) { est.lines.forEach(l=>{ rows.push([est.date||"",est.client,l.service,parseFloat(l.amount||0).toFixed(2),est.status,est.notes||"",company.companyName||""].map(escapeCsv).join(",")); }); } else { rows.push([est.date||"",est.client,est.service||"",parseFloat(est.total||est.amount||0).toFixed(2),est.status,est.notes||"",company.companyName||""].map(escapeCsv).join(",")); } });
+    downloadCSV([headers.join(","),...rows].join("\n"),`corte-pro-estimates-${new Date().toISOString().split("T")[0]}.csv`);
   };
 
   const backupData = () => {
-    const data = {
-      clients: load("cp_clients", []),
-      invoices: load("cp_invoices", []),
-      estimates: load("cp_estimates", []),
-      company: load("cp_company", {}),
-      stops_crew1: load("cp_stops_crew1", []),
-      stops_crew2: load("cp_stops_crew2", []),
-    };
-    const body = `Corte Pro Backup — ${new Date().toLocaleDateString()}\n\n${JSON.stringify(data, null, 2)}`;
-    sendEmail(company.email || "", `Corte Pro Backup ${new Date().toLocaleDateString()}`, body);
+    const data = { clients:load("cp_clients",[]), invoices:load("cp_invoices",[]), estimates:load("cp_estimates",[]), company:load("cp_company",{}), stops_crew1:load("cp_stops_crew1",[]), stops_crew2:load("cp_stops_crew2",[]) };
+    sendEmail(company.email||"", `Corte Pro Backup ${new Date().toLocaleDateString()}`, `Corte Pro Backup — ${new Date().toLocaleDateString()}\n\n${JSON.stringify(data,null,2)}`);
+    showToast(t.toast.backupSent, "success");
   };
 
   const savePin = () => {
-    if (pinForm.newPin.length !== 4) { setPinMsg(t.billing.pinError); return; }
-    if (pinForm.newPin !== pinForm.confirmPin) { setPinMsg(t.billing.pinError); setTimeout(() => setPinMsg(""), 2000); return; }
+    if (pinForm.newPin.length!==4) { showToast(t.toast.pinTooShort,"error"); return; }
+    if (pinForm.newPin!==pinForm.confirmPin) { showToast(t.toast.pinError,"error"); return; }
     save("cp_billing_pin", pinForm.newPin);
     setPinForm({ newPin:"", confirmPin:"" });
-    setPinMsg(t.billing.pinSaved);
-    setTimeout(() => setPinMsg(""), 2000);
+    showToast(t.toast.pinSaved,"success");
   };
-  const removePin = () => { save("cp_billing_pin", null); setPinMsg(t.billing.pinSaved); setTimeout(() => setPinMsg(""), 2000); };
+  const removePin = () => { save("cp_billing_pin",null); showToast(t.toast.pinRemoved,"info"); };
 
   return (
     <div style={{ padding:16 }}>
       <h2 style={{ margin:"0 0 16px", color:C.green, fontSize:20, fontWeight:800 }}>{t.billing.title}</h2>
 
-      {/* Stats */}
       <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:12, marginBottom:20 }}>
-        {[[t.billing.totalEarned, `$${paid.toFixed(2)}`, C.green],[t.billing.totalPending, `$${pending.toFixed(2)}`, C.orange],[t.billing.thisMonth, `$${thisMonth.toFixed(2)}`, C.blue],["Total Invoices", `${invoices.length}`, C.grayDark]].map(([label,val,color]) => (
+        {[[t.billing.totalEarned,`$${paid.toFixed(2)}`,C.green],[t.billing.totalPending,`$${pending.toFixed(2)}`,C.orange],[t.billing.thisMonth,`$${thisMonth.toFixed(2)}`,C.blue],["Total Invoices",`${invoices.length}`,C.grayDark]].map(([label,val,color]) => (
           <div key={label} style={{ background:C.white, border:`1px solid ${C.grayMid}`, borderRadius:12, padding:14, textAlign:"center" }}>
             <div style={{ fontSize:11, color:C.grayDark, marginBottom:4 }}>{label}</div>
             <div style={{ fontSize:22, fontWeight:800, color }}>{val}</div>
@@ -895,7 +874,6 @@ function BillingTab({ t, invoices, estimates, company, setCompany }) {
         ))}
       </div>
 
-      {/* Export */}
       <div style={{ background:C.black, color:C.white, borderRadius:12, padding:16, marginBottom:16, borderLeft:`5px solid ${C.green}` }}>
         <div style={{ fontSize:15, fontWeight:800, marginBottom:6 }}>📊 {t.billing.exportTitle}</div>
         <div style={{ fontSize:12, color:"rgba(255,255,255,0.85)", marginBottom:14, lineHeight:1.5 }}>{t.billing.exportBlurb}</div>
@@ -903,75 +881,58 @@ function BillingTab({ t, invoices, estimates, company, setCompany }) {
         <button onClick={exportEstimates} style={{ width:"100%", background:"transparent", color:C.white, border:`2px solid ${C.green}`, borderRadius:8, padding:"10px 0", fontWeight:700, cursor:"pointer", fontSize:14 }}>{t.billing.exportEstimates}</button>
       </div>
 
-      {/* Google Review */}
+
       <div style={{ background:C.white, borderRadius:12, padding:16, marginBottom:16, border:`2px solid ${C.green}` }}>
         <div style={{ fontSize:15, fontWeight:800, color:C.black, marginBottom:4 }}>⭐ {t.billing.reviewTitle}</div>
         <div style={{ fontSize:12, color:C.grayDark, marginBottom:12, lineHeight:1.5 }}>{t.billing.reviewBlurb}</div>
-        <input value={form.googleReviewLink||""} onChange={e => setForm({ ...form, googleReviewLink:e.target.value })} placeholder={t.billing.reviewPlaceholder} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:13, boxSizing:"border-box" }} />
+        <input value={form.googleReviewLink||""} onChange={e=>setForm({...form,googleReviewLink:e.target.value})} placeholder={t.billing.reviewPlaceholder} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:13, boxSizing:"border-box" }} />
       </div>
 
-      {/* Payment Methods */}
       <div style={{ background:C.white, borderRadius:12, padding:16, marginBottom:16, border:`2px solid ${C.green}` }}>
         <div style={{ fontSize:15, fontWeight:800, color:C.black, marginBottom:4 }}>💳 {t.billing.paymentsTitle}</div>
         <div style={{ fontSize:12, color:C.grayDark, marginBottom:14 }}>{t.billing.paymentsBlurb}</div>
         {["check","cash","zelle","venmo","cashapp","creditCard"].map(key => {
-          const p = (form.payments && form.payments[key]) || { enabled:false, handle:"" };
-          const togglePayment = () => setForm({ ...form, payments:{ ...(form.payments||{}), [key]:{ ...p, enabled:!p.enabled } } });
-          const updateHandle = (val) => setForm({ ...form, payments:{ ...(form.payments||{}), [key]:{ ...p, handle:val } } });
+          const p=(form.payments&&form.payments[key])||{enabled:false,handle:""};
+          const togglePayment=()=>setForm({...form,payments:{...(form.payments||{}),[key]:{...p,enabled:!p.enabled}}});
+          const updateHandle=(val)=>setForm({...form,payments:{...(form.payments||{}),[key]:{...p,handle:val}}});
           return (
             <div key={key} style={{ marginBottom:8 }}>
               <label style={{ display:"flex", alignItems:"center", gap:8, cursor:"pointer", padding:"8px 10px", background:p.enabled?C.greenPale:C.gray, borderRadius:6 }}>
                 <input type="checkbox" checked={p.enabled} onChange={togglePayment} style={{ width:16, height:16, accentColor:C.green }} />
                 <span style={{ fontSize:13, fontWeight:600, color:C.text, flex:1 }}>{t.billing[key]}</span>
               </label>
-              {p.enabled && (key === "zelle" || key === "venmo" || key === "cashapp") && (
-                <input value={p.handle||""} onChange={e => updateHandle(e.target.value)} placeholder={t.billing.paymentHandle} style={{ width:"100%", padding:"8px 10px", borderRadius:6, border:`1px solid ${C.grayMid}`, fontSize:12, marginTop:6, boxSizing:"border-box" }} />
+              {p.enabled&&(key==="zelle"||key==="venmo"||key==="cashapp")&&(
+                <input value={p.handle||""} onChange={e=>updateHandle(e.target.value)} placeholder={t.billing.paymentHandle} style={{ width:"100%", padding:"8px 10px", borderRadius:6, border:`1px solid ${C.grayMid}`, fontSize:12, marginTop:6, boxSizing:"border-box" }} />
               )}
             </div>
           );
         })}
       </div>
 
-      {/* Company Settings + Backup */}
       <div style={{ background:C.white, borderRadius:12, padding:16, marginBottom:16, border:`2px solid ${C.green}` }}>
         <div style={{ fontSize:15, fontWeight:800, color:C.black, marginBottom:4 }}>🏢 {t.billing.settings}</div>
         <div style={{ fontSize:12, color:C.grayDark, marginBottom:14 }}>This info appears on your invoices and estimates.</div>
         {[["companyName",t.billing.companyName],["ownerName",t.billing.ownerName],["phone",t.billing.phone],["email",t.billing.email],["address",t.billing.address],["license",t.billing.license]].map(([key,label]) => (
-          <input key={key} value={form[key]||""} onChange={e => setForm({ ...form, [key]:e.target.value })} placeholder={label} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:14, marginBottom:8, boxSizing:"border-box" }} />
+          <input key={key} value={form[key]||""} onChange={e=>setForm({...form,[key]:e.target.value})} placeholder={label} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:14, marginBottom:8, boxSizing:"border-box" }} />
         ))}
-        <button onClick={saveSettings} style={{ width:"100%", background:C.green, color:C.white, border:"none", borderRadius:8, padding:"11px 0", fontWeight:700, cursor:"pointer", marginTop:6, marginBottom:8 }}>{t.billing.saveSettings}</button>
-        {showSaved && <div style={{ textAlign:"center", color:C.green, fontWeight:700, marginBottom:8, fontSize:13 }}>✓ {t.billing.saved}</div>}
+        <button onClick={saveSettings} style={{ width:"100%", background:C.green, color:C.white, border:"none", borderRadius:8, padding:"11px 0", fontWeight:700, cursor:"pointer", marginTop:6, marginBottom:16 }}>{t.billing.saveSettings}</button>
 
-        {/* Backup Data — under Company Settings */}
-        <div style={{ borderTop:`1px solid ${C.grayMid}`, paddingTop:14, marginTop:6 }}>
+        <div style={{ borderTop:`1px solid ${C.grayMid}`, paddingTop:16 }}>
           <div style={{ fontSize:14, fontWeight:800, color:C.black, marginBottom:4 }}>📧 {t.billing.backupTitle}</div>
           <div style={{ fontSize:12, color:C.grayDark, marginBottom:10, lineHeight:1.5 }}>{t.billing.backupBlurb}</div>
-          <button onClick={backupData} style={{ width:"100%", background:C.black, color:C.white, border:`2px solid ${C.green}`, borderRadius:8, padding:"11px 0", fontWeight:700, cursor:"pointer", fontSize:14 }}>{t.billing.backupBtn}</button>
+          <button onClick={backupData} style={{ width:"100%", background:C.green, color:C.white, border:"none", borderRadius:8, padding:"13px 0", fontWeight:800, cursor:"pointer", fontSize:15, boxShadow:"0 3px 10px rgba(45,106,31,0.4)" }}>{t.billing.backupBtn}</button>
         </div>
       </div>
 
-      {/* PIN Settings */}
       <div style={{ background:C.white, borderRadius:12, padding:16, marginBottom:16, border:`2px solid ${C.green}` }}>
         <div style={{ fontSize:15, fontWeight:800, color:C.black, marginBottom:4 }}>🔐 {t.billing.pinTitle}</div>
         <div style={{ fontSize:12, color:C.grayDark, marginBottom:14, lineHeight:1.5 }}>{t.billing.pinBlurb}</div>
-        <input
-          type="password" inputMode="numeric" maxLength={4}
-          value={pinForm.newPin} onChange={e => setPinForm({ ...pinForm, newPin:e.target.value.replace(/\D/g,"").slice(0,4) })}
-          placeholder={savedPin ? t.billing.pinChange : t.billing.pinNew}
-          style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:18, marginBottom:8, boxSizing:"border-box", textAlign:"center", letterSpacing:8 }}
-        />
-        <input
-          type="password" inputMode="numeric" maxLength={4}
-          value={pinForm.confirmPin} onChange={e => setPinForm({ ...pinForm, confirmPin:e.target.value.replace(/\D/g,"").slice(0,4) })}
-          placeholder={t.billing.pinConfirm}
-          style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:18, marginBottom:10, boxSizing:"border-box", textAlign:"center", letterSpacing:8 }}
-        />
-        <button onClick={savePin} style={{ width:"100%", background:C.green, color:C.white, border:"none", borderRadius:8, padding:"11px 0", fontWeight:700, cursor:"pointer", marginBottom:8 }}>{savedPin ? t.billing.pinChange : t.billing.pinSet}</button>
+        <input type="password" inputMode="numeric" maxLength={4} value={pinForm.newPin} onChange={e=>setPinForm({...pinForm,newPin:e.target.value.replace(/\D/g,"").slice(0,4)})} placeholder={savedPin?t.billing.pinChange:t.billing.pinNew} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:18, marginBottom:8, boxSizing:"border-box", textAlign:"center", letterSpacing:8 }} />
+        <input type="password" inputMode="numeric" maxLength={4} value={pinForm.confirmPin} onChange={e=>setPinForm({...pinForm,confirmPin:e.target.value.replace(/\D/g,"").slice(0,4)})} placeholder={t.billing.pinConfirm} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:18, marginBottom:10, boxSizing:"border-box", textAlign:"center", letterSpacing:8 }} />
+        <button onClick={savePin} style={{ width:"100%", background:C.green, color:C.white, border:"none", borderRadius:8, padding:"11px 0", fontWeight:700, cursor:"pointer", marginBottom:8 }}>{savedPin?t.billing.pinChange:t.billing.pinSet}</button>
         {savedPin && <button onClick={removePin} style={{ width:"100%", background:"transparent", color:C.red, border:`2px solid ${C.red}`, borderRadius:8, padding:"9px 0", fontWeight:700, cursor:"pointer", fontSize:13 }}>{t.billing.pinRemove}</button>}
-        {pinMsg && <div style={{ textAlign:"center", color:pinMsg === t.billing.pinSaved ? C.green : C.red, fontWeight:700, marginTop:8, fontSize:13 }}>{pinMsg}</div>}
       </div>
 
-      {/* Plan */}
       <div style={{ background:C.greenPale, borderRadius:12, padding:16 }}>
         <div style={{ fontSize:13, color:C.grayDark, marginBottom:4 }}>{t.billing.plan}</div>
         <div style={{ fontWeight:800, fontSize:16, color:C.green, marginBottom:2 }}>{t.billing.monthly}</div>
@@ -981,32 +942,31 @@ function BillingTab({ t, invoices, estimates, company, setCompany }) {
   );
 }
 
-// ─── MAIN APP ─────────────────────────────────────────────────────────────────
 export default function App() {
-  const [lang, setLang] = useState(() => load("cp_lang", "en"));
+  const [lang, setLang] = useState(() => load("cp_lang","en"));
   const [unlocked, setUnlocked] = useState(false);
   const [setupDone, setSetupDone] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
-  const [clients, setClients] = useState(() => load("cp_clients", []));
-  const [invoices, setInvoices] = useState(() => load("cp_invoices", []));
-  const [estimates, setEstimates] = useState(() => load("cp_estimates", []));
-  const [company, setCompany] = useState(() => load("cp_company", { companyName:"", ownerName:"", phone:"", email:"", address:"", license:"", payments:{ check:{enabled:false,handle:""}, cash:{enabled:false,handle:""}, zelle:{enabled:false,handle:""}, venmo:{enabled:false,handle:""}, cashapp:{enabled:false,handle:""}, creditCard:{enabled:false,handle:""} } }));
+  const [clients, setClients] = useState(() => load("cp_clients",[]));
+  const [invoices, setInvoices] = useState(() => load("cp_invoices",[]));
+  const [estimates, setEstimates] = useState(() => load("cp_estimates",[]));
+  const [company, setCompany] = useState(() => load("cp_company",{ companyName:"", ownerName:"", phone:"", email:"", address:"", license:"", payments:{ check:{enabled:false,handle:""}, cash:{enabled:false,handle:""}, zelle:{enabled:false,handle:""}, venmo:{enabled:false,handle:""}, cashapp:{enabled:false,handle:""}, creditCard:{enabled:false,handle:""} } }));
   const t = TRANSLATIONS[lang];
 
-  useEffect(() => { if (load("cp_unlocked", false)) setUnlocked(true); if (load("cp_setup_done", false)) setSetupDone(true); }, []);
-  useEffect(() => { save("cp_lang", lang); }, [lang]);
-  useEffect(() => { save("cp_clients", clients); }, [clients]);
-  useEffect(() => { save("cp_invoices", invoices); }, [invoices]);
-  useEffect(() => { save("cp_estimates", estimates); }, [estimates]);
-  useEffect(() => { save("cp_company", company); }, [company]);
+  useEffect(() => { if (load("cp_unlocked",false)) setUnlocked(true); if (load("cp_setup_done",false)) setSetupDone(true); }, []);
+  useEffect(() => { save("cp_lang",lang); }, [lang]);
+  useEffect(() => { save("cp_clients",clients); }, [clients]);
+  useEffect(() => { save("cp_invoices",invoices); }, [invoices]);
+  useEffect(() => { save("cp_estimates",estimates); }, [estimates]);
+  useEffect(() => { save("cp_company",company); }, [company]);
 
-  const handleUnlock = () => { setUnlocked(true); save("cp_unlocked", true); };
-  const handleSetupComplete = (info) => { setCompany(info); setSetupDone(true); save("cp_setup_done", true); };
+  const handleUnlock = () => { setUnlocked(true); save("cp_unlocked",true); };
+  const handleSetupComplete = (info) => { setCompany(info); setSetupDone(true); save("cp_setup_done",true); };
 
   if (!unlocked) return (
     <div>
       <div style={{ position:"fixed", top:12, right:16, zIndex:99 }}>
-        <button onClick={() => setLang(lang==="en"?"es":"en")} style={{ background:"rgba(255,255,255,0.2)", color:C.white, border:"1px solid rgba(255,255,255,0.4)", borderRadius:20, padding:"6px 14px", fontWeight:700, cursor:"pointer", fontSize:13 }}>{t.lang}</button>
+        <button onClick={()=>setLang(lang==="en"?"es":"en")} style={{ background:"rgba(255,255,255,0.2)", color:C.white, border:"1px solid rgba(255,255,255,0.4)", borderRadius:20, padding:"6px 14px", fontWeight:700, cursor:"pointer", fontSize:13 }}>{t.lang}</button>
       </div>
       <AccessGate onUnlock={handleUnlock} t={t} />
     </div>
@@ -1015,7 +975,6 @@ export default function App() {
   if (!setupDone) return <SetupScreen onComplete={handleSetupComplete} t={t} lang={lang} setLang={setLang} />;
 
   const tabIcons = ["🗺️","👥","📄","📋","💰"];
-
   const tabs = [
     <RouteTab t={t} clients={clients} key="route" />,
     <ClientsTab t={t} clients={clients} setClients={setClients} key="clients" />,
@@ -1025,25 +984,24 @@ export default function App() {
   ];
 
   return (
-    <div style={{ maxWidth:1100, margin:"0 auto", minHeight:"100vh", background:C.gray, fontFamily:"-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", paddingBottom:90 }}>
-      <div style={{ background:C.white, padding:0, position:"sticky", top:0, zIndex:10, borderBottom:`3px solid ${C.green}` }}>
-        <img src="/header.png" alt="Corte Pro" style={{ width:"100%", height:"auto", display:"block" }} />
-        <div style={{ background:C.black, padding:"6px 12px", display:"flex", justifyContent:"flex-end", alignItems:"center" }}>
-          <button onClick={() => setLang(lang==="en"?"es":"en")} style={{ background:C.green, color:C.white, border:`1px solid ${C.greenDark}`, borderRadius:20, padding:"5px 14px", fontWeight:700, cursor:"pointer", fontSize:12 }}>{t.lang}</button>
+    <ToastProvider>
+      <div style={{ maxWidth:1100, margin:"0 auto", minHeight:"100vh", background:C.gray, fontFamily:"-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", paddingBottom:90 }}>
+        <div style={{ background:C.white, padding:0, position:"sticky", top:0, zIndex:10, borderBottom:`3px solid ${C.green}` }}>
+          <img src="/header.png" alt="Corte Pro" style={{ width:"100%", height:"auto", display:"block" }} />
+          <div style={{ background:C.black, padding:"6px 12px", display:"flex", justifyContent:"flex-end", alignItems:"center" }}>
+            <button onClick={()=>setLang(lang==="en"?"es":"en")} style={{ background:C.green, color:C.white, border:`1px solid ${C.greenDark}`, borderRadius:20, padding:"5px 14px", fontWeight:700, cursor:"pointer", fontSize:12 }}>{t.lang}</button>
+          </div>
+        </div>
+        <div>{tabs[activeTab]}</div>
+        <div style={{ position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)", width:"100%", maxWidth:1100, background:C.black, borderTop:`3px solid ${C.green}`, display:"flex", zIndex:10 }}>
+          {t.tabs.map((tab,i) => (
+            <button key={tab} onClick={()=>setActiveTab(i)} style={{ flex:1, padding:"10px 0 8px", background:"none", border:"none", color:activeTab===i?C.green:"rgba(255,255,255,0.55)", fontWeight:activeTab===i?800:500, fontSize:10, cursor:"pointer", borderTop:activeTab===i?`3px solid ${C.green}`:"3px solid transparent", display:"flex", flexDirection:"column", alignItems:"center", gap:2 }}>
+              <span style={{ fontSize:26, lineHeight:1 }}>{tabIcons[i]}</span>
+              <span style={{ fontSize:10 }}>{tab}</span>
+            </button>
+          ))}
         </div>
       </div>
-
-      <div>{tabs[activeTab]}</div>
-
-      {/* Bottom Nav — bigger icons */}
-      <div style={{ position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)", width:"100%", maxWidth:1100, background:C.black, borderTop:`3px solid ${C.green}`, display:"flex", zIndex:10 }}>
-        {t.tabs.map((tab, i) => (
-          <button key={tab} onClick={() => setActiveTab(i)} style={{ flex:1, padding:"10px 0 8px", background:"none", border:"none", color:activeTab===i?C.green:"rgba(255,255,255,0.55)", fontWeight:activeTab===i?800:500, fontSize:10, cursor:"pointer", borderTop:activeTab===i?`3px solid ${C.green}`:"3px solid transparent", display:"flex", flexDirection:"column", alignItems:"center", gap:2 }}>
-            <span style={{ fontSize:26, lineHeight:1 }}>{tabIcons[i]}</span>
-            <span style={{ fontSize:10 }}>{tab}</span>
-          </button>
-        ))}
-      </div>
-    </div>
+    </ToastProvider>
   );
 }
