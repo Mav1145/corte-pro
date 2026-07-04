@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
+
 const SERVICES_EN = [
   "Weekly Lawn Mowing","Bi-Weekly Lawn Mowing","Lawn Edging","Aeration","Dethatching",
   "Sod Installation","Mulch Installation","Shrub Trimming","Hedge Trimming","Tree Planting",
@@ -45,6 +46,9 @@ const TRANSLATIONS = {
       importBlurb: "Upload a CSV file to add many clients at once. Download the template below, fill in your clients in Excel or Google Sheets, save as CSV, then upload it here.",
       importSuccess: "clients imported!", importError: "Could not read this file. Make sure it's a CSV file.",
       schedHelp: "Schedule: weekly, biweeklyA, biweeklyB, or oneTime. Days: comma-separated like Mon,Wed,Fri",
+      billingType: "Billing Type", perVisit: "Per Visit", monthly: "Monthly",
+      defaultService: "Default Service", defaultRate: "Default Rate ($)",
+      billingTypeLabel: "💵 Billing",
     },
     invoices: {
       title: "Invoices", create: "Create Invoice", client: "Select Client", service: "Service",
@@ -54,7 +58,7 @@ const TRANSLATIONS = {
       addLine: "+ Add Service Line", removeLine: "Remove", lineItems: "Service Lines",
       from: "From", to: "Bill To",
       setup: "Set up your company info in Settings to show your business name on invoices.",
-      invoiceNum: "Invoice #", textInv: "📱 Text", emailInv: "✉️ Email",
+      invoiceNum: "Invoice #", textInv: "📱 Text", emailInv: "✉️ Email", emailPDFInv: "📎 Email PDF",
       deleteInv: "Delete", confirmDelInv: "Delete this invoice?",
     },
     estimates: {
@@ -62,7 +66,7 @@ const TRANSLATIONS = {
       service: "Service Description", amount: "Estimated Amount ($)", notes: "Notes",
       save: "Save Estimate", convert: "Convert to Invoice", noEstimates: "No estimates yet.",
       approved: "Approved", pending: "Pending", convertConfirm: "Convert this estimate to an invoice?",
-      converted: "✓ Converted to invoice!", textEst: "📱 Text", emailEst: "✉️ Email",
+      converted: "✓ Converted to invoice!", textEst: "📱 Text", emailEst: "✉️ Email", emailPDFEst: "📎 Email PDF",
       deleteEst: "Delete", confirmDelEst: "Delete this estimate?",
     },
     billing: {
@@ -84,6 +88,7 @@ const TRANSLATIONS = {
       reviewBlurb: "Paste your Google Business review link here. Get it free at business.google.com → Get more reviews → Share review form.",
       reviewPlaceholder: "https://g.page/r/YOUR-CODE/review",
       reviewMissing: "No Google Review link set. Add it in Billing settings.",
+      monthlyTitle: "Monthly Invoices", monthlyBlurb: "Clients on monthly billing with visits logged this month.", generateAll: "Generate All Invoices", noMonthlyVisits: "No monthly visits this month.",
       backupTitle: "Backup Data",
       backupBlurb: "Email a backup of all your app data. Open your email app and tap Send to save your data.",
       backupBtn: "📧 Email Backup",
@@ -108,7 +113,7 @@ const TRANSLATIONS = {
     pdf: "🖨️ Print/PDF",
     lang: "Español",
     pinScreen: { title: "Owner Access", subtitle: "Enter your PIN to access Billing", placeholder: "Enter PIN", btn: "Unlock", error: "Incorrect PIN. Try again.", forgot: "Contact support to reset." },
-    toast: { clientSaved: "Client saved!", clientDeleted: "Client deleted.", importSuccess: "clients imported!", importError: "Could not read file. Make sure it's a CSV.", noScheduled: "No clients scheduled for today.", noData: "No data to export yet.", backupSent: "Backup email opened!", reviewMissing: "Add a Google Review link in Billing settings first.", converted: "✓ Converted to invoice!", invoiceDeleted: "Invoice deleted.", estimateDeleted: "Estimate deleted.", pinSaved: "PIN saved!", pinRemoved: "PIN removed.", pinError: "PINs do not match.", pinTooShort: "PIN must be 4 digits.", settingsSaved: "Settings saved!" },
+    toast: { clientSaved: "Client saved!", invoiceCreated: "Invoice created!", visitLogged: "Visit logged for monthly billing.", createInvoice: "Create invoice for", yes: "Yes", skip: "Skip", enterAmount: "Enter amount for", monthlyTitle: "Monthly Invoices", monthlyBlurb: "Clients on monthly billing with visits this month. Tap to generate invoice.", generateAll: "Generate All Invoices", noMonthlyVisits: "No monthly visits this month.", visitCount: "visit", visitsCount: "visits", clientDeleted: "Client deleted.", importSuccess: "clients imported!", importError: "Could not read file. Make sure it's a CSV.", noScheduled: "No clients scheduled for today.", noData: "No data to export yet.", backupSent: "Backup email opened!", reviewMissing: "Add a Google Review link in Billing settings first.", converted: "✓ Converted to invoice!", invoiceDeleted: "Invoice deleted.", estimateDeleted: "Estimate deleted.", pinSaved: "PIN saved!", pinRemoved: "PIN removed.", pinError: "PINs do not match.", pinTooShort: "PIN must be 4 digits.", settingsSaved: "Settings saved!" },
   },
   es: {
     appName: "Corte Pro",
@@ -137,6 +142,9 @@ const TRANSLATIONS = {
       importBlurb: "Sube un archivo CSV para agregar muchos clientes a la vez. Descarga la plantilla, llena tus clientes en Excel o Google Sheets, guarda como CSV, y súbelo aquí.",
       importSuccess: "¡clientes importados!", importError: "No se pudo leer este archivo. Asegúrate que sea un archivo CSV.",
       schedHelp: "Horario: weekly, biweeklyA, biweeklyB, o oneTime. Días: separados por comas como Lun,Mié,Vie",
+      billingType: "Tipo de Cobro", perVisit: "Por Visita", monthly: "Mensual",
+      defaultService: "Servicio por Defecto", defaultRate: "Tarifa por Defecto ($)",
+      billingTypeLabel: "💵 Cobro",
     },
     invoices: {
       title: "Facturas", create: "Crear Factura", client: "Seleccionar Cliente", service: "Servicio",
@@ -146,7 +154,7 @@ const TRANSLATIONS = {
       addLine: "+ Agregar Servicio", removeLine: "Quitar", lineItems: "Servicios",
       from: "De", to: "Para",
       setup: "Configura los datos de tu negocio en Ajustes para que aparezcan en tus facturas.",
-      invoiceNum: "Factura #", textInv: "📱 Mensaje", emailInv: "✉️ Correo",
+      invoiceNum: "Factura #", textInv: "📱 Mensaje", emailInv: "✉️ Correo", emailPDFInv: "📎 Email PDF",
       deleteInv: "Eliminar", confirmDelInv: "¿Eliminar esta factura?",
     },
     estimates: {
@@ -154,7 +162,7 @@ const TRANSLATIONS = {
       service: "Descripción del Servicio", amount: "Cantidad Estimada ($)", notes: "Notas",
       save: "Guardar Estimado", convert: "Convertir a Factura", noEstimates: "No hay estimados.",
       approved: "Aprobado", pending: "Pendiente", convertConfirm: "¿Convertir este estimado a factura?",
-      converted: "✓ ¡Convertido a factura!", textEst: "📱 Mensaje", emailEst: "✉️ Correo",
+      converted: "✓ ¡Convertido a factura!", textEst: "📱 Mensaje", emailEst: "✉️ Correo", emailPDFEst: "📎 Email PDF",
       deleteEst: "Eliminar", confirmDelEst: "¿Eliminar este estimado?",
     },
     billing: {
@@ -176,6 +184,7 @@ const TRANSLATIONS = {
       reviewBlurb: "Pega aquí el link de reseñas de tu Negocio en Google.",
       reviewPlaceholder: "https://g.page/r/TU-CODIGO/review",
       reviewMissing: "No hay link de reseña. Agrégalo en Facturación.",
+      monthlyTitle: "Facturas Mensuales", monthlyBlurb: "Clientes con cobro mensual con visitas registradas este mes.", generateAll: "Generar Todas las Facturas", noMonthlyVisits: "No hay visitas mensuales este mes.",
       backupTitle: "Respaldar Datos",
       backupBlurb: "Envía un respaldo de todos tus datos por correo. Abre tu correo y toca Enviar para guardar tus datos.",
       backupBtn: "📧 Respaldar por Correo",
@@ -199,7 +208,7 @@ const TRANSLATIONS = {
     pdf: "🖨️ Imprimir/PDF",
     lang: "English",
     pinScreen: { title: "Acceso del Dueño", subtitle: "Ingresa tu PIN para acceder a Facturación", placeholder: "Ingresa PIN", btn: "Desbloquear", error: "PIN incorrecto. Intenta de nuevo.", forgot: "Contacta soporte para restablecer." },
-    toast: { clientSaved: "¡Cliente guardado!", clientDeleted: "Cliente eliminado.", importSuccess: "¡clientes importados!", importError: "No se pudo leer el archivo. Asegúrate que sea CSV.", noScheduled: "No hay clientes programados para hoy.", noData: "No hay datos para exportar.", backupSent: "¡Correo de respaldo abierto!", reviewMissing: "Agrega un link de reseña de Google en Facturación primero.", converted: "✓ ¡Convertido a factura!", invoiceDeleted: "Factura eliminada.", estimateDeleted: "Estimado eliminado.", pinSaved: "¡PIN guardado!", pinRemoved: "PIN eliminado.", pinError: "Los PINs no coinciden.", pinTooShort: "El PIN debe tener 4 dígitos.", settingsSaved: "¡Información guardada!" },
+    toast: { clientSaved: "¡Cliente guardado!", invoiceCreated: "¡Factura creada!", visitLogged: "Visita registrada para cobro mensual.", createInvoice: "¿Crear factura para", yes: "Sí", skip: "Saltar", enterAmount: "Ingresa monto para", monthlyTitle: "Facturas Mensuales", monthlyBlurb: "Clientes con cobro mensual que tienen visitas este mes. Toca para generar factura.", generateAll: "Generar Todas las Facturas", noMonthlyVisits: "No hay visitas mensuales este mes.", visitCount: "visita", visitsCount: "visitas", clientDeleted: "Cliente eliminado.", importSuccess: "¡clientes importados!", importError: "No se pudo leer el archivo. Asegúrate que sea CSV.", noScheduled: "No hay clientes programados para hoy.", noData: "No hay datos para exportar.", backupSent: "¡Correo de respaldo abierto!", reviewMissing: "Agrega un link de reseña de Google en Facturación primero.", converted: "✓ ¡Convertido a factura!", invoiceDeleted: "Factura eliminada.", estimateDeleted: "Estimado eliminado.", pinSaved: "¡PIN guardado!", pinRemoved: "PIN eliminado.", pinError: "Los PINs no coinciden.", pinTooShort: "El PIN debe tener 4 dígitos.", settingsSaved: "¡Información guardada!" },
   },
 };
 
@@ -224,17 +233,98 @@ const formatDate = (iso) => {
   return `${monthNum}/${dayNum}/${y}`;
 };
 
+const LINE = "────────────────────";
+
 const formatInvoiceText = (inv, company, t) => {
+  const payments = company.payments || {};
+  const enabledPayments = Object.entries(payments).filter(([k,v]) => v && v.enabled);
   let text = "";
-  if (company.companyName) text += `${company.companyName}\n`;
-  if (company.ownerName) text += `${company.ownerName}\n`;
-  if (company.phone) text += `${company.phone}\n`;
-  text += `\n${t.invoices.invoiceNum}: ${inv.id}\n${t.invoices.date}: ${formatDate(inv.date)}\n\n`;
+  text += LINE + "\n";
+  if (company.companyName) text += ` ${company.companyName.toUpperCase()}\n`;
+  text += LINE + "\n";
+  text += `${t.invoices.invoiceNum} ${inv.id}\n`;
+  text += `${t.invoices.date}: ${formatDate(inv.date)}\n\n`;
   text += `${t.invoices.to}: ${inv.client}\n\n`;
-  if (inv.lines) { inv.lines.forEach(l => { text += `• ${l.service} (${formatDate(l.date)}) — $${parseFloat(l.amount).toFixed(2)}\n`; }); }
+  text += `SERVICES\n`;
+  if (inv.lines) { inv.lines.forEach(l => { text += `• ${l.service} — $${parseFloat(l.amount).toFixed(2)}\n`; }); }
   text += `\n${t.invoices.total}: $${parseFloat(inv.total).toFixed(2)}\n`;
-  text += `${t.invoices.paid}/${t.invoices.pending}: ${inv.status}\n`;
+  text += `${inv.status === "paid" ? t.invoices.paid.toUpperCase() : t.invoices.pending.toUpperCase()}\n`;
+  if (enabledPayments.length > 0) {
+    text += `\nPAY VIA:\n`;
+    enabledPayments.forEach(([k,v]) => { text += `  ${t.billing[k]}${v.handle ? ` — ${v.handle}` : ""}\n`; });
+  }
+  if (company.phone) text += `\n📞 ${company.phone}\n`;
+  text += `\nThank you for your business!\n`;
+  text += LINE + "\n";
   return text;
+};
+
+const formatEstText = (est, company, t) => {
+  const payments = company.payments || {};
+  const enabledPayments = Object.entries(payments).filter(([k,v]) => v && v.enabled);
+  let text = "";
+  text += LINE + "\n";
+  if (company.companyName) text += ` ${company.companyName.toUpperCase()}\n`;
+  text += LINE + "\n";
+  text += `${t.estimates.title.toUpperCase()}\n`;
+  text += `${t.invoices.date}: ${formatDate(est.date)}\n\n`;
+  text += `${t.invoices.to}: ${est.client}\n\n`;
+  text += `SERVICES\n`;
+  if (est.lines) { est.lines.forEach(l => { text += `• ${l.service} — $${parseFloat(l.amount).toFixed(2)}\n`; }); }
+  text += `\n${t.invoices.total}: $${parseFloat(est.total||est.amount||0).toFixed(2)}\n`;
+  if (est.notes) text += `\nNotes: ${est.notes}\n`;
+  if (enabledPayments.length > 0) {
+    text += `\nPAY VIA:\n`;
+    enabledPayments.forEach(([k,v]) => { text += `  ${t.billing[k]}${v.handle ? ` — ${v.handle}` : ""}\n`; });
+  }
+  if (company.phone) text += `\n📞 ${company.phone}\n`;
+  text += `\nThank you for your business!\n`;
+  text += LINE + "\n";
+  return text;
+};
+
+// jsPDF generator — loads library dynamically then creates PDF
+const generatePDF = (htmlContent, filename) => {
+  const doGenerate = () => {
+    try {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ orientation:"portrait", unit:"pt", format:"letter" });
+      doc.html(htmlContent, {
+        callback: (pdf) => { pdf.save(filename); },
+        x: 30, y: 30, width: 550, windowWidth: 800,
+      });
+    } catch(e) {
+      printDoc(htmlContent);
+    }
+  };
+  if (window.jspdf) {
+    doGenerate();
+  } else {
+    const script = document.createElement("script");
+    script.src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js";
+    script.onload = doGenerate;
+    script.onerror = () => printDoc(htmlContent);
+    document.head.appendChild(script);
+  }
+};
+
+const emailPDF = (inv, company, t) => {
+  const payments = company.payments || {};
+  const enabledPayments = Object.entries(payments).filter(([k,v]) => v && v.enabled);
+  const paymentsHtml = enabledPayments.length > 0 ? `<div style="margin-top:20px;padding:12px;background:#f0ebd8;border-radius:6px;"><strong style="color:#2D6A1F;">Pay Via:</strong><br>${enabledPayments.map(([k,v])=>`${t.billing[k]}${v.handle?` — ${v.handle}`:""}`).join("<br>")}</div>` : "";
+  const linesHtml = (inv.lines||[]).map(l=>`<tr><td style="padding:8px;border-bottom:1px solid #eee;">${l.service||""}</td><td style="padding:8px;border-bottom:1px solid #eee;">${formatDate(l.date)}</td><td style="padding:8px;border-bottom:1px solid #eee;text-align:right;font-weight:bold;">$${parseFloat(l.amount||0).toFixed(2)}</td></tr>`).join("");
+  const html = `<div style="font-family:Arial,sans-serif;max-width:700px;color:#1a1a1a;"><div style="border-bottom:3px solid #2D6A1F;padding-bottom:16px;margin-bottom:20px;display:flex;justify-content:space-between;"><div><div style="font-size:22px;font-weight:800;color:#2D6A1F;">${company.companyName||""}</div>${company.ownerName?`<div style="color:#666;font-size:13px;">${company.ownerName}</div>`:""}${company.phone?`<div style="color:#666;font-size:13px;">📞 ${company.phone}</div>`:""}${company.email?`<div style="color:#666;font-size:13px;">✉️ ${company.email}</div>`:""}</div><div style="text-align:right;"><div style="font-size:20px;font-weight:800;">INVOICE</div><div style="color:#666;font-size:13px;">#${inv.id}</div><div style="color:#666;font-size:13px;">${formatDate(inv.date)}</div></div></div><div style="margin-bottom:16px;"><div style="font-size:11px;color:#666;font-weight:bold;">BILL TO:</div><div style="font-size:16px;font-weight:bold;">${inv.client}</div></div><table style="width:100%;border-collapse:collapse;margin-bottom:16px;"><thead><tr style="background:#2D6A1F;color:white;"><th style="padding:8px;text-align:left;">Service</th><th style="padding:8px;text-align:left;">Date</th><th style="padding:8px;text-align:right;">Amount</th></tr></thead><tbody>${linesHtml}</tbody></table><div style="text-align:right;font-size:18px;font-weight:800;color:#2D6A1F;padding:12px;background:#e8f5e3;border-radius:6px;">Total: $${parseFloat(inv.total||0).toFixed(2)}</div><div style="margin-top:8px;text-align:right;font-weight:600;color:${inv.status==="paid"?"#2D6A1F":"#e67e22"};">${inv.status==="paid"?"✓ PAID":"⏳ PENDING"}</div>${paymentsHtml}</div>`;
+  generatePDF(html, `invoice-${inv.id}-${inv.client.replace(/\s+/g,"-")}.pdf`);
+};
+
+const emailEstPDF = (est, company, t) => {
+  const payments = company.payments || {};
+  const enabledPayments = Object.entries(payments).filter(([k,v]) => v && v.enabled);
+  const paymentsHtml = enabledPayments.length > 0 ? `<div style="margin-top:20px;padding:12px;background:#f0ebd8;border-radius:6px;"><strong style="color:#2D6A1F;">Pay Via:</strong><br>${enabledPayments.map(([k,v])=>`${t.billing[k]}${v.handle?` — ${v.handle}`:""}`).join("<br>")}</div>` : "";
+  const linesHtml = (est.lines||[]).map(l=>`<tr><td style="padding:8px;border-bottom:1px solid #eee;">${l.service||""}</td><td style="padding:8px;border-bottom:1px solid #eee;text-align:right;font-weight:bold;">$${parseFloat(l.amount||0).toFixed(2)}</td></tr>`).join("");
+  const notesHtml = est.notes?`<div style="margin-top:16px;padding:12px;background:#f8f8f8;border-radius:6px;font-style:italic;color:#555;">Notes: ${est.notes}</div>`:"";
+  const html = `<div style="font-family:Arial,sans-serif;max-width:700px;color:#1a1a1a;"><div style="border-bottom:3px solid #2D6A1F;padding-bottom:16px;margin-bottom:20px;display:flex;justify-content:space-between;"><div><div style="font-size:22px;font-weight:800;color:#2D6A1F;">${company.companyName||""}</div>${company.ownerName?`<div style="color:#666;font-size:13px;">${company.ownerName}</div>`:""}${company.phone?`<div style="color:#666;font-size:13px;">📞 ${company.phone}</div>`:""}${company.email?`<div style="color:#666;font-size:13px;">✉️ ${company.email}</div>`:""}</div><div style="text-align:right;"><div style="font-size:20px;font-weight:800;">ESTIMATE</div><div style="color:#666;font-size:13px;">#${est.id}</div><div style="color:#666;font-size:13px;">${formatDate(est.date)}</div></div></div><div style="margin-bottom:16px;"><div style="font-size:11px;color:#666;font-weight:bold;">PREPARED FOR:</div><div style="font-size:16px;font-weight:bold;">${est.client}</div></div><table style="width:100%;border-collapse:collapse;margin-bottom:16px;"><thead><tr style="background:#2D6A1F;color:white;"><th style="padding:8px;text-align:left;">Service</th><th style="padding:8px;text-align:right;">Amount</th></tr></thead><tbody>${linesHtml}</tbody></table><div style="text-align:right;font-size:18px;font-weight:800;color:#2D6A1F;padding:12px;background:#e8f5e3;border-radius:6px;">Total: $${parseFloat(est.total||est.amount||0).toFixed(2)}</div>${notesHtml}${paymentsHtml}</div>`;
+  generatePDF(html, `estimate-${est.id}-${est.client.replace(/\s+/g,"-")}.pdf`);
 };
 
 const sendSMS = (phone, body) => { const cleanPhone = (phone || "").replace(/[^\d+]/g, ""); window.location.href = `sms:${cleanPhone}?body=${encodeURIComponent(body)}`; };
@@ -396,13 +486,15 @@ function AccessGate({ onUnlock, t }) {
   );
 }
 
-function RouteTab({ t, clients }) {
+function RouteTab({ t, clients, invoices, setInvoices, company }) {
   const showToast = useToast();
   const [activeCrew, setActiveCrew] = useState(() => load("cp_active_crew", 1));
   const crewKey = (n) => `cp_stops_crew${n}`;
   const [stops, setStops] = useState(() => load(crewKey(load("cp_active_crew", 1)), []));
   const [form, setForm] = useState({ client:"", address:"" });
   const [showForm, setShowForm] = useState(false);
+  const [invoicePrompt, setInvoicePrompt] = useState(null); // { client, stop }
+  const [promptAmount, setPromptAmount] = useState("");
 
   useEffect(() => { save(crewKey(activeCrew), stops); }, [stops, activeCrew]);
 
@@ -479,7 +571,28 @@ function RouteTab({ t, clients }) {
         ? <div style={{ textAlign:"center", color:C.grayDark, padding:"40px 16px", fontSize:14 }}>{t.route.noStops}</div>
         : stops.map((s,i) => (
           <div key={s.id} style={{ background:s.done?C.grayMid:C.white, borderRadius:12, padding:14, marginBottom:10, border:`1px solid ${C.grayMid}`, display:"flex", alignItems:"center", gap:12 }}>
-            <input type="checkbox" checked={s.done} onChange={() => setStops(stops.map(x=>x.id===s.id?{...x,done:!x.done}:x))} style={{ width:20, height:20, accentColor:C.green }} />
+            <input type="checkbox" checked={s.done} onChange={() => {
+              const nowDone = !s.done;
+              setStops(stops.map(x=>x.id===s.id?{...x,done:nowDone}:x));
+              if (nowDone && s.client) {
+                const clientData = clients.find(c=>c.name===s.client);
+                if (clientData) {
+                  if (clientData.billingType==="monthly") {
+                    // Log visit for monthly billing
+                    const monthKey = "cp_monthly_visits";
+                    const visits = load(monthKey, []);
+                    const today = new Date().toISOString().split("T")[0];
+                    visits.push({ date:today, client:s.client, address:s.address, service:clientData.defaultService||"", rate:clientData.defaultRate||"", clientId:clientData.id });
+                    save(monthKey, visits);
+                    showToast(t.toast.visitLogged, "info");
+                  } else {
+                    // Per visit — prompt for invoice
+                    setPromptAmount(clientData.defaultRate||"");
+                    setInvoicePrompt({ client:clientData, stop:s });
+                  }
+                }
+              }
+            }} style={{ width:20, height:20, accentColor:C.green }} />
             <div style={{ flex:1 }}>
               <div style={{ fontWeight:700, color:s.done?C.grayDark:C.text, textDecoration:s.done?"line-through":"none", fontSize:14 }}>{t.route.stop} {i+1}{s.client?` — ${s.client}`:""}</div>
               <div style={{ color:C.grayDark, fontSize:13 }}>{s.address}</div>
@@ -489,6 +602,39 @@ function RouteTab({ t, clients }) {
           </div>
         ))
       }
+      {/* Invoice Prompt Modal */}
+      {invoicePrompt && (
+        <div style={{ position:"fixed", top:0, left:0, right:0, bottom:0, background:"rgba(0,0,0,0.6)", zIndex:999, display:"flex", alignItems:"center", justifyContent:"center", padding:24 }}>
+          <div style={{ background:C.white, borderRadius:16, padding:24, width:"100%", maxWidth:360, boxShadow:"0 8px 32px rgba(0,0,0,0.3)" }}>
+            <div style={{ fontSize:16, fontWeight:800, color:C.black, marginBottom:6 }}>💵 {t.toast.createInvoice}</div>
+            <div style={{ fontSize:18, fontWeight:800, color:C.green, marginBottom:16 }}>{invoicePrompt.client.name}</div>
+            {invoicePrompt.client.defaultService && <div style={{ fontSize:13, color:C.grayDark, marginBottom:10 }}>📋 {invoicePrompt.client.defaultService}</div>}
+            <input
+              value={promptAmount} onChange={e=>setPromptAmount(e.target.value.replace(/[^0-9.]/g,""))}
+              placeholder="Amount ($)" type="text" inputMode="decimal"
+              style={{ width:"100%", padding:"12px", borderRadius:8, border:`2px solid ${C.green}`, fontSize:18, fontWeight:700, marginBottom:16, boxSizing:"border-box", textAlign:"center" }}
+            />
+            <div style={{ display:"flex", gap:8 }}>
+              <button onClick={() => {
+                if (promptAmount && parseFloat(promptAmount) > 0) {
+                  const newInv = {
+                    id: Date.now(),
+                    client: invoicePrompt.client.name,
+                    lines: [{ id:Date.now(), service:invoicePrompt.client.defaultService||"Service", date:new Date().toISOString().split("T")[0], amount:promptAmount }],
+                    total: parseFloat(promptAmount),
+                    status: "pending",
+                    date: new Date().toISOString().split("T")[0],
+                  };
+                  setInvoices([...invoices, newInv]);
+                  showToast(t.toast.invoiceCreated, "success");
+                }
+                setInvoicePrompt(null); setPromptAmount("");
+              }} style={{ flex:1, background:C.green, color:C.white, border:"none", borderRadius:8, padding:"12px 0", fontWeight:800, fontSize:15, cursor:"pointer" }}>{t.toast.yes}</button>
+              <button onClick={() => { setInvoicePrompt(null); setPromptAmount(""); }} style={{ flex:1, background:C.white, color:C.grayDark, border:`2px solid ${C.grayMid}`, borderRadius:8, padding:"12px 0", fontWeight:700, fontSize:15, cursor:"pointer" }}>{t.toast.skip}</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -497,16 +643,16 @@ function ClientsTab({ t, clients, setClients }) {
   const showToast = useToast();
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState(null);
-  const [form, setForm] = useState({ name:"", phone:"", address:"", email:"", scheduleType:"oneTime", days:[] });
+  const [form, setForm] = useState({ name:"", phone:"", address:"", email:"", scheduleType:"oneTime", days:[], billingType:"perVisit", defaultService:"", defaultRate:"" });
   const fileInputRef = useRef(null);
-  const openAdd = () => { setEditingId(null); setForm({ name:"", phone:"", address:"", email:"", scheduleType:"oneTime", days:[] }); setShowForm(true); };
-  const openEdit = (c) => { setEditingId(c.id); setForm({ name:c.name, phone:c.phone, address:c.address, email:c.email, scheduleType:c.scheduleType||"oneTime", days:c.days||[] }); setShowForm(true); };
+  const openAdd = () => { setEditingId(null); setForm({ name:"", phone:"", address:"", email:"", scheduleType:"oneTime", days:[], billingType:"perVisit", defaultService:"", defaultRate:"" }); setShowForm(true); };
+  const openEdit = (c) => { setEditingId(c.id); setForm({ name:c.name, phone:c.phone, address:c.address, email:c.email, scheduleType:c.scheduleType||"oneTime", days:c.days||[], billingType:c.billingType||"perVisit", defaultService:c.defaultService||"", defaultRate:c.defaultRate||"" }); setShowForm(true); };
   const toggleDay = (dayIdx) => { const newDays = form.days.includes(dayIdx) ? form.days.filter(d=>d!==dayIdx) : [...form.days,dayIdx].sort(); setForm({ ...form, days:newDays }); };
   const saveClient = () => {
     if (!form.name) return;
     if (editingId) { setClients(clients.map(c=>c.id===editingId?{...form,id:editingId}:c)); }
     else { setClients([...clients, { ...form, id:Date.now() }]); }
-    setForm({ name:"", phone:"", address:"", email:"", scheduleType:"oneTime", days:[] }); setEditingId(null); setShowForm(false);
+    setForm({ name:"", phone:"", address:"", email:"", scheduleType:"oneTime", days:[], billingType:"perVisit", defaultService:"", defaultRate:"" }); setEditingId(null); setShowForm(false);
     showToast(t.toast.clientSaved, "success");
   };
   const deleteClient = (id) => { setClients(clients.filter(c=>c.id!==id)); showToast(t.toast.clientDeleted, "info"); };
@@ -596,6 +742,19 @@ function ClientsTab({ t, clients, setClients }) {
               ))}
             </div>
           )}
+          <div style={{ fontSize:13, fontWeight:700, color:C.black, marginBottom:8, marginTop:6 }}>{t.clients.billingTypeLabel}</div>
+          <div style={{ display:"flex", gap:8, marginBottom:10 }}>
+            {["perVisit","monthly"].map(bt => (
+              <button key={bt} onClick={()=>setForm({...form,billingType:bt})} style={{ flex:1, padding:"9px 0", borderRadius:8, border:`2px solid ${form.billingType===bt?C.green:C.grayMid}`, background:form.billingType===bt?C.green:C.white, color:form.billingType===bt?C.white:C.grayDark, fontWeight:700, fontSize:13, cursor:"pointer" }}>
+                {bt==="perVisit"?t.clients.perVisit:t.clients.monthly}
+              </button>
+            ))}
+          </div>
+          <select value={form.defaultService} onChange={e=>setForm({...form,defaultService:e.target.value})} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:14, marginBottom:8, boxSizing:"border-box" }}>
+            <option value="">-- {t.clients.defaultService} --</option>
+            {t.invoices.services.map(s=><option key={s} value={s}>{s}</option>)}
+          </select>
+          <input value={form.defaultRate} onChange={e=>setForm({...form,defaultRate:e.target.value.replace(/[^0-9.]/g,"")})} placeholder={t.clients.defaultRate} type="text" inputMode="decimal" style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:14, marginBottom:10, boxSizing:"border-box" }} />
           <button onClick={saveClient} style={{ width:"100%", background:C.green, color:C.white, border:"none", borderRadius:8, padding:"11px 0", fontWeight:700, cursor:"pointer" }}>{editingId?t.clients.update:t.clients.save}</button>
         </div>
       )}
@@ -606,7 +765,8 @@ function ClientsTab({ t, clients, setClients }) {
             <div style={{ fontWeight:700, fontSize:15, color:C.text, marginBottom:2 }}>{c.name}</div>
             <div style={{ color:C.grayDark, fontSize:13, marginBottom:2 }}>{c.phone}</div>
             <div style={{ color:C.grayDark, fontSize:13, marginBottom:scheduleLabel(c)?4:8 }}>{c.address}</div>
-            {scheduleLabel(c) && <div style={{ display:"inline-block", background:C.greenPale, color:C.green, padding:"3px 8px", borderRadius:6, fontSize:11, fontWeight:700, marginBottom:8 }}>📅 {scheduleLabel(c)}</div>}
+            {scheduleLabel(c) && <div style={{ display:"inline-block", background:C.greenPale, color:C.green, padding:"3px 8px", borderRadius:6, fontSize:11, fontWeight:700, marginBottom:4, marginRight:4 }}>📅 {scheduleLabel(c)}</div>}
+            {c.billingType && <div style={{ display:"inline-block", background:c.billingType==="monthly"?"#fff3cd":"#e8f5e3", color:c.billingType==="monthly"?C.orange:C.green, padding:"3px 8px", borderRadius:6, fontSize:11, fontWeight:700, marginBottom:8 }}>💵 {c.billingType==="monthly"?t.clients.monthly:t.clients.perVisit}{c.defaultRate?` — $${c.defaultRate}`:""}</div>}
             <div style={{ display:"flex", gap:8, flexWrap:"wrap" }}>
               {c.phone && <a href={`tel:${c.phone}`} style={{ background:C.green, color:C.white, borderRadius:6, padding:"6px 12px", fontSize:12, fontWeight:600, textDecoration:"none" }}>{t.clients.call}</a>}
               {c.address && <a href={`https://maps.google.com/?q=${encodeURIComponent(c.address)}`} target="_blank" rel="noreferrer" style={{ background:C.blue, color:C.white, borderRadius:6, padding:"6px 12px", fontSize:12, fontWeight:600, textDecoration:"none" }}>{t.clients.directions}</a>}
@@ -711,6 +871,7 @@ function InvoicesTab({ t, clients, invoices, setInvoices, company }) {
               <button onClick={()=>printInvoice(inv,company,t)} style={{ background:C.black, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.pdf}</button>
               <button onClick={()=>{ const client=clients.find(c=>c.name===inv.client); sendSMS(client?client.phone:"",formatInvoiceText(inv,company,t)); }} style={{ background:C.blue, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.textInv}</button>
               <button onClick={()=>{ const client=clients.find(c=>c.name===inv.client); sendEmail(client?client.email:"",`${t.invoices.invoiceNum} ${inv.id} — ${company.companyName||""}`,formatInvoiceText(inv,company,t)); }} style={{ background:C.orange, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.emailInv}</button>
+              <button onClick={()=>emailPDF(inv,company,t)} style={{ background:C.green, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.emailPDFInv}</button>
               <button onClick={()=>{ if (!company.googleReviewLink) { showToast(t.toast.reviewMissing,"warning"); return; } window.open(company.googleReviewLink,"_blank"); }} style={{ background:C.black, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>⭐ {t.invoices.review}</button>
               <button onClick={()=>{ setInvoices(invoices.filter(x=>x.id!==inv.id)); showToast(t.toast.invoiceDeleted,"info"); }} style={{ background:C.red, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.deleteInv}</button>
             </div>
@@ -742,17 +903,7 @@ function EstimatesTab({ t, clients, estimates, setEstimates, invoices, setInvoic
     setEstimates(estimates.map(e=>e.id===est.id?{...e,status:"approved"}:e));
     showToast(t.toast.converted, "success");
   };
-  const formatEstText = (est) => {
-    let text="";
-    if (company.companyName) text+=`${company.companyName}\n`;
-    if (company.ownerName) text+=`${company.ownerName}\n`;
-    if (company.phone) text+=`${company.phone}\n\n`;
-    text+=`${t.estimates.title}\n${t.invoices.date}: ${formatDate(est.date)}\n\n${t.invoices.to}: ${est.client}\n\n`;
-    if (est.lines) est.lines.forEach(l=>{ text+=`• ${l.service} — $${parseFloat(l.amount).toFixed(2)}\n`; });
-    text+=`\n${t.invoices.total}: $${parseFloat(est.total||est.amount||0).toFixed(2)}\n`;
-    if (est.notes) text+=`\n${t.estimates.notes}: ${est.notes}\n`;
-    return text;
-  };
+
   return (
     <div style={{ padding:16 }}>
       <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:16 }}>
@@ -801,8 +952,9 @@ function EstimatesTab({ t, clients, estimates, setEstimates, invoices, setInvoic
               <span style={{ background:est.status==="approved"?"#e8f5e3":"#fff3cd", color:est.status==="approved"?C.green:C.orange, borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600 }}>{est.status==="approved"?t.estimates.approved:t.estimates.pending}</span>
               {est.status!=="approved" && <button onClick={()=>convertToInvoice(est)} style={{ background:C.green, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.convert}</button>}
               <button onClick={()=>printEstimate(est,company,t)} style={{ background:C.black, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.pdf}</button>
-              <button onClick={()=>{ const client=clients.find(c=>c.name===est.client); sendSMS(client?client.phone:"",formatEstText(est)); }} style={{ background:C.blue, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.textEst}</button>
-              <button onClick={()=>{ const client=clients.find(c=>c.name===est.client); sendEmail(client?client.email:"",`${t.estimates.title} — ${company.companyName||""}`,formatEstText(est)); }} style={{ background:C.orange, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.emailEst}</button>
+              <button onClick={()=>{ const client=clients.find(c=>c.name===est.client); sendSMS(client?client.phone:"",formatEstText(est,company,t)); }} style={{ background:C.blue, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.textEst}</button>
+              <button onClick={()=>{ const client=clients.find(c=>c.name===est.client); sendEmail(client?client.email:"",`${t.estimates.title} — ${company.companyName||""}`,formatEstText(est,company,t)); }} style={{ background:C.orange, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.emailEst}</button>
+              <button onClick={()=>emailEstPDF(est,company,t)} style={{ background:C.green, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.emailPDFEst}</button>
               <button onClick={()=>{ setEstimates(estimates.filter(x=>x.id!==est.id)); showToast(t.toast.estimateDeleted,"info"); }} style={{ background:C.red, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.deleteEst}</button>
             </div>
           </div>
@@ -889,6 +1041,60 @@ function BillingTab({ t, invoices, estimates, company, setCompany }) {
         <button onClick={exportEstimates} style={{ width:"100%", background:"transparent", color:C.white, border:`2px solid ${C.green}`, borderRadius:8, padding:"10px 0", fontWeight:700, cursor:"pointer", fontSize:14 }}>{t.billing.exportEstimates}</button>
       </div>
 
+
+      {/* Monthly Invoices Section */}
+      {(() => {
+        const monthKey = "cp_monthly_visits";
+        const allVisits = load(monthKey, []);
+        const now = new Date();
+        const monthVisits = allVisits.filter(v => {
+          const d = new Date(v.date);
+          return d.getMonth()===now.getMonth() && d.getFullYear()===now.getFullYear();
+        });
+        // Group by client
+        const byClient = {};
+        monthVisits.forEach(v => {
+          if (!byClient[v.client]) byClient[v.client] = [];
+          byClient[v.client].push(v);
+        });
+        const clientNames = Object.keys(byClient);
+        const generateInvoice = (clientName) => {
+          const visits = byClient[clientName];
+          const lines = visits.map(v => ({ id:Date.now()+Math.random(), service:v.service||"Monthly Service", date:v.date, amount:v.rate||"0" }));
+          const total = lines.reduce((s,l)=>s+parseFloat(l.amount||0),0);
+          const newInv = { id:Date.now(), client:clientName, lines, total, status:"pending", date:new Date().toISOString().split("T")[0] };
+          setInvoices([...invoices, newInv]);
+          // Clear those visits
+          const remaining = allVisits.filter(v => !(v.client===clientName && new Date(v.date).getMonth()===now.getMonth() && new Date(v.date).getFullYear()===now.getFullYear()));
+          save(monthKey, remaining);
+        };
+        const generateAll = () => { clientNames.forEach(name => generateInvoice(name)); showToast(t.toast.invoiceCreated, "success"); };
+        return (
+          <div style={{ background:C.white, borderRadius:12, padding:16, marginBottom:16, border:`2px solid ${C.orange}` }}>
+            <div style={{ fontSize:15, fontWeight:800, color:C.black, marginBottom:4 }}>📅 {t.billing.monthlyTitle}</div>
+            <div style={{ fontSize:12, color:C.grayDark, marginBottom:14, lineHeight:1.5 }}>{t.billing.monthlyBlurb}</div>
+            {clientNames.length === 0
+              ? <div style={{ textAlign:"center", color:C.grayDark, fontSize:13, padding:"10px 0" }}>{t.billing.noMonthlyVisits}</div>
+              : <>
+                {clientNames.map(name => {
+                  const visits = byClient[name];
+                  const total = visits.reduce((s,v)=>s+parseFloat(v.rate||0),0);
+                  return (
+                    <div key={name} style={{ display:"flex", justifyContent:"space-between", alignItems:"center", padding:"10px 12px", background:C.gray, borderRadius:8, marginBottom:8 }}>
+                      <div>
+                        <div style={{ fontWeight:700, fontSize:14, color:C.text }}>{name}</div>
+                        <div style={{ fontSize:12, color:C.grayDark }}>{visits.length} {visits.length===1?t.toast.visitCount:t.toast.visitsCount} · ${total.toFixed(2)}</div>
+                      </div>
+                      <button onClick={()=>{ generateInvoice(name); showToast(t.toast.invoiceCreated,"success"); }} style={{ background:C.green, color:C.white, border:"none", borderRadius:6, padding:"8px 14px", fontWeight:700, fontSize:13, cursor:"pointer" }}>Invoice</button>
+                    </div>
+                  );
+                })}
+                {clientNames.length > 1 && <button onClick={generateAll} style={{ width:"100%", background:C.orange, color:C.white, border:"none", borderRadius:8, padding:"11px 0", fontWeight:800, cursor:"pointer", marginTop:4, fontSize:14 }}>{t.billing.generateAll}</button>}
+              </>
+            }
+          </div>
+        );
+      })()}
 
       <div style={{ background:C.white, borderRadius:12, padding:16, marginBottom:16, border:`2px solid ${C.green}` }}>
         <div style={{ fontSize:15, fontWeight:800, color:C.black, marginBottom:4 }}>⭐ {t.billing.reviewTitle}</div>
@@ -984,7 +1190,7 @@ export default function App() {
 
   const tabIcons = ["🗺️","👥","📄","📋","💰"];
   const tabs = [
-    <RouteTab t={t} clients={clients} key="route" />,
+    <RouteTab t={t} clients={clients} invoices={invoices} setInvoices={setInvoices} company={company} key="route" />,
     <ClientsTab t={t} clients={clients} setClients={setClients} key="clients" />,
     <InvoicesTab t={t} clients={clients} invoices={invoices} setInvoices={setInvoices} company={company} key="invoices" />,
     <EstimatesTab t={t} clients={clients} estimates={estimates} setEstimates={setEstimates} invoices={invoices} setInvoices={setInvoices} company={company} key="estimates" />,
