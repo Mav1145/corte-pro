@@ -332,7 +332,10 @@ const emailPDF = (inv, company, t, showToast, clients, onMissingInfo) => {
       company_name: company.companyName || "Corte Pro",
       invoice_num: String(inv.id),
       email_body: buildInvoiceHTML(inv, company, t),
+      message: buildInvoiceHTML(inv, company, t),
+      name: company.companyName || "Corte Pro",
       reply_to: company.email || "",
+      email: company.email || "",
     };
     return ejs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
   }).then(() => {
@@ -357,7 +360,10 @@ const emailEstPDF = (est, company, t, showToast, clients, onMissingInfo) => {
       company_name: company.companyName || "Corte Pro",
       invoice_num: "EST-" + String(est.id),
       email_body: buildEstimateHTML(est, company, t),
+      message: buildEstimateHTML(est, company, t),
+      name: company.companyName || "Corte Pro",
       reply_to: company.email || "",
+      email: company.email || "",
     };
     return ejs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
   }).then(() => {
