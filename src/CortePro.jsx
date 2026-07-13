@@ -1564,21 +1564,6 @@ export default function App() {
       window.history.replaceState({}, "", window.location.pathname);
     }
     // Check for approval link
-    const params = new URLSearchParams(window.location.search);
-    const approveId = params.get("approve");
-    if (approveId) {
-      const ests = load("cp_estimates", []);
-      const idx = ests.findIndex(e => "EST"+e.id === approveId || String(e.id) === approveId);
-      if (idx !== -1 && ests[idx].status === "pending") {
-        ests[idx].status = "approved";
-        save("cp_estimates", ests);
-        setApprovalScreen({ found:true, clientName:ests[idx].client, estId:approveId });
-      } else {
-        setApprovalScreen({ found:false, clientName:"", estId:approveId });
-      }
-      // Clean URL
-      window.history.replaceState({}, "", window.location.pathname);
-    }
   }, []);
   useEffect(() => { save("cp_lang",lang); }, [lang]);
   useEffect(() => { save("cp_clients",clients); }, [clients]);
