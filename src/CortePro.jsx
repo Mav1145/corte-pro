@@ -1214,10 +1214,9 @@ function InvoicesTab({ t, clients, setClients, invoices, setInvoices, company })
               {inv.status!=="paid" && <button onClick={()=>setInvoices(invoices.map(x=>x.id===inv.id?{...x,status:"paid"}:x))} style={{ background:C.green, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.markPaid}</button>}
               
               <button onClick={()=>{ const client=clients.find(c=>c.name===inv.client); sendSMS(client?client.phone:"",formatInvoiceText(inv,company,t)); }} style={{ background:C.blue, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.textInv}</button>
-              <button onClick={()=>emailPDF(inv,company,t,showToast,clients,handleMissingInfo)} style={{ background:C.green, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.emailPDFInv}</button>
               <button onClick={()=>{ if (!company.googleReviewLink) { showToast(t.toast.reviewMissing,"warning"); return; } window.open(company.googleReviewLink,"_blank"); }} style={{ background:C.black, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>⭐ {t.invoices.review}</button>
               {inv.status!=="paid" && <button onClick={()=>sendPaymentReminder(inv,company,t,showToast,clients,handleMissingInfo)} style={{ background:C.orange, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.remind}</button>}
-              <button onClick={()=>{ setAddOnPrompt(inv); setAddOnForm({ service:"", amount:"" }); }} style={{ background:C.blue, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.addLine2}</button>}
+              <button onClick={()=>{ setAddOnPrompt(inv); setAddOnForm({ service:"", amount:"" }); }} style={{ background:C.blue, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.addLine2}</button>
               <button onClick={()=>{ setInvoices(invoices.filter(x=>x.id!==inv.id)); showToast(t.toast.invoiceDeleted,"info"); }} style={{ background:C.red, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.deleteInv}</button>
             </div>
           </div>
@@ -1338,7 +1337,6 @@ function EstimatesTab({ t, clients, setClients, estimates, setEstimates, invoice
               {est.status!=="approved" && <button onClick={()=>convertToInvoice(est)} style={{ background:C.green, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.convert}</button>}
               
               <button onClick={()=>{ const client=clients.find(c=>c.name===est.client); sendSMS(client?client.phone:"",formatEstText(est,company,t)); }} style={{ background:C.blue, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.textEst}</button>
-              <button onClick={()=>emailEstPDF(est,company,t,showToast,clients,handleMissingInfo)} style={{ background:C.green, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.emailPDFEst}</button>
               <button onClick={()=>{ setEstimates(estimates.filter(x=>x.id!==est.id)); showToast(t.toast.estimateDeleted,"info"); }} style={{ background:C.red, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.deleteEst}</button>
             </div>
           </div>
