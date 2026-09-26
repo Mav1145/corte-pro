@@ -89,7 +89,7 @@ const TRANSLATIONS = {
       addLine: "+ Add Service Line", removeLine: "Remove", lineItems: "Service Lines",
       from: "From", to: "Bill To",
       setup: "Set up your company info in Settings to show your business name on invoices.",
-      invoiceNum: "Invoice #", textInv: "📱 Text", emailInv: "✉️ Email", emailPDFInv: "📧 Email Invoice",
+      invoiceNum: "Invoice #", textInv: "📱 Text", pdfInv: "📄 PDF", emailInv: "✉️ Email", emailPDFInv: "📧 Email Invoice",
       deleteInv: "Delete", confirmDelInv: "Delete this invoice?", addLine2: "+ Quick Add-On", remind: "🔔 Remind", reminderSent: "Payment reminder sent!", reminderSubject: "Payment Reminder",
     },
     estimates: {
@@ -97,7 +97,7 @@ const TRANSLATIONS = {
       service: "Service Description", amount: "Estimated Amount ($)", notes: "Notes",
       save: "Save Estimate", convert: "Convert to Invoice", noEstimates: "No estimates yet.",
       approved: "Approved", pending: "Pending", convertConfirm: "Convert this estimate to an invoice?",
-      converted: "✓ Converted to invoice!", textEst: "📱 Text", emailEst: "✉️ Email", approvalSent: "Estimate sent with approval link!", approveBtn: "✅ Mark Approved", approvalScreen: "Estimate Approved!", approvalMsg: "Thank you! We will be in touch shortly.", approvalNotFound: "Estimate not found or already approved.", emailPDFEst: "📧 Email Estimate",
+      converted: "✓ Converted to invoice!", textEst: "📱 Text", pdfEst: "📄 PDF", emailEst: "✉️ Email", approvalSent: "Estimate sent with approval link!", approveBtn: "✅ Mark Approved", approvalScreen: "Estimate Approved!", approvalMsg: "Thank you! We will be in touch shortly.", approvalNotFound: "Estimate not found or already approved.", emailPDFEst: "📧 Email Estimate",
       deleteEst: "Delete", confirmDelEst: "Delete this estimate?",
     },
     billing: {
@@ -187,7 +187,7 @@ const TRANSLATIONS = {
       addLine: "+ Agregar Servicio", removeLine: "Quitar", lineItems: "Servicios",
       from: "De", to: "Para",
       setup: "Configura los datos de tu negocio en Ajustes para que aparezcan en tus facturas.",
-      invoiceNum: "Factura #", textInv: "📱 Mensaje", emailInv: "✉️ Correo", emailPDFInv: "📧 Email Invoice",
+      invoiceNum: "Factura #", textInv: "📱 Mensaje", pdfInv: "📄 PDF", emailInv: "✉️ Correo", emailPDFInv: "📧 Email Invoice",
       deleteInv: "Eliminar", confirmDelInv: "¿Eliminar esta factura?", addLine2: "+ Agregar Extra", remind: "🔔 Recordar", reminderSent: "¡Recordatorio enviado!", reminderSubject: "Recordatorio de Pago",
     },
     estimates: {
@@ -195,7 +195,7 @@ const TRANSLATIONS = {
       service: "Descripción del Servicio", amount: "Cantidad Estimada ($)", notes: "Notas",
       save: "Guardar Estimado", convert: "Convertir a Factura", noEstimates: "No hay estimados.",
       approved: "Aprobado", pending: "Pendiente", convertConfirm: "¿Convertir este estimado a factura?",
-      converted: "✓ ¡Convertido a factura!", textEst: "📱 Mensaje", emailEst: "✉️ Correo", approvalSent: "¡Estimado enviado con link de aprobación!", approveBtn: "✅ Marcar Aprobado", approvalScreen: "¡Estimado Aprobado!", approvalMsg: "¡Gracias! Nos pondremos en contacto pronto.", approvalNotFound: "Estimado no encontrado o ya aprobado.", emailPDFEst: "📧 Email Estimate",
+      converted: "✓ ¡Convertido a factura!", textEst: "📱 Mensaje", pdfEst: "📄 PDF", emailEst: "✉️ Correo", approvalSent: "¡Estimado enviado con link de aprobación!", approveBtn: "✅ Marcar Aprobado", approvalScreen: "¡Estimado Aprobado!", approvalMsg: "¡Gracias! Nos pondremos en contacto pronto.", approvalNotFound: "Estimado no encontrado o ya aprobado.", emailPDFEst: "📧 Email Estimate",
       deleteEst: "Eliminar", confirmDelEst: "¿Eliminar este estimado?",
     },
     billing: {
@@ -397,6 +397,78 @@ const buildEstimateHTML = (est, company, t) => {
   const lineRows = (est.lines||[]).map(l => `<tr><td style="padding:8px;border-bottom:1px solid #eee;">${l.service||""}</td><td style="padding:8px;border-bottom:1px solid #eee;text-align:right;font-weight:700;">$${parseFloat(l.amount||0).toFixed(2)}</td></tr>`).join("");
   const approvalLink = buildApprovalLink(est);
   return `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#1a1a1a;"><div style="background:#2D6A1F;padding:24px 28px;border-radius:8px 8px 0 0;"><div style="color:#fff;font-size:22px;font-weight:800;">${company.companyName||""}</div>${company.ownerName?`<div style="color:rgba(255,255,255,0.85);font-size:13px;margin-top:4px;">${company.ownerName}</div>`:""}${company.phone?`<div style="color:rgba(255,255,255,0.85);font-size:13px;">📞 ${company.phone}</div>`:""}</div><div style="background:#f8f8f8;padding:16px 28px;display:flex;justify-content:space-between;border-bottom:2px solid #e0e0e0;"><div><span style="font-size:11px;color:#999;text-transform:uppercase;">Prepared For</span><br/><strong style="font-size:16px;">${est.client}</strong></div><div style="text-align:right;"><span style="font-size:11px;color:#999;text-transform:uppercase;">Estimate</span><br/><strong style="font-size:16px;">#${est.id}</strong><br/><span style="font-size:12px;color:#666;">${formatDate(est.date)}</span></div></div><div style="padding:20px 28px;"><table style="width:100%;border-collapse:collapse;margin-bottom:16px;"><thead><tr style="background:#2D6A1F;color:#fff;"><th style="padding:8px;text-align:left;font-size:12px;">Service</th><th style="padding:8px;text-align:right;font-size:12px;">Amount</th></tr></thead><tbody>${lineRows}</tbody></table><div style="text-align:right;background:#e8f5e3;padding:12px 16px;border-radius:6px;margin-bottom:16px;"><span style="font-size:18px;font-weight:800;color:#2D6A1F;">Total: $${parseFloat(est.total||est.amount||0).toFixed(2)}</span></div>${est.notes?`<div style="background:#f8f8f8;padding:12px;border-radius:6px;margin-bottom:16px;font-style:italic;color:#555;">Notes: ${est.notes}</div>`:""}${enabledPayments.length>0?`<div style="background:#f0ebd8;padding:14px;border-radius:6px;margin-bottom:16px;"><div style="font-weight:800;color:#2D6A1F;margin-bottom:8px;font-size:13px;">Payment Methods:</div><table>${payRows}</table></div>`:""}<div style="text-align:center;margin:24px 0;"><a href="${approvalLink}" style="display:inline-block;background:#2D6A1F;color:#fff;padding:14px 32px;border-radius:8px;font-size:16px;font-weight:800;text-decoration:none;">✅ Approve This Estimate</a></div><div style="text-align:center;color:#999;font-size:11px;border-top:1px solid #eee;padding-top:14px;">Thank you for your business! · Generated by Corte Pro</div></div></div>`;
+};
+
+// ── REAL PDF GENERATION ──────────────────────────────────────────────────────
+// Renders the styled invoice/estimate HTML to a canvas (html2canvas), then embeds
+// it in a true .pdf (jsPDF) and opens the native share sheet (download fallback).
+const loadScriptFrom = (cdns, getLib) => new Promise((resolve, reject) => {
+  const existing = getLib(); if (existing) { resolve(existing); return; }
+  const tryLoad = (idx) => {
+    if (idx >= cdns.length) { reject(new Error("CDN unavailable")); return; }
+    const s = document.createElement("script");
+    s.src = cdns[idx];
+    s.onload = () => { const lib = getLib(); lib ? resolve(lib) : tryLoad(idx + 1); };
+    s.onerror = () => tryLoad(idx + 1);
+    document.head.appendChild(s);
+  };
+  tryLoad(0);
+});
+let _h2cLoading = null, _jspdfLoading = null;
+const loadHtml2Canvas = () => _h2cLoading || (_h2cLoading = loadScriptFrom([
+  "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+  "https://unpkg.com/html2canvas@1.4.1/dist/html2canvas.min.js",
+], () => window.html2canvas).catch(e => { _h2cLoading = null; throw e; }));
+const loadJsPDF = () => _jspdfLoading || (_jspdfLoading = loadScriptFrom([
+  "https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js",
+  "https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js",
+], () => window.jspdf && window.jspdf.jsPDF).catch(e => { _jspdfLoading = null; throw e; }));
+
+const renderHTMLToPDFBlob = (html) => {
+  const holder = document.createElement("div");
+  holder.style.position = "fixed"; holder.style.left = "-9999px"; holder.style.top = "0";
+  holder.style.width = "600px"; holder.style.background = "#ffffff";
+  holder.innerHTML = html;
+  document.body.appendChild(holder);
+  const cleanup = () => { if (holder.parentNode) document.body.removeChild(holder); };
+  return Promise.all([loadHtml2Canvas(), loadJsPDF()]).then(([html2canvas, jsPDF]) =>
+    html2canvas(holder, { backgroundColor: "#ffffff", scale: 2, useCORS: true }).then(canvas => {
+      cleanup();
+      const pdfWidth = 210;
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: [pdfWidth, pdfHeight] });
+      doc.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdfWidth, pdfHeight);
+      return doc.output("blob");
+    })
+  ).catch(err => { cleanup(); throw err; });
+};
+
+const sharePdfBlob = (blob, filename, shareTitle, showToast) => {
+  const file = new File([blob], filename, { type: "application/pdf" });
+  if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    navigator.share({ files: [file], title: shareTitle }).catch(() => {});
+  } else {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 5000);
+    if (showToast) showToast("📥 PDF saved — attach it in your texting or email app", "success");
+  }
+};
+
+const shareInvoicePDF = (inv, company, t, showToast) => {
+  if (showToast) showToast("📄 Generating PDF...", "info");
+  renderHTMLToPDFBlob(buildInvoiceHTML(inv, company, t))
+    .then(blob => sharePdfBlob(blob, `invoice-${inv.id}.pdf`, `Invoice #${inv.id}`, showToast))
+    .catch(err => { console.error("Invoice PDF error:", err); if (showToast) showToast("❌ PDF generation failed", "error"); });
+};
+
+const shareEstimatePDF = (est, company, t, showToast) => {
+  if (showToast) showToast("📄 Generating PDF...", "info");
+  renderHTMLToPDFBlob(buildEstimateHTML(est, company, t))
+    .then(blob => sharePdfBlob(blob, `estimate-${est.id}.pdf`, `Estimate #${est.id}`, showToast))
+    .catch(err => { console.error("Estimate PDF error:", err); if (showToast) showToast("❌ PDF generation failed", "error"); });
 };
 
 const sendPaymentReminder = (inv, company, t, showToast, clients, onMissingInfo) => {
@@ -1214,6 +1286,7 @@ function InvoicesTab({ t, clients, setClients, invoices, setInvoices, company })
               {inv.status!=="paid" && <button onClick={()=>setInvoices(invoices.map(x=>x.id===inv.id?{...x,status:"paid"}:x))} style={{ background:C.green, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.markPaid}</button>}
               
               <button onClick={()=>{ const client=clients.find(c=>c.name===inv.client); sendSMS(client?client.phone:"",formatInvoiceText(inv,company,t)); }} style={{ background:C.blue, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.textInv}</button>
+              <button onClick={()=>shareInvoicePDF(inv,company,t,showToast)} style={{ background:C.green, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.pdfInv}</button>
               <button onClick={()=>{ if (!company.googleReviewLink) { showToast(t.toast.reviewMissing,"warning"); return; } window.open(company.googleReviewLink,"_blank"); }} style={{ background:C.black, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>⭐ {t.invoices.review}</button>
               {inv.status!=="paid" && <button onClick={()=>sendPaymentReminder(inv,company,t,showToast,clients,handleMissingInfo)} style={{ background:C.orange, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.remind}</button>}
               <button onClick={()=>{ setAddOnPrompt(inv); setAddOnForm({ service:"", amount:"" }); }} style={{ background:C.blue, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.invoices.addLine2}</button>
@@ -1337,6 +1410,7 @@ function EstimatesTab({ t, clients, setClients, estimates, setEstimates, invoice
               {est.status!=="approved" && <button onClick={()=>convertToInvoice(est)} style={{ background:C.green, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.convert}</button>}
               
               <button onClick={()=>{ const client=clients.find(c=>c.name===est.client); sendSMS(client?client.phone:"",formatEstText(est,company,t)); }} style={{ background:C.blue, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.textEst}</button>
+              <button onClick={()=>shareEstimatePDF(est,company,t,showToast)} style={{ background:C.green, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.pdfEst}</button>
               <button onClick={()=>{ setEstimates(estimates.filter(x=>x.id!==est.id)); showToast(t.toast.estimateDeleted,"info"); }} style={{ background:C.red, color:C.white, border:"none", borderRadius:6, padding:"4px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.estimates.deleteEst}</button>
             </div>
           </div>
