@@ -254,7 +254,13 @@ const C = {
   red: "#c0392b", orange: "#e67e22", blue: "#2980b9",
 };
 
-const save = (key, val) => { try { localStorage.setItem(key, JSON.stringify(val)); } catch(e){} };
+let _saveWarned = false;
+const save = (key, val) => {
+  try { localStorage.setItem(key, JSON.stringify(val)); }
+  catch(e) {
+    if (!_saveWarned) { _saveWarned = true; alert("⚠️ Corte Pro could not save your latest changes — your phone's storage for this app is full. Tap Backup in Billing now to protect your data."); }
+  }
+};
 const load = (key, fallback) => { try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; } catch(e){ return fallback; } };
 
 // ── SHORT DOCUMENT NUMBERS (INV-1001, EST-1001) ─────────────────────────────
@@ -277,6 +283,8 @@ const estValidUntil = (est) => {
   base.setDate(base.getDate() + 30);
   return base.toISOString().split("T")[0];
 };
+// Money with thousands separators: 4500 -> "4,500.00"
+const money = (n) => (parseFloat(n) || 0).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const formatPhone = (raw) => {
   const d = String(raw || "").replace(/\D/g, "");
   const ten = d.length === 11 && d[0] === "1" ? d.slice(1) : d;
@@ -318,8 +326,8 @@ const formatInvoiceText = (inv, company, t) => {
   text += `\n`;
   text += `${t.invoices.to}: ${inv.client}\n\n`;
   text += `SERVICES\n`;
-  if (inv.lines) { inv.lines.forEach(l => { text += `• ${l.service} — $${parseFloat(l.amount).toFixed(2)}\n`; }); }
-  text += `\n${t.invoices.total}: $${parseFloat(inv.total).toFixed(2)}\n`;
+  if (inv.lines) { inv.lines.forEach(l => { text += `• ${l.service} — $${money(l.amount)}\n`; }); }
+  text += `\n${t.invoices.total}: $${money(inv.total)}\n`;
   text += `${inv.status === "paid" ? t.invoices.paid.toUpperCase() : t.invoices.pending.toUpperCase()}\n`;
   if (enabledPayments.length > 0) {
     text += `\nPAY VIA:\n`;
@@ -342,8 +350,8 @@ const formatEstText = (est, company, t) => {
   text += `${t.invoices.date}: ${formatDate(est.date)}\n\n`;
   text += `${t.invoices.to}: ${est.client}\n\n`;
   text += `SERVICES\n`;
-  if (est.lines) { est.lines.forEach(l => { text += `• ${l.service} — $${parseFloat(l.amount).toFixed(2)}\n`; }); }
-  text += `\n${t.invoices.total}: $${parseFloat(est.total||est.amount||0).toFixed(2)}\n`;
+  if (est.lines) { est.lines.forEach(l => { text += `• ${l.service} — $${money(l.amount)}\n`; }); }
+  text += `\n${t.invoices.total}: $${money(est.total||est.amount||0)}\n`;
   if (est.notes) text += `\nNotes: ${est.notes}\n`;
   if (enabledPayments.length > 0) {
     text += `\nPAY VIA:\n`;
@@ -452,8 +460,8 @@ const buildInvoiceHTML = (inv, company, t) => {
   const payments = company.payments || {};
   const enabledPayments = Object.entries(payments).filter(([k,v]) => v && v.enabled);
   const payRows = enabledPayments.map(([k,v]) => `<tr><td style="padding:4px 8px;color:#555;">${t.billing[k]||k}</td><td style="padding:4px 8px;color:#333;font-weight:600;">${formatPhone(v.handle)}</td></tr>`).join("");
-  const lineRows = (inv.lines||[]).map(l => `<tr><td style="padding:8px;border-bottom:1px solid #eee;">${l.service||""}</td><td style="padding:8px;border-bottom:1px solid #eee;color:#666;">${formatDate(l.date)}</td><td style="padding:8px;border-bottom:1px solid #eee;text-align:right;font-weight:700;">$${parseFloat(l.amount||0).toFixed(2)}</td></tr>`).join("");
-  return `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#1a1a1a;"><div style="background:#2D6A1F;padding:24px 28px;border-radius:8px 8px 0 0;display:flex;align-items:center;gap:16px;">${company.logo?`<div style="background:#fff;border-radius:8px;padding:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;"><img src="${company.logo}" style="display:block;max-width:90px;max-height:70px;" /></div>`:""}<div><div style="color:#fff;font-size:22px;font-weight:800;">${company.companyName||""}</div>${company.ownerName?`<div style="color:rgba(255,255,255,0.85);font-size:13px;margin-top:4px;">${company.ownerName}</div>`:""}${company.phone?`<div style="color:rgba(255,255,255,0.85);font-size:13px;">${D.tel}: ${formatPhone(company.phone)}</div>`:""}${company.license?`<div style="color:rgba(255,255,255,0.85);font-size:12px;">${D.license} ${company.license}</div>`:""}</div></div><div style="background:#f8f8f8;padding:16px 28px;display:flex;justify-content:space-between;border-bottom:2px solid #e0e0e0;"><div><span style="font-size:11px;color:#999;text-transform:uppercase;">${D.billTo}</span><br/><strong style="font-size:16px;">${inv.client}</strong></div><div style="text-align:right;"><span style="font-size:11px;color:#999;text-transform:uppercase;">${D.invoice}</span><br/><strong style="font-size:16px;">${invNum(inv)}</strong><br/><span style="font-size:12px;color:#666;">${formatDate(inv.date)}</span>${inv.status!=="paid"?`<br/><span style="font-size:11px;color:#e67e22;font-weight:700;">${D.due} ${formatDate(invDueDate(inv))}</span>`:""}</div></div><div style="padding:20px 28px;"><table style="width:100%;border-collapse:collapse;margin-bottom:16px;"><thead><tr style="background:#2D6A1F;color:#fff;"><th style="padding:8px;text-align:left;font-size:12px;">${D.service}</th><th style="padding:8px;text-align:left;font-size:12px;">${D.date}</th><th style="padding:8px;text-align:right;font-size:12px;">${D.amount}</th></tr></thead><tbody>${lineRows}</tbody></table><div style="text-align:right;background:#e8f5e3;padding:12px 16px;border-radius:6px;margin-bottom:16px;"><span style="font-size:18px;font-weight:800;color:#2D6A1F;">${D.total}: $${parseFloat(inv.total||0).toFixed(2)}</span><br/><span style="font-size:12px;font-weight:700;color:${inv.status==="paid"?"#2D6A1F":"#e67e22"};">${inv.status==="paid"?D.paid:D.pending}</span></div>${enabledPayments.length>0?`<div style="background:#f0ebd8;padding:14px;border-radius:6px;margin-bottom:16px;"><div style="font-weight:800;color:#2D6A1F;margin-bottom:8px;font-size:13px;">${D.paymentMethods}:</div><table>${payRows}</table></div>`:""}<div style="text-align:center;color:#999;font-size:11px;border-top:1px solid #eee;padding-top:14px;">${D.thanks} · ${D.generatedBy}</div></div></div>`;
+  const lineRows = (inv.lines||[]).map(l => `<tr><td style="padding:8px;border-bottom:1px solid #eee;">${l.service||""}</td><td style="padding:8px;border-bottom:1px solid #eee;color:#666;">${formatDate(l.date)}</td><td style="padding:8px;border-bottom:1px solid #eee;text-align:right;font-weight:700;">$${money(l.amount||0)}</td></tr>`).join("");
+  return `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#1a1a1a;"><div style="background:#2D6A1F;padding:24px 28px;border-radius:8px 8px 0 0;display:flex;align-items:center;gap:16px;">${company.logo?`<div style="background:#fff;border-radius:8px;padding:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;"><img src="${company.logo}" style="display:block;max-width:90px;max-height:70px;" /></div>`:""}<div><div style="color:#fff;font-size:22px;font-weight:800;">${company.companyName||""}</div>${company.ownerName?`<div style="color:rgba(255,255,255,0.85);font-size:13px;margin-top:4px;">${company.ownerName}</div>`:""}${company.phone?`<div style="color:rgba(255,255,255,0.85);font-size:13px;">${D.tel}: ${formatPhone(company.phone)}</div>`:""}${company.address?`<div style="color:rgba(255,255,255,0.85);font-size:13px;">${company.address}</div>`:""}${company.license?`<div style="color:rgba(255,255,255,0.85);font-size:12px;">${D.license} ${company.license}</div>`:""}</div></div><div style="background:#f8f8f8;padding:16px 28px;display:flex;justify-content:space-between;border-bottom:2px solid #e0e0e0;"><div><span style="font-size:11px;color:#999;text-transform:uppercase;">${D.billTo}</span><br/><strong style="font-size:16px;">${inv.client}</strong></div><div style="text-align:right;"><span style="font-size:11px;color:#999;text-transform:uppercase;">${D.invoice}</span><br/><strong style="font-size:16px;">${invNum(inv)}</strong><br/><span style="font-size:12px;color:#666;">${formatDate(inv.date)}</span>${inv.status!=="paid"?`<br/><span style="font-size:11px;color:#e67e22;font-weight:700;">${D.due} ${formatDate(invDueDate(inv))}</span>`:""}</div></div><div style="padding:20px 28px;"><table style="width:100%;border-collapse:collapse;margin-bottom:16px;"><thead><tr style="background:#2D6A1F;color:#fff;"><th style="padding:8px;text-align:left;font-size:12px;">${D.service}</th><th style="padding:8px;text-align:left;font-size:12px;">${D.date}</th><th style="padding:8px;text-align:right;font-size:12px;">${D.amount}</th></tr></thead><tbody>${lineRows}</tbody></table><div style="text-align:right;background:#e8f5e3;padding:12px 16px;border-radius:6px;margin-bottom:16px;"><span style="font-size:18px;font-weight:800;color:#2D6A1F;">${D.total}: $${money(inv.total||0)}</span><br/><span style="font-size:12px;font-weight:700;color:${inv.status==="paid"?"#2D6A1F":"#e67e22"};">${inv.status==="paid"?D.paid:D.pending}</span></div>${enabledPayments.length>0?`<div style="background:#f0ebd8;padding:14px;border-radius:6px;margin-bottom:16px;"><div style="font-weight:800;color:#2D6A1F;margin-bottom:8px;font-size:13px;">${D.paymentMethods}:</div><table>${payRows}</table></div>`:""}<div style="text-align:center;color:#999;font-size:11px;border-top:1px solid #eee;padding-top:14px;">${D.thanks} · ${D.generatedBy}</div></div></div>`;
 };
 
 const buildEstimateHTML = (est, company, t) => {
@@ -461,10 +469,10 @@ const buildEstimateHTML = (est, company, t) => {
   const payments = company.payments || {};
   const enabledPayments = Object.entries(payments).filter(([k,v]) => v && v.enabled);
   const payRows = enabledPayments.map(([k,v]) => `<tr><td style="padding:4px 8px;color:#555;">${t.billing[k]||k}</td><td style="padding:4px 8px;color:#333;font-weight:600;">${formatPhone(v.handle)}</td></tr>`).join("");
-  const lineRows = (est.lines||[]).map(l => `<tr><td style="padding:8px;border-bottom:1px solid #eee;">${l.service||""}</td><td style="padding:8px;border-bottom:1px solid #eee;text-align:right;font-weight:700;">$${parseFloat(l.amount||0).toFixed(2)}</td></tr>`).join("");
+  const lineRows = (est.lines||[]).map(l => `<tr><td style="padding:8px;border-bottom:1px solid #eee;">${l.service||""}</td><td style="padding:8px;border-bottom:1px solid #eee;text-align:right;font-weight:700;">$${money(l.amount||0)}</td></tr>`).join("");
   const acceptLink = buildReplySmsLink(company, `${t.estimates.acceptSms} ${estNum(est)} - ${est.client}`);
   const declineLink = buildReplySmsLink(company, `${t.estimates.declineSms} ${estNum(est)} - ${est.client}`);
-  return `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#1a1a1a;"><div style="background:#2D6A1F;padding:24px 28px;border-radius:8px 8px 0 0;display:flex;align-items:center;gap:16px;">${company.logo?`<div style="background:#fff;border-radius:8px;padding:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;"><img src="${company.logo}" style="display:block;max-width:90px;max-height:70px;" /></div>`:""}<div><div style="color:#fff;font-size:22px;font-weight:800;">${company.companyName||""}</div>${company.ownerName?`<div style="color:rgba(255,255,255,0.85);font-size:13px;margin-top:4px;">${company.ownerName}</div>`:""}${company.phone?`<div style="color:rgba(255,255,255,0.85);font-size:13px;">${D.tel}: ${formatPhone(company.phone)}</div>`:""}${company.license?`<div style="color:rgba(255,255,255,0.85);font-size:12px;">${D.license} ${company.license}</div>`:""}</div></div><div style="background:#f8f8f8;padding:16px 28px;display:flex;justify-content:space-between;border-bottom:2px solid #e0e0e0;"><div><span style="font-size:11px;color:#999;text-transform:uppercase;">${D.preparedFor}</span><br/><strong style="font-size:16px;">${est.client}</strong></div><div style="text-align:right;"><span style="font-size:11px;color:#999;text-transform:uppercase;">${D.estimate}</span><br/><strong style="font-size:16px;">${estNum(est)}</strong><br/><span style="font-size:12px;color:#666;">${formatDate(est.date)}</span><br/><span style="font-size:11px;color:#e67e22;font-weight:700;">${t.estimates.validUntil} ${formatDate(estValidUntil(est))}</span></div></div><div style="padding:20px 28px;"><table style="width:100%;border-collapse:collapse;margin-bottom:16px;"><thead><tr style="background:#2D6A1F;color:#fff;"><th style="padding:8px;text-align:left;font-size:12px;">${D.service}</th><th style="padding:8px;text-align:right;font-size:12px;">${D.amount}</th></tr></thead><tbody>${lineRows}</tbody></table><div style="text-align:right;background:#e8f5e3;padding:12px 16px;border-radius:6px;margin-bottom:16px;"><span style="font-size:18px;font-weight:800;color:#2D6A1F;">${D.total}: $${parseFloat(est.total||est.amount||0).toFixed(2)}</span></div>${est.notes?`<div style="background:#f8f8f8;padding:12px;border-radius:6px;margin-bottom:16px;font-style:italic;color:#555;">${D.notes}: ${est.notes}</div>`:""}${enabledPayments.length>0?`<div style="background:#f0ebd8;padding:14px;border-radius:6px;margin-bottom:16px;"><div style="font-weight:800;color:#2D6A1F;margin-bottom:8px;font-size:13px;">${D.paymentMethods}:</div><table>${payRows}</table></div>`:""}${company.phone?`<div style="text-align:center;margin:24px 0;"><a href="${acceptLink}" style="display:inline-block;background:#2D6A1F;color:#fff;padding:14px 28px;border-radius:8px;font-size:16px;font-weight:800;text-decoration:none;margin:0 6px;">${t.estimates.acceptBtn}</a><a href="${declineLink}" style="display:inline-block;background:#c0392b;color:#fff;padding:14px 28px;border-radius:8px;font-size:16px;font-weight:800;text-decoration:none;margin:0 6px;">${t.estimates.declineBtn}</a></div>`:""}<div style="text-align:center;color:#666;font-size:12px;margin-bottom:10px;">${t.estimates.validNote}</div><div style="text-align:center;color:#999;font-size:11px;border-top:1px solid #eee;padding-top:14px;">${D.thanks} · ${D.generatedBy}</div></div></div>`;
+  return `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#1a1a1a;"><div style="background:#2D6A1F;padding:24px 28px;border-radius:8px 8px 0 0;display:flex;align-items:center;gap:16px;">${company.logo?`<div style="background:#fff;border-radius:8px;padding:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;"><img src="${company.logo}" style="display:block;max-width:90px;max-height:70px;" /></div>`:""}<div><div style="color:#fff;font-size:22px;font-weight:800;">${company.companyName||""}</div>${company.ownerName?`<div style="color:rgba(255,255,255,0.85);font-size:13px;margin-top:4px;">${company.ownerName}</div>`:""}${company.phone?`<div style="color:rgba(255,255,255,0.85);font-size:13px;">${D.tel}: ${formatPhone(company.phone)}</div>`:""}${company.address?`<div style="color:rgba(255,255,255,0.85);font-size:13px;">${company.address}</div>`:""}${company.license?`<div style="color:rgba(255,255,255,0.85);font-size:12px;">${D.license} ${company.license}</div>`:""}</div></div><div style="background:#f8f8f8;padding:16px 28px;display:flex;justify-content:space-between;border-bottom:2px solid #e0e0e0;"><div><span style="font-size:11px;color:#999;text-transform:uppercase;">${D.preparedFor}</span><br/><strong style="font-size:16px;">${est.client}</strong></div><div style="text-align:right;"><span style="font-size:11px;color:#999;text-transform:uppercase;">${D.estimate}</span><br/><strong style="font-size:16px;">${estNum(est)}</strong><br/><span style="font-size:12px;color:#666;">${formatDate(est.date)}</span><br/><span style="font-size:11px;color:#e67e22;font-weight:700;">${t.estimates.validUntil} ${formatDate(estValidUntil(est))}</span></div></div><div style="padding:20px 28px;"><table style="width:100%;border-collapse:collapse;margin-bottom:16px;"><thead><tr style="background:#2D6A1F;color:#fff;"><th style="padding:8px;text-align:left;font-size:12px;">${D.service}</th><th style="padding:8px;text-align:right;font-size:12px;">${D.amount}</th></tr></thead><tbody>${lineRows}</tbody></table><div style="text-align:right;background:#e8f5e3;padding:12px 16px;border-radius:6px;margin-bottom:16px;"><span style="font-size:18px;font-weight:800;color:#2D6A1F;">${D.total}: $${money(est.total||est.amount||0)}</span></div>${est.notes?`<div style="background:#f8f8f8;padding:12px;border-radius:6px;margin-bottom:16px;font-style:italic;color:#555;">${D.notes}: ${est.notes}</div>`:""}${enabledPayments.length>0?`<div style="background:#f0ebd8;padding:14px;border-radius:6px;margin-bottom:16px;"><div style="font-weight:800;color:#2D6A1F;margin-bottom:8px;font-size:13px;">${D.paymentMethods}:</div><table>${payRows}</table></div>`:""}${company.phone?`<div style="text-align:center;margin:24px 0;"><a href="${acceptLink}" style="display:inline-block;background:#2D6A1F;color:#fff;padding:14px 28px;border-radius:8px;font-size:16px;font-weight:800;text-decoration:none;margin:0 6px;">${t.estimates.acceptBtn}</a><a href="${declineLink}" style="display:inline-block;background:#c0392b;color:#fff;padding:14px 28px;border-radius:8px;font-size:16px;font-weight:800;text-decoration:none;margin:0 6px;">${t.estimates.declineBtn}</a></div>`:""}<div style="text-align:center;color:#666;font-size:12px;margin-bottom:10px;">${t.estimates.validNote}</div><div style="text-align:center;color:#999;font-size:11px;border-top:1px solid #eee;padding-top:14px;">${D.thanks} · ${D.generatedBy}</div></div></div>`;
 };
 
 // ── REAL PDF GENERATION ──────────────────────────────────────────────────────
@@ -562,7 +570,7 @@ const sendPaymentReminder = (inv, company, t, showToast, clients, onMissingInfo)
       <p style="font-size:14px;color:#555;">This is a friendly reminder that the following invoice is still outstanding:</p>
       <div style="background:#fff3cd;border-left:4px solid #e67e22;padding:16px;border-radius:6px;margin:16px 0;">
         <div style="font-size:13px;color:#666;">Invoice ${invNum(inv)} · ${formatDate(inv.date)}</div>
-        <div style="font-size:24px;font-weight:800;color:#e67e22;">$${parseFloat(inv.total||0).toFixed(2)} Due</div>
+        <div style="font-size:24px;font-weight:800;color:#e67e22;">$${money(inv.total||0)} Due</div>
       </div>
       ${enabledPayments.length>0?`<div style="background:#f0ebd8;padding:14px;border-radius:6px;margin-bottom:16px;"><div style="font-weight:800;color:#2D6A1F;margin-bottom:8px;">Pay via:</div><table>${payRows}</table></div>`:""}
       <p style="font-size:13px;color:#555;">Please process payment at your earliest convenience. If you have any questions, don't hesitate to reach out.</p>
@@ -718,15 +726,13 @@ function AccessGate({ onUnlock, t }) {
 
 function RouteTab({ t, clients, invoices, setInvoices, company, setClients }) {
   const showToast = useToast();
-  const [stops, setStops] = useState(() => load("cp_stops", []));
+  const [stops, setStops] = useState(() => load("cp_stops", []).map(({ photo, ...rest }) => rest));
   const [form, setForm] = useState({ client:"", address:"" });
   const [showForm, setShowForm] = useState(false);
   const [invoicePrompt, setInvoicePrompt] = useState(null);
   const [promptAmount, setPromptAmount] = useState("");
   const [skipPrompt, setSkipPrompt] = useState(null);
   const [showWeeklyReport, setShowWeeklyReport] = useState(false);
-  const [photoStop, setPhotoStop] = useState(null); // stop id for photo view
-  const photoInputRef = useRef(null);
 
   useEffect(() => { save("cp_stops", stops); }, [stops]);
 
@@ -795,9 +801,9 @@ function RouteTab({ t, clients, invoices, setInvoices, company, setClients }) {
     text += `Skipped: ${weeklySkipped.length}\n`;
     text += `Completion Rate: ${m.completionRate}%\n`;
     text += "\n💰 FINANCIALS\n";
-    text += `Invoiced: $${m.totalInvoiced.toFixed(2)}\n`;
-    text += `Collected: $${m.totalCollected.toFixed(2)}\n`;
-    text += `Pending: $${m.totalPending.toFixed(2)}\n`;
+    text += `Invoiced: $${money(m.totalInvoiced)}\n`;
+    text += `Collected: $${money(m.totalCollected)}\n`;
+    text += `Pending: $${money(m.totalPending)}\n`;
     text += `Invoices Sent: ${m.weekInvoices.length}\n`;
     if (weeklyCompleted.length > 0) {
       text += "\n✅ COMPLETED JOBS\n";
@@ -811,7 +817,7 @@ function RouteTab({ t, clients, invoices, setInvoices, company, setClients }) {
     }
     if (m.weekPending.length > 0) {
       text += "\n🔔 OUTSTANDING INVOICES\n";
-      m.weekPending.forEach(inv => { text += `  ${inv.client} — $${parseFloat(inv.total).toFixed(2)}\n`; });
+      m.weekPending.forEach(inv => { text += `  ${inv.client} — $${money(inv.total)}\n`; });
     }
     text += "\n" + LINE + "\n";
     text += "Generated by Corte Pro";
@@ -884,11 +890,9 @@ function RouteTab({ t, clients, invoices, setInvoices, company, setClients }) {
               <div style={{ fontWeight:700, color:s.skipped?C.orange:s.done?C.grayDark:C.text, textDecoration:s.done?"line-through":"none", fontSize:14 }}>{t.route.stop} {i+1}{s.client?` — ${s.client}`:""}{s.skipped?` — ${t.route.skipped}`:""}</div>
               <div style={{ color:C.grayDark, fontSize:13 }}>{s.address}</div>
               {s.skipped && s.skipReason && <div style={{ fontSize:11, color:C.orange, fontWeight:700, marginTop:2 }}>⚠️ {s.skipReason}</div>}
-              {s.photo && <div style={{ fontSize:11, color:C.blue, fontWeight:700, marginTop:2, cursor:"pointer" }} onClick={()=>setPhotoStop(s.id)}>📷 Photo attached</div>}
             </div>
             <button onClick={() => startGPS(s.address)} style={{ background:C.blue, color:C.white, border:"none", borderRadius:6, padding:"6px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>🚗 {t.route.navigate}</button>
             {!s.done && !s.skipped && <button onClick={() => setSkipPrompt(s)} style={{ background:C.orange, color:C.white, border:"none", borderRadius:6, padding:"6px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.route.skip}</button>}
-            <button onClick={() => { photoInputRef.current && (photoInputRef.current.dataset.stopId = s.id) && photoInputRef.current.click(); }} style={{ background:C.grayDark, color:C.white, border:"none", borderRadius:6, padding:"6px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.route.addPhoto}</button>
             <button onClick={() => setStops(stops.filter(x=>x.id!==s.id))} style={{ background:C.red, color:C.white, border:"none", borderRadius:6, padding:"6px 10px", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.route.remove}</button>
           </div>
         ))
@@ -918,17 +922,17 @@ function RouteTab({ t, clients, invoices, setInvoices, company, setClients }) {
                       {/* Money line */}
                       <div style={{ background:C.black, borderRadius:10, padding:"12px 16px", marginBottom:14, display:"flex", justifyContent:"space-around" }}>
                         <div style={{ textAlign:"center" }}>
-                          <div style={{ fontSize:18, fontWeight:800, color:C.green }}>${m.totalInvoiced.toFixed(2)}</div>
+                          <div style={{ fontSize:18, fontWeight:800, color:C.green }}>${money(m.totalInvoiced)}</div>
                           <div style={{ fontSize:11, color:"rgba(255,255,255,0.6)" }}>Invoiced</div>
                         </div>
                         <div style={{ width:1, background:"rgba(255,255,255,0.15)" }} />
                         <div style={{ textAlign:"center" }}>
-                          <div style={{ fontSize:18, fontWeight:800, color:C.green }}>${m.totalCollected.toFixed(2)}</div>
+                          <div style={{ fontSize:18, fontWeight:800, color:C.green }}>${money(m.totalCollected)}</div>
                           <div style={{ fontSize:11, color:"rgba(255,255,255,0.6)" }}>Collected</div>
                         </div>
                         <div style={{ width:1, background:"rgba(255,255,255,0.15)" }} />
                         <div style={{ textAlign:"center" }}>
-                          <div style={{ fontSize:18, fontWeight:800, color:C.orange }}>${m.totalPending.toFixed(2)}</div>
+                          <div style={{ fontSize:18, fontWeight:800, color:C.orange }}>${money(m.totalPending)}</div>
                           <div style={{ fontSize:11, color:"rgba(255,255,255,0.6)" }}>Pending</div>
                         </div>
                       </div>
@@ -953,7 +957,7 @@ function RouteTab({ t, clients, invoices, setInvoices, company, setClients }) {
                           {m.weekPending.map(inv => (
                             <div key={inv.id} style={{ display:"flex", justifyContent:"space-between", padding:"8px 10px", background:"#fff8e1", borderRadius:6, marginBottom:4 }}>
                               <span style={{ fontSize:13 }}>{inv.client}</span>
-                              <span style={{ fontWeight:800, color:C.orange }}>${parseFloat(inv.total).toFixed(2)}</span>
+                              <span style={{ fontWeight:800, color:C.orange }}>${money(inv.total)}</span>
                             </div>
                           ))}
                         </div>
@@ -974,34 +978,6 @@ function RouteTab({ t, clients, invoices, setInvoices, company, setClients }) {
         </div>
       )}
 
-      {/* Hidden photo input */}
-      <input ref={photoInputRef} type="file" accept="image/*" capture="environment" style={{ display:"none" }} onChange={e => {
-        const file = e.target.files && e.target.files[0];
-        const stopId = photoInputRef.current && parseInt(photoInputRef.current.dataset.stopId);
-        if (!file || !stopId) return;
-        const reader = new FileReader();
-        reader.onload = evt => {
-          setStops(stops.map(x => x.id === stopId ? { ...x, photo: evt.target.result } : x));
-          showToast("📷 Photo saved!", "success");
-        };
-        reader.readAsDataURL(file);
-        e.target.value = "";
-      }} />
-
-      {/* Photo viewer modal */}
-      {photoStop && (() => {
-        const s = stops.find(x => x.id === photoStop);
-        return s && s.photo ? (
-          <div style={{ position:"fixed", top:0, left:0, right:0, bottom:0, background:"rgba(0,0,0,0.9)", zIndex:999, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:16 }}>
-            <img src={s.photo} alt="Stop photo" style={{ maxWidth:"100%", maxHeight:"70vh", borderRadius:8, objectFit:"contain" }} />
-            <div style={{ color:C.white, fontWeight:700, marginTop:12, fontSize:14 }}>{s.client||s.address}</div>
-            <div style={{ display:"flex", gap:12, marginTop:16 }}>
-              <button onClick={() => setStops(stops.map(x => x.id === photoStop ? { ...x, photo:null } : x)) || setPhotoStop(null)} style={{ background:C.red, color:C.white, border:"none", borderRadius:8, padding:"10px 20px", fontWeight:700, cursor:"pointer" }}>🗑 Remove</button>
-              <button onClick={() => setPhotoStop(null)} style={{ background:C.white, color:C.black, border:"none", borderRadius:8, padding:"10px 20px", fontWeight:700, cursor:"pointer" }}>Close</button>
-            </div>
-          </div>
-        ) : null;
-      })()}
 
       {/* Skip reason modal */}
       {skipPrompt && (
@@ -1261,11 +1237,11 @@ function InvoicesTab({ t, clients, setClients, invoices, setInvoices, company })
       <div style={{ display:"flex", gap:10, marginBottom:16 }}>
         <div style={{ flex:1, background:C.greenPale, borderRadius:10, padding:12, textAlign:"center" }}>
           <div style={{ fontSize:11, color:C.grayDark, marginBottom:2 }}>{t.invoices.total}</div>
-          <div style={{ fontSize:20, fontWeight:800, color:C.green }}>${total.toFixed(2)}</div>
+          <div style={{ fontSize:20, fontWeight:800, color:C.green }}>${money(total)}</div>
         </div>
         <div style={{ flex:1, background:"#fff8e1", borderRadius:10, padding:12, textAlign:"center" }}>
           <div style={{ fontSize:11, color:C.grayDark, marginBottom:2 }}>{t.invoices.paid}</div>
-          <div style={{ fontSize:20, fontWeight:800, color:C.orange }}>${paid.toFixed(2)}</div>
+          <div style={{ fontSize:20, fontWeight:800, color:C.orange }}>${money(paid)}</div>
         </div>
       </div>
       {showForm && (
@@ -1287,7 +1263,7 @@ function InvoicesTab({ t, clients, setClients, invoices, setInvoices, company })
             </div>
           ))}
           <button onClick={addLine} style={{ width:"100%", background:C.white, color:C.green, border:`2px dashed ${C.green}`, borderRadius:8, padding:"10px 0", fontWeight:700, cursor:"pointer", marginBottom:10, fontSize:13 }}>{t.invoices.addLine}</button>
-          <div style={{ background:C.white, padding:"10px 12px", borderRadius:8, marginBottom:10, textAlign:"right", fontWeight:700, color:C.green, fontSize:15 }}>{t.invoices.total}: ${lineTotal(form.lines).toFixed(2)}</div>
+          <div style={{ background:C.white, padding:"10px 12px", borderRadius:8, marginBottom:10, textAlign:"right", fontWeight:700, color:C.green, fontSize:15 }}>{t.invoices.total}: ${money(lineTotal(form.lines))}</div>
           <button onClick={create} style={{ width:"100%", background:C.green, color:C.white, border:"none", borderRadius:8, padding:"11px 0", fontWeight:700, cursor:"pointer" }}>{t.invoices.send}</button>
         </div>
       )}
@@ -1351,12 +1327,12 @@ function InvoicesTab({ t, clients, setClients, invoices, setInvoices, company })
             <div style={{ fontSize:11, color:C.grayDark, fontWeight:600, marginBottom:2 }}>{t.invoices.to}:</div>
             <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:8 }}>
               <div><div style={{ fontWeight:700, fontSize:15, color:C.text }}>{inv.client}</div><div style={{ fontSize:11, color:C.grayDark, fontWeight:600 }}>{invNum(inv)}</div></div>
-              <div style={{ fontSize:17, fontWeight:800, color:C.green }}>${parseFloat(inv.total).toFixed(2)}</div>
+              <div style={{ fontSize:17, fontWeight:800, color:C.green }}>${money(inv.total)}</div>
             </div>
             {inv.lines && inv.lines.map(l => (
               <div key={l.id} style={{ display:"flex", justifyContent:"space-between", color:C.grayDark, fontSize:13, marginBottom:3, paddingLeft:8, borderLeft:`2px solid ${C.greenPale}` }}>
                 <div>{l.service} <span style={{ fontSize:11 }}>({l.date})</span></div>
-                <div>${parseFloat(l.amount).toFixed(2)}</div>
+                <div>${money(l.amount)}</div>
               </div>
             ))}
             <div style={{ display:"flex", gap:6, flexWrap:"wrap", marginTop:10 }}>
@@ -1446,7 +1422,7 @@ function EstimatesTab({ t, clients, setClients, estimates, setEstimates, invoice
           ))}
           <button onClick={addLine} style={{ width:"100%", background:C.white, color:C.green, border:`2px dashed ${C.green}`, borderRadius:8, padding:"10px 0", fontWeight:700, cursor:"pointer", marginBottom:10, fontSize:13 }}>{t.invoices.addLine}</button>
           <input value={form.notes} onChange={e=>setForm({...form,notes:e.target.value})} placeholder={t.estimates.notes} style={{ width:"100%", padding:"10px 12px", borderRadius:8, border:`1px solid ${C.grayMid}`, fontSize:14, marginBottom:10, boxSizing:"border-box" }} />
-          <div style={{ background:C.white, padding:"10px 12px", borderRadius:8, marginBottom:10, textAlign:"right", fontWeight:700, color:C.green, fontSize:15 }}>{t.invoices.total}: ${lineTotal(form.lines).toFixed(2)}</div>
+          <div style={{ background:C.white, padding:"10px 12px", borderRadius:8, marginBottom:10, textAlign:"right", fontWeight:700, color:C.green, fontSize:15 }}>{t.invoices.total}: ${money(lineTotal(form.lines))}</div>
           <button onClick={saveEst} style={{ width:"100%", background:C.green, color:C.white, border:"none", borderRadius:8, padding:"11px 0", fontWeight:700, cursor:"pointer" }}>{t.estimates.save}</button>
         </div>
       )}
@@ -1473,12 +1449,12 @@ function EstimatesTab({ t, clients, setClients, estimates, setEstimates, invoice
           <div key={est.id} style={{ background:C.white, borderRadius:12, padding:14, marginBottom:10, border:`1px solid ${C.grayMid}` }}>
             <div style={{ display:"flex", justifyContent:"space-between", marginBottom:8 }}>
               <div><div style={{ fontWeight:700, fontSize:15, color:C.text }}>{est.client}</div><div style={{ fontSize:11, color:C.grayDark, fontWeight:600 }}>{estNum(est)}</div></div>
-              <div style={{ fontSize:17, fontWeight:800, color:C.green }}>${parseFloat(est.total||est.amount||0).toFixed(2)}</div>
+              <div style={{ fontSize:17, fontWeight:800, color:C.green }}>${money(est.total||est.amount||0)}</div>
             </div>
             {est.lines && est.lines.map(l => (
               <div key={l.id} style={{ display:"flex", justifyContent:"space-between", color:C.grayDark, fontSize:13, marginBottom:3, paddingLeft:8, borderLeft:`2px solid ${C.greenPale}` }}>
                 <div>{l.service}</div>
-                <div>${parseFloat(l.amount).toFixed(2)}</div>
+                <div>${money(l.amount)}</div>
               </div>
             ))}
             {est.notes && <div style={{ color:C.grayDark, fontSize:12, marginTop:6, fontStyle:"italic" }}>{est.notes}</div>}
@@ -1560,7 +1536,7 @@ function BillingTab({ t, invoices, estimates, company, setCompany }) {
       <h2 style={{ margin:"0 0 16px", color:C.green, fontSize:20, fontWeight:800 }}>{t.billing.title}</h2>
 
       <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:12, marginBottom:20 }}>
-        {[[t.billing.totalEarned,`$${paid.toFixed(2)}`,C.green],[t.billing.totalPending,`$${pending.toFixed(2)}`,C.orange],[t.billing.thisMonth,`$${thisMonth.toFixed(2)}`,C.blue],["Total Invoices",`${invoices.length}`,C.grayDark]].map(([label,val,color]) => (
+        {[[t.billing.totalEarned,`$${money(paid)}`,C.green],[t.billing.totalPending,`$${money(pending)}`,C.orange],[t.billing.thisMonth,`$${money(thisMonth)}`,C.blue],["Total Invoices",`${invoices.length}`,C.grayDark]].map(([label,val,color]) => (
           <div key={label} style={{ background:C.white, border:`1px solid ${C.grayMid}`, borderRadius:12, padding:14, textAlign:"center" }}>
             <div style={{ fontSize:11, color:C.grayDark, marginBottom:4 }}>{label}</div>
             <div style={{ fontSize:22, fontWeight:800, color }}>{val}</div>
@@ -1617,7 +1593,7 @@ function BillingTab({ t, invoices, estimates, company, setCompany }) {
                     <div key={name} style={{ display:"flex", justifyContent:"space-between", alignItems:"center", padding:"10px 12px", background:C.gray, borderRadius:8, marginBottom:8 }}>
                       <div>
                         <div style={{ fontWeight:700, fontSize:14, color:C.text }}>{name}</div>
-                        <div style={{ fontSize:12, color:C.grayDark }}>{visits.length} {visits.length===1?t.toast.visitCount:t.toast.visitsCount} · ${total.toFixed(2)}</div>
+                        <div style={{ fontSize:12, color:C.grayDark }}>{visits.length} {visits.length===1?t.toast.visitCount:t.toast.visitsCount} · ${money(total)}</div>
                       </div>
                       <button onClick={()=>{ generateInvoice(name); showToast(t.toast.invoiceCreated,"success"); }} style={{ background:C.green, color:C.white, border:"none", borderRadius:6, padding:"8px 14px", fontWeight:700, fontSize:13, cursor:"pointer" }}>Invoice</button>
                     </div>
